@@ -34,7 +34,7 @@ class TeleconferenceDeviceMediaQuality(AdditionalDataHolder, BackedModel, Parsab
     # The total number of the inbound packets.
     inbound_packets: Optional[int] = None
     # the local IP address for the media session.
-    local_i_p_address: Optional[str] = None
+    local_ipaddress: Optional[str] = None
     # The local media port.
     local_port: Optional[int] = None
     # The maximum inbound stream network jitter.
@@ -58,12 +58,12 @@ class TeleconferenceDeviceMediaQuality(AdditionalDataHolder, BackedModel, Parsab
     # The total number of the outbound packets.
     outbound_packets: Optional[int] = None
     # The remote IP address for the media session.
-    remote_i_p_address: Optional[str] = None
+    remote_ipaddress: Optional[str] = None
     # The remote media port.
     remote_port: Optional[int] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> TeleconferenceDeviceMediaQuality:
+    def create_from_discriminator_value(parse_node: ParseNode) -> TeleconferenceDeviceMediaQuality:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -111,7 +111,7 @@ class TeleconferenceDeviceMediaQuality(AdditionalDataHolder, BackedModel, Parsab
             "averageOutboundRoundTripDelay": lambda n : setattr(self, 'average_outbound_round_trip_delay', n.get_timedelta_value()),
             "channelIndex": lambda n : setattr(self, 'channel_index', n.get_int_value()),
             "inboundPackets": lambda n : setattr(self, 'inbound_packets', n.get_int_value()),
-            "localIPAddress": lambda n : setattr(self, 'local_i_p_address', n.get_str_value()),
+            "localIPAddress": lambda n : setattr(self, 'local_ipaddress', n.get_str_value()),
             "localPort": lambda n : setattr(self, 'local_port', n.get_int_value()),
             "maximumInboundJitter": lambda n : setattr(self, 'maximum_inbound_jitter', n.get_timedelta_value()),
             "maximumInboundPacketLossRateInPercentage": lambda n : setattr(self, 'maximum_inbound_packet_loss_rate_in_percentage', n.get_float_value()),
@@ -123,7 +123,7 @@ class TeleconferenceDeviceMediaQuality(AdditionalDataHolder, BackedModel, Parsab
             "networkLinkSpeedInBytes": lambda n : setattr(self, 'network_link_speed_in_bytes', n.get_int_value()),
             "@odata.type": lambda n : setattr(self, 'odata_type', n.get_str_value()),
             "outboundPackets": lambda n : setattr(self, 'outbound_packets', n.get_int_value()),
-            "remoteIPAddress": lambda n : setattr(self, 'remote_i_p_address', n.get_str_value()),
+            "remoteIPAddress": lambda n : setattr(self, 'remote_ipaddress', n.get_str_value()),
             "remotePort": lambda n : setattr(self, 'remote_port', n.get_int_value()),
         }
         return fields
@@ -144,7 +144,7 @@ class TeleconferenceDeviceMediaQuality(AdditionalDataHolder, BackedModel, Parsab
         writer.write_timedelta_value("averageOutboundRoundTripDelay", self.average_outbound_round_trip_delay)
         writer.write_int_value("channelIndex", self.channel_index)
         writer.write_int_value("inboundPackets", self.inbound_packets)
-        writer.write_str_value("localIPAddress", self.local_i_p_address)
+        writer.write_str_value("localIPAddress", self.local_ipaddress)
         writer.write_int_value("localPort", self.local_port)
         writer.write_timedelta_value("maximumInboundJitter", self.maximum_inbound_jitter)
         writer.write_float_value("maximumInboundPacketLossRateInPercentage", self.maximum_inbound_packet_loss_rate_in_percentage)
@@ -156,7 +156,7 @@ class TeleconferenceDeviceMediaQuality(AdditionalDataHolder, BackedModel, Parsab
         writer.write_int_value("networkLinkSpeedInBytes", self.network_link_speed_in_bytes)
         writer.write_str_value("@odata.type", self.odata_type)
         writer.write_int_value("outboundPackets", self.outbound_packets)
-        writer.write_str_value("remoteIPAddress", self.remote_i_p_address)
+        writer.write_str_value("remoteIPAddress", self.remote_ipaddress)
         writer.write_int_value("remotePort", self.remote_port)
         writer.write_additional_data_value(self.additional_data)
     

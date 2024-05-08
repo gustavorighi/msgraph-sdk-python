@@ -6,7 +6,7 @@ from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .managed_android_lob_app import ManagedAndroidLobApp
     from .managed_app import ManagedApp
-    from .managed_i_o_s_lob_app import ManagedIOSLobApp
+    from .managed_ioslob_app import ManagedIOSLobApp
     from .mobile_app_content import MobileAppContent
 
 from .managed_app import ManagedApp
@@ -28,7 +28,7 @@ class ManagedMobileLobApp(ManagedApp):
     size: Optional[int] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> ManagedMobileLobApp:
+    def create_from_discriminator_value(parse_node: ParseNode) -> ManagedMobileLobApp:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -45,7 +45,7 @@ class ManagedMobileLobApp(ManagedApp):
 
             return ManagedAndroidLobApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.managedIOSLobApp".casefold():
-            from .managed_i_o_s_lob_app import ManagedIOSLobApp
+            from .managed_ioslob_app import ManagedIOSLobApp
 
             return ManagedIOSLobApp()
         return ManagedMobileLobApp()
@@ -57,12 +57,12 @@ class ManagedMobileLobApp(ManagedApp):
         """
         from .managed_android_lob_app import ManagedAndroidLobApp
         from .managed_app import ManagedApp
-        from .managed_i_o_s_lob_app import ManagedIOSLobApp
+        from .managed_ioslob_app import ManagedIOSLobApp
         from .mobile_app_content import MobileAppContent
 
         from .managed_android_lob_app import ManagedAndroidLobApp
         from .managed_app import ManagedApp
-        from .managed_i_o_s_lob_app import ManagedIOSLobApp
+        from .managed_ioslob_app import ManagedIOSLobApp
         from .mobile_app_content import MobileAppContent
 
         fields: Dict[str, Callable[[Any], None]] = {

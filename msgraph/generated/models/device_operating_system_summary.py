@@ -31,7 +31,7 @@ class DeviceOperatingSystemSummary(AdditionalDataHolder, BackedModel, Parsable):
     # Number of iOS device count.
     ios_count: Optional[int] = None
     # Number of Mac OS X device count.
-    mac_o_s_count: Optional[int] = None
+    mac_oscount: Optional[int] = None
     # The OdataType property
     odata_type: Optional[str] = None
     # Number of unknown device count.
@@ -42,7 +42,7 @@ class DeviceOperatingSystemSummary(AdditionalDataHolder, BackedModel, Parsable):
     windows_mobile_count: Optional[int] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> DeviceOperatingSystemSummary:
+    def create_from_discriminator_value(parse_node: ParseNode) -> DeviceOperatingSystemSummary:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -66,7 +66,7 @@ class DeviceOperatingSystemSummary(AdditionalDataHolder, BackedModel, Parsable):
             "androidWorkProfileCount": lambda n : setattr(self, 'android_work_profile_count', n.get_int_value()),
             "configMgrDeviceCount": lambda n : setattr(self, 'config_mgr_device_count', n.get_int_value()),
             "iosCount": lambda n : setattr(self, 'ios_count', n.get_int_value()),
-            "macOSCount": lambda n : setattr(self, 'mac_o_s_count', n.get_int_value()),
+            "macOSCount": lambda n : setattr(self, 'mac_oscount', n.get_int_value()),
             "@odata.type": lambda n : setattr(self, 'odata_type', n.get_str_value()),
             "unknownCount": lambda n : setattr(self, 'unknown_count', n.get_int_value()),
             "windowsCount": lambda n : setattr(self, 'windows_count', n.get_int_value()),
@@ -90,7 +90,7 @@ class DeviceOperatingSystemSummary(AdditionalDataHolder, BackedModel, Parsable):
         writer.write_int_value("androidWorkProfileCount", self.android_work_profile_count)
         writer.write_int_value("configMgrDeviceCount", self.config_mgr_device_count)
         writer.write_int_value("iosCount", self.ios_count)
-        writer.write_int_value("macOSCount", self.mac_o_s_count)
+        writer.write_int_value("macOSCount", self.mac_oscount)
         writer.write_str_value("@odata.type", self.odata_type)
         writer.write_int_value("unknownCount", self.unknown_count)
         writer.write_int_value("windowsCount", self.windows_count)

@@ -6,13 +6,13 @@ from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .android_lob_app import AndroidLobApp
     from .ios_lob_app import IosLobApp
-    from .mac_o_s_dmg_app import MacOSDmgApp
-    from .mac_o_s_lob_app import MacOSLobApp
+    from .mac_osdmg_app import MacOSDmgApp
+    from .mac_oslob_app import MacOSLobApp
     from .mobile_app import MobileApp
     from .mobile_app_content import MobileAppContent
     from .win32_lob_app import Win32LobApp
     from .windows_app_x import WindowsAppX
-    from .windows_mobile_m_s_i import WindowsMobileMSI
+    from .windows_mobile_msi import WindowsMobileMSI
     from .windows_universal_app_x import WindowsUniversalAppX
 
 from .mobile_app import MobileApp
@@ -34,7 +34,7 @@ class MobileLobApp(MobileApp):
     size: Optional[int] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> MobileLobApp:
+    def create_from_discriminator_value(parse_node: ParseNode) -> MobileLobApp:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -55,11 +55,11 @@ class MobileLobApp(MobileApp):
 
             return IosLobApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSDmgApp".casefold():
-            from .mac_o_s_dmg_app import MacOSDmgApp
+            from .mac_osdmg_app import MacOSDmgApp
 
             return MacOSDmgApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSLobApp".casefold():
-            from .mac_o_s_lob_app import MacOSLobApp
+            from .mac_oslob_app import MacOSLobApp
 
             return MacOSLobApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.win32LobApp".casefold():
@@ -71,7 +71,7 @@ class MobileLobApp(MobileApp):
 
             return WindowsAppX()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.windowsMobileMSI".casefold():
-            from .windows_mobile_m_s_i import WindowsMobileMSI
+            from .windows_mobile_msi import WindowsMobileMSI
 
             return WindowsMobileMSI()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.windowsUniversalAppX".casefold():
@@ -87,24 +87,24 @@ class MobileLobApp(MobileApp):
         """
         from .android_lob_app import AndroidLobApp
         from .ios_lob_app import IosLobApp
-        from .mac_o_s_dmg_app import MacOSDmgApp
-        from .mac_o_s_lob_app import MacOSLobApp
+        from .mac_osdmg_app import MacOSDmgApp
+        from .mac_oslob_app import MacOSLobApp
         from .mobile_app import MobileApp
         from .mobile_app_content import MobileAppContent
         from .win32_lob_app import Win32LobApp
         from .windows_app_x import WindowsAppX
-        from .windows_mobile_m_s_i import WindowsMobileMSI
+        from .windows_mobile_msi import WindowsMobileMSI
         from .windows_universal_app_x import WindowsUniversalAppX
 
         from .android_lob_app import AndroidLobApp
         from .ios_lob_app import IosLobApp
-        from .mac_o_s_dmg_app import MacOSDmgApp
-        from .mac_o_s_lob_app import MacOSLobApp
+        from .mac_osdmg_app import MacOSDmgApp
+        from .mac_oslob_app import MacOSLobApp
         from .mobile_app import MobileApp
         from .mobile_app_content import MobileAppContent
         from .win32_lob_app import Win32LobApp
         from .windows_app_x import WindowsAppX
-        from .windows_mobile_m_s_i import WindowsMobileMSI
+        from .windows_mobile_msi import WindowsMobileMSI
         from .windows_universal_app_x import WindowsUniversalAppX
 
         fields: Dict[str, Callable[[Any], None]] = {

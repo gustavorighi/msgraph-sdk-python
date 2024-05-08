@@ -48,7 +48,7 @@ class SharepointSettings(Entity):
     # Indicates whether users are allowed to create sites.
     is_site_creation_enabled: Optional[bool] = None
     # Indicates whether the UI commands for creating sites are shown.
-    is_site_creation_u_i_enabled: Optional[bool] = None
+    is_site_creation_uienabled: Optional[bool] = None
     # Indicates whether creating new modern pages is allowed on SharePoint sites.
     is_site_pages_creation_enabled: Optional[bool] = None
     # Indicates whether site storage space is automatically managed or if specific storage limits are set per site.
@@ -60,7 +60,7 @@ class SharepointSettings(Entity):
     # The OdataType property
     odata_type: Optional[str] = None
     # The default OneDrive storage limit for all new and existing users who are assigned a qualifying license. Measured in megabytes (MB).
-    personal_site_default_storage_limit_in_m_b: Optional[int] = None
+    personal_site_default_storage_limit_in_mb: Optional[int] = None
     # Collection of email domains that are allowed for sharing outside the organization.
     sharing_allowed_domain_list: Optional[List[str]] = None
     # Collection of email domains that are blocked for sharing outside the organization.
@@ -72,12 +72,12 @@ class SharepointSettings(Entity):
     # The value of the team site managed path. This is the path under which new team sites will be created.
     site_creation_default_managed_path: Optional[str] = None
     # The default storage quota for a new site upon creation. Measured in megabytes (MB).
-    site_creation_default_storage_limit_in_m_b: Optional[int] = None
+    site_creation_default_storage_limit_in_mb: Optional[int] = None
     # The default timezone of a tenant for newly created sites. For a list of possible values, see SPRegionalSettings.TimeZones property.
     tenant_default_timezone: Optional[str] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> SharepointSettings:
+    def create_from_discriminator_value(parse_node: ParseNode) -> SharepointSettings:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -121,18 +121,18 @@ class SharepointSettings(Entity):
             "isSharePointMobileNotificationEnabled": lambda n : setattr(self, 'is_share_point_mobile_notification_enabled', n.get_bool_value()),
             "isSharePointNewsfeedEnabled": lambda n : setattr(self, 'is_share_point_newsfeed_enabled', n.get_bool_value()),
             "isSiteCreationEnabled": lambda n : setattr(self, 'is_site_creation_enabled', n.get_bool_value()),
-            "isSiteCreationUIEnabled": lambda n : setattr(self, 'is_site_creation_u_i_enabled', n.get_bool_value()),
+            "isSiteCreationUIEnabled": lambda n : setattr(self, 'is_site_creation_uienabled', n.get_bool_value()),
             "isSitePagesCreationEnabled": lambda n : setattr(self, 'is_site_pages_creation_enabled', n.get_bool_value()),
             "isSitesStorageLimitAutomatic": lambda n : setattr(self, 'is_sites_storage_limit_automatic', n.get_bool_value()),
             "isSyncButtonHiddenOnPersonalSite": lambda n : setattr(self, 'is_sync_button_hidden_on_personal_site', n.get_bool_value()),
             "isUnmanagedSyncAppForTenantRestricted": lambda n : setattr(self, 'is_unmanaged_sync_app_for_tenant_restricted', n.get_bool_value()),
-            "personalSiteDefaultStorageLimitInMB": lambda n : setattr(self, 'personal_site_default_storage_limit_in_m_b', n.get_int_value()),
+            "personalSiteDefaultStorageLimitInMB": lambda n : setattr(self, 'personal_site_default_storage_limit_in_mb', n.get_int_value()),
             "sharingAllowedDomainList": lambda n : setattr(self, 'sharing_allowed_domain_list', n.get_collection_of_primitive_values(str)),
             "sharingBlockedDomainList": lambda n : setattr(self, 'sharing_blocked_domain_list', n.get_collection_of_primitive_values(str)),
             "sharingCapability": lambda n : setattr(self, 'sharing_capability', n.get_enum_value(SharingCapabilities)),
             "sharingDomainRestrictionMode": lambda n : setattr(self, 'sharing_domain_restriction_mode', n.get_enum_value(SharingDomainRestrictionMode)),
             "siteCreationDefaultManagedPath": lambda n : setattr(self, 'site_creation_default_managed_path', n.get_str_value()),
-            "siteCreationDefaultStorageLimitInMB": lambda n : setattr(self, 'site_creation_default_storage_limit_in_m_b', n.get_int_value()),
+            "siteCreationDefaultStorageLimitInMB": lambda n : setattr(self, 'site_creation_default_storage_limit_in_mb', n.get_int_value()),
             "tenantDefaultTimezone": lambda n : setattr(self, 'tenant_default_timezone', n.get_str_value()),
         }
         super_fields = super().get_field_deserializers()
@@ -164,18 +164,18 @@ class SharepointSettings(Entity):
         writer.write_bool_value("isSharePointMobileNotificationEnabled", self.is_share_point_mobile_notification_enabled)
         writer.write_bool_value("isSharePointNewsfeedEnabled", self.is_share_point_newsfeed_enabled)
         writer.write_bool_value("isSiteCreationEnabled", self.is_site_creation_enabled)
-        writer.write_bool_value("isSiteCreationUIEnabled", self.is_site_creation_u_i_enabled)
+        writer.write_bool_value("isSiteCreationUIEnabled", self.is_site_creation_uienabled)
         writer.write_bool_value("isSitePagesCreationEnabled", self.is_site_pages_creation_enabled)
         writer.write_bool_value("isSitesStorageLimitAutomatic", self.is_sites_storage_limit_automatic)
         writer.write_bool_value("isSyncButtonHiddenOnPersonalSite", self.is_sync_button_hidden_on_personal_site)
         writer.write_bool_value("isUnmanagedSyncAppForTenantRestricted", self.is_unmanaged_sync_app_for_tenant_restricted)
-        writer.write_int_value("personalSiteDefaultStorageLimitInMB", self.personal_site_default_storage_limit_in_m_b)
+        writer.write_int_value("personalSiteDefaultStorageLimitInMB", self.personal_site_default_storage_limit_in_mb)
         writer.write_collection_of_primitive_values("sharingAllowedDomainList", self.sharing_allowed_domain_list)
         writer.write_collection_of_primitive_values("sharingBlockedDomainList", self.sharing_blocked_domain_list)
         writer.write_enum_value("sharingCapability", self.sharing_capability)
         writer.write_enum_value("sharingDomainRestrictionMode", self.sharing_domain_restriction_mode)
         writer.write_str_value("siteCreationDefaultManagedPath", self.site_creation_default_managed_path)
-        writer.write_int_value("siteCreationDefaultStorageLimitInMB", self.site_creation_default_storage_limit_in_m_b)
+        writer.write_int_value("siteCreationDefaultStorageLimitInMB", self.site_creation_default_storage_limit_in_mb)
         writer.write_str_value("tenantDefaultTimezone", self.tenant_default_timezone)
     
 

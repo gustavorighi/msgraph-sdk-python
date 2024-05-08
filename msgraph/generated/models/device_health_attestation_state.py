@@ -77,10 +77,10 @@ class DeviceHealthAttestationState(AdditionalDataHolder, BackedModel, Parsable):
     # VSM is a container that protects high value assets from a compromised kernel
     virtual_secure_mode: Optional[str] = None
     # Operating system running with limited services that is used to prepare a computer for Windows
-    windows_p_e: Optional[str] = None
+    windows_pe: Optional[str] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> DeviceHealthAttestationState:
+    def create_from_discriminator_value(parse_node: ParseNode) -> DeviceHealthAttestationState:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -128,7 +128,7 @@ class DeviceHealthAttestationState(AdditionalDataHolder, BackedModel, Parsable):
             "testSigning": lambda n : setattr(self, 'test_signing', n.get_str_value()),
             "tpmVersion": lambda n : setattr(self, 'tpm_version', n.get_str_value()),
             "virtualSecureMode": lambda n : setattr(self, 'virtual_secure_mode', n.get_str_value()),
-            "windowsPE": lambda n : setattr(self, 'windows_p_e', n.get_str_value()),
+            "windowsPE": lambda n : setattr(self, 'windows_pe', n.get_str_value()),
         }
         return fields
     
@@ -172,7 +172,7 @@ class DeviceHealthAttestationState(AdditionalDataHolder, BackedModel, Parsable):
         writer.write_str_value("testSigning", self.test_signing)
         writer.write_str_value("tpmVersion", self.tpm_version)
         writer.write_str_value("virtualSecureMode", self.virtual_secure_mode)
-        writer.write_str_value("windowsPE", self.windows_p_e)
+        writer.write_str_value("windowsPE", self.windows_pe)
         writer.write_additional_data_value(self.additional_data)
     
 

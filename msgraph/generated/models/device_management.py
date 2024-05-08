@@ -43,11 +43,11 @@ if TYPE_CHECKING:
     from .user_experience_analytics_app_health_application_performance import UserExperienceAnalyticsAppHealthApplicationPerformance
     from .user_experience_analytics_app_health_app_performance_by_app_version_details import UserExperienceAnalyticsAppHealthAppPerformanceByAppVersionDetails
     from .user_experience_analytics_app_health_app_performance_by_app_version_device_id import UserExperienceAnalyticsAppHealthAppPerformanceByAppVersionDeviceId
-    from .user_experience_analytics_app_health_app_performance_by_o_s_version import UserExperienceAnalyticsAppHealthAppPerformanceByOSVersion
+    from .user_experience_analytics_app_health_app_performance_by_osversion import UserExperienceAnalyticsAppHealthAppPerformanceByOSVersion
     from .user_experience_analytics_app_health_device_model_performance import UserExperienceAnalyticsAppHealthDeviceModelPerformance
     from .user_experience_analytics_app_health_device_performance import UserExperienceAnalyticsAppHealthDevicePerformance
     from .user_experience_analytics_app_health_device_performance_details import UserExperienceAnalyticsAppHealthDevicePerformanceDetails
-    from .user_experience_analytics_app_health_o_s_version_performance import UserExperienceAnalyticsAppHealthOSVersionPerformance
+    from .user_experience_analytics_app_health_osversion_performance import UserExperienceAnalyticsAppHealthOSVersionPerformance
     from .user_experience_analytics_baseline import UserExperienceAnalyticsBaseline
     from .user_experience_analytics_category import UserExperienceAnalyticsCategory
     from .user_experience_analytics_device_performance import UserExperienceAnalyticsDevicePerformance
@@ -156,7 +156,7 @@ class DeviceManagement(Entity):
     # User experience analytics appHealth Application Performance by App Version Device Id
     user_experience_analytics_app_health_application_performance_by_app_version_device_id: Optional[List[UserExperienceAnalyticsAppHealthAppPerformanceByAppVersionDeviceId]] = None
     # User experience analytics appHealth Application Performance by OS Version
-    user_experience_analytics_app_health_application_performance_by_o_s_version: Optional[List[UserExperienceAnalyticsAppHealthAppPerformanceByOSVersion]] = None
+    user_experience_analytics_app_health_application_performance_by_osversion: Optional[List[UserExperienceAnalyticsAppHealthAppPerformanceByOSVersion]] = None
     # User experience analytics appHealth Model Performance
     user_experience_analytics_app_health_device_model_performance: Optional[List[UserExperienceAnalyticsAppHealthDeviceModelPerformance]] = None
     # User experience analytics appHealth Device Performance
@@ -164,7 +164,7 @@ class DeviceManagement(Entity):
     # User experience analytics device performance details
     user_experience_analytics_app_health_device_performance_details: Optional[List[UserExperienceAnalyticsAppHealthDevicePerformanceDetails]] = None
     # User experience analytics appHealth OS version Performance
-    user_experience_analytics_app_health_o_s_version_performance: Optional[List[UserExperienceAnalyticsAppHealthOSVersionPerformance]] = None
+    user_experience_analytics_app_health_osversion_performance: Optional[List[UserExperienceAnalyticsAppHealthOSVersionPerformance]] = None
     # User experience analytics appHealth overview
     user_experience_analytics_app_health_overview: Optional[UserExperienceAnalyticsCategory] = None
     # User experience analytics baselines
@@ -211,7 +211,7 @@ class DeviceManagement(Entity):
     windows_malware_overview: Optional[WindowsMalwareOverview] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> DeviceManagement:
+    def create_from_discriminator_value(parse_node: ParseNode) -> DeviceManagement:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -264,11 +264,11 @@ class DeviceManagement(Entity):
         from .user_experience_analytics_app_health_application_performance import UserExperienceAnalyticsAppHealthApplicationPerformance
         from .user_experience_analytics_app_health_app_performance_by_app_version_details import UserExperienceAnalyticsAppHealthAppPerformanceByAppVersionDetails
         from .user_experience_analytics_app_health_app_performance_by_app_version_device_id import UserExperienceAnalyticsAppHealthAppPerformanceByAppVersionDeviceId
-        from .user_experience_analytics_app_health_app_performance_by_o_s_version import UserExperienceAnalyticsAppHealthAppPerformanceByOSVersion
+        from .user_experience_analytics_app_health_app_performance_by_osversion import UserExperienceAnalyticsAppHealthAppPerformanceByOSVersion
         from .user_experience_analytics_app_health_device_model_performance import UserExperienceAnalyticsAppHealthDeviceModelPerformance
         from .user_experience_analytics_app_health_device_performance import UserExperienceAnalyticsAppHealthDevicePerformance
         from .user_experience_analytics_app_health_device_performance_details import UserExperienceAnalyticsAppHealthDevicePerformanceDetails
-        from .user_experience_analytics_app_health_o_s_version_performance import UserExperienceAnalyticsAppHealthOSVersionPerformance
+        from .user_experience_analytics_app_health_osversion_performance import UserExperienceAnalyticsAppHealthOSVersionPerformance
         from .user_experience_analytics_baseline import UserExperienceAnalyticsBaseline
         from .user_experience_analytics_category import UserExperienceAnalyticsCategory
         from .user_experience_analytics_device_performance import UserExperienceAnalyticsDevicePerformance
@@ -329,11 +329,11 @@ class DeviceManagement(Entity):
         from .user_experience_analytics_app_health_application_performance import UserExperienceAnalyticsAppHealthApplicationPerformance
         from .user_experience_analytics_app_health_app_performance_by_app_version_details import UserExperienceAnalyticsAppHealthAppPerformanceByAppVersionDetails
         from .user_experience_analytics_app_health_app_performance_by_app_version_device_id import UserExperienceAnalyticsAppHealthAppPerformanceByAppVersionDeviceId
-        from .user_experience_analytics_app_health_app_performance_by_o_s_version import UserExperienceAnalyticsAppHealthAppPerformanceByOSVersion
+        from .user_experience_analytics_app_health_app_performance_by_osversion import UserExperienceAnalyticsAppHealthAppPerformanceByOSVersion
         from .user_experience_analytics_app_health_device_model_performance import UserExperienceAnalyticsAppHealthDeviceModelPerformance
         from .user_experience_analytics_app_health_device_performance import UserExperienceAnalyticsAppHealthDevicePerformance
         from .user_experience_analytics_app_health_device_performance_details import UserExperienceAnalyticsAppHealthDevicePerformanceDetails
-        from .user_experience_analytics_app_health_o_s_version_performance import UserExperienceAnalyticsAppHealthOSVersionPerformance
+        from .user_experience_analytics_app_health_osversion_performance import UserExperienceAnalyticsAppHealthOSVersionPerformance
         from .user_experience_analytics_baseline import UserExperienceAnalyticsBaseline
         from .user_experience_analytics_category import UserExperienceAnalyticsCategory
         from .user_experience_analytics_device_performance import UserExperienceAnalyticsDevicePerformance
@@ -395,11 +395,11 @@ class DeviceManagement(Entity):
             "userExperienceAnalyticsAppHealthApplicationPerformance": lambda n : setattr(self, 'user_experience_analytics_app_health_application_performance', n.get_collection_of_object_values(UserExperienceAnalyticsAppHealthApplicationPerformance)),
             "userExperienceAnalyticsAppHealthApplicationPerformanceByAppVersionDetails": lambda n : setattr(self, 'user_experience_analytics_app_health_application_performance_by_app_version_details', n.get_collection_of_object_values(UserExperienceAnalyticsAppHealthAppPerformanceByAppVersionDetails)),
             "userExperienceAnalyticsAppHealthApplicationPerformanceByAppVersionDeviceId": lambda n : setattr(self, 'user_experience_analytics_app_health_application_performance_by_app_version_device_id', n.get_collection_of_object_values(UserExperienceAnalyticsAppHealthAppPerformanceByAppVersionDeviceId)),
-            "userExperienceAnalyticsAppHealthApplicationPerformanceByOSVersion": lambda n : setattr(self, 'user_experience_analytics_app_health_application_performance_by_o_s_version', n.get_collection_of_object_values(UserExperienceAnalyticsAppHealthAppPerformanceByOSVersion)),
+            "userExperienceAnalyticsAppHealthApplicationPerformanceByOSVersion": lambda n : setattr(self, 'user_experience_analytics_app_health_application_performance_by_osversion', n.get_collection_of_object_values(UserExperienceAnalyticsAppHealthAppPerformanceByOSVersion)),
             "userExperienceAnalyticsAppHealthDeviceModelPerformance": lambda n : setattr(self, 'user_experience_analytics_app_health_device_model_performance', n.get_collection_of_object_values(UserExperienceAnalyticsAppHealthDeviceModelPerformance)),
             "userExperienceAnalyticsAppHealthDevicePerformance": lambda n : setattr(self, 'user_experience_analytics_app_health_device_performance', n.get_collection_of_object_values(UserExperienceAnalyticsAppHealthDevicePerformance)),
             "userExperienceAnalyticsAppHealthDevicePerformanceDetails": lambda n : setattr(self, 'user_experience_analytics_app_health_device_performance_details', n.get_collection_of_object_values(UserExperienceAnalyticsAppHealthDevicePerformanceDetails)),
-            "userExperienceAnalyticsAppHealthOSVersionPerformance": lambda n : setattr(self, 'user_experience_analytics_app_health_o_s_version_performance', n.get_collection_of_object_values(UserExperienceAnalyticsAppHealthOSVersionPerformance)),
+            "userExperienceAnalyticsAppHealthOSVersionPerformance": lambda n : setattr(self, 'user_experience_analytics_app_health_osversion_performance', n.get_collection_of_object_values(UserExperienceAnalyticsAppHealthOSVersionPerformance)),
             "userExperienceAnalyticsAppHealthOverview": lambda n : setattr(self, 'user_experience_analytics_app_health_overview', n.get_object_value(UserExperienceAnalyticsCategory)),
             "userExperienceAnalyticsBaselines": lambda n : setattr(self, 'user_experience_analytics_baselines', n.get_collection_of_object_values(UserExperienceAnalyticsBaseline)),
             "userExperienceAnalyticsCategories": lambda n : setattr(self, 'user_experience_analytics_categories', n.get_collection_of_object_values(UserExperienceAnalyticsCategory)),
@@ -474,11 +474,11 @@ class DeviceManagement(Entity):
         writer.write_collection_of_object_values("userExperienceAnalyticsAppHealthApplicationPerformance", self.user_experience_analytics_app_health_application_performance)
         writer.write_collection_of_object_values("userExperienceAnalyticsAppHealthApplicationPerformanceByAppVersionDetails", self.user_experience_analytics_app_health_application_performance_by_app_version_details)
         writer.write_collection_of_object_values("userExperienceAnalyticsAppHealthApplicationPerformanceByAppVersionDeviceId", self.user_experience_analytics_app_health_application_performance_by_app_version_device_id)
-        writer.write_collection_of_object_values("userExperienceAnalyticsAppHealthApplicationPerformanceByOSVersion", self.user_experience_analytics_app_health_application_performance_by_o_s_version)
+        writer.write_collection_of_object_values("userExperienceAnalyticsAppHealthApplicationPerformanceByOSVersion", self.user_experience_analytics_app_health_application_performance_by_osversion)
         writer.write_collection_of_object_values("userExperienceAnalyticsAppHealthDeviceModelPerformance", self.user_experience_analytics_app_health_device_model_performance)
         writer.write_collection_of_object_values("userExperienceAnalyticsAppHealthDevicePerformance", self.user_experience_analytics_app_health_device_performance)
         writer.write_collection_of_object_values("userExperienceAnalyticsAppHealthDevicePerformanceDetails", self.user_experience_analytics_app_health_device_performance_details)
-        writer.write_collection_of_object_values("userExperienceAnalyticsAppHealthOSVersionPerformance", self.user_experience_analytics_app_health_o_s_version_performance)
+        writer.write_collection_of_object_values("userExperienceAnalyticsAppHealthOSVersionPerformance", self.user_experience_analytics_app_health_osversion_performance)
         writer.write_object_value("userExperienceAnalyticsAppHealthOverview", self.user_experience_analytics_app_health_overview)
         writer.write_collection_of_object_values("userExperienceAnalyticsBaselines", self.user_experience_analytics_baselines)
         writer.write_collection_of_object_values("userExperienceAnalyticsCategories", self.user_experience_analytics_categories)

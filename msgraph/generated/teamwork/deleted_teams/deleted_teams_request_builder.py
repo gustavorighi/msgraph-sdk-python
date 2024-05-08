@@ -2,6 +2,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from kiota_abstractions.base_request_builder import BaseRequestBuilder
 from kiota_abstractions.base_request_configuration import RequestConfiguration
+from kiota_abstractions.default_query_parameters import QueryParameters
 from kiota_abstractions.get_path_parameters import get_path_parameters
 from kiota_abstractions.method import Method
 from kiota_abstractions.request_adapter import RequestAdapter
@@ -9,11 +10,12 @@ from kiota_abstractions.request_information import RequestInformation
 from kiota_abstractions.request_option import RequestOption
 from kiota_abstractions.serialization import Parsable, ParsableFactory
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
+from warnings import warn
 
 if TYPE_CHECKING:
     from ...models.deleted_team import DeletedTeam
     from ...models.deleted_team_collection_response import DeletedTeamCollectionResponse
-    from ...models.o_data_errors.o_data_error import ODataError
+    from ...models.odata_errors.odata_error import ODataError
     from .count.count_request_builder import CountRequestBuilder
     from .get_all_messages.get_all_messages_request_builder import GetAllMessagesRequestBuilder
     from .item.deleted_team_item_request_builder import DeletedTeamItemRequestBuilder
@@ -45,7 +47,7 @@ class DeletedTeamsRequestBuilder(BaseRequestBuilder):
         url_tpl_params["deletedTeam%2Did"] = deleted_team_id
         return DeletedTeamItemRequestBuilder(self.request_adapter, url_tpl_params)
     
-    async def get(self,request_configuration: Optional[RequestConfiguration] = None) -> Optional[DeletedTeamCollectionResponse]:
+    async def get(self,request_configuration: Optional[RequestConfiguration[DeletedTeamsRequestBuilderGetQueryParameters]] = None) -> Optional[DeletedTeamCollectionResponse]:
         """
         Get a list of the deletedTeam objects and their properties.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
@@ -55,7 +57,7 @@ class DeletedTeamsRequestBuilder(BaseRequestBuilder):
         request_info = self.to_get_request_information(
             request_configuration
         )
-        from ...models.o_data_errors.o_data_error import ODataError
+        from ...models.odata_errors.odata_error import ODataError
 
         error_mapping: Dict[str, ParsableFactory] = {
             "XXX": ODataError,
@@ -66,7 +68,7 @@ class DeletedTeamsRequestBuilder(BaseRequestBuilder):
 
         return await self.request_adapter.send_async(request_info, DeletedTeamCollectionResponse, error_mapping)
     
-    async def post(self,body: Optional[DeletedTeam] = None, request_configuration: Optional[RequestConfiguration] = None) -> Optional[DeletedTeam]:
+    async def post(self,body: DeletedTeam, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[DeletedTeam]:
         """
         Create new navigation property to deletedTeams for teamwork
         param body: The request body
@@ -78,7 +80,7 @@ class DeletedTeamsRequestBuilder(BaseRequestBuilder):
         request_info = self.to_post_request_information(
             body, request_configuration
         )
-        from ...models.o_data_errors.o_data_error import ODataError
+        from ...models.odata_errors.odata_error import ODataError
 
         error_mapping: Dict[str, ParsableFactory] = {
             "XXX": ODataError,
@@ -89,7 +91,7 @@ class DeletedTeamsRequestBuilder(BaseRequestBuilder):
 
         return await self.request_adapter.send_async(request_info, DeletedTeam, error_mapping)
     
-    def to_get_request_information(self,request_configuration: Optional[RequestConfiguration] = None) -> RequestInformation:
+    def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[DeletedTeamsRequestBuilderGetQueryParameters]] = None) -> RequestInformation:
         """
         Get a list of the deletedTeam objects and their properties.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
@@ -100,7 +102,7 @@ class DeletedTeamsRequestBuilder(BaseRequestBuilder):
         request_info.headers.try_add("Accept", "application/json")
         return request_info
     
-    def to_post_request_information(self,body: Optional[DeletedTeam] = None, request_configuration: Optional[RequestConfiguration] = None) -> RequestInformation:
+    def to_post_request_information(self,body: DeletedTeam, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Create new navigation property to deletedTeams for teamwork
         param body: The request body
@@ -115,7 +117,7 @@ class DeletedTeamsRequestBuilder(BaseRequestBuilder):
         request_info.set_content_from_parsable(self.request_adapter, "application/json", body)
         return request_info
     
-    def with_url(self,raw_url: Optional[str] = None) -> DeletedTeamsRequestBuilder:
+    def with_url(self,raw_url: str) -> DeletedTeamsRequestBuilder:
         """
         Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         param raw_url: The raw URL to use for the request builder.
@@ -148,7 +150,7 @@ class DeletedTeamsRequestBuilder(BaseRequestBuilder):
         """
         Get a list of the deletedTeam objects and their properties.
         """
-        def get_query_parameter(self,original_name: Optional[str] = None) -> str:
+        def get_query_parameter(self,original_name: str) -> str:
             """
             Maps the query parameters names to their encoded names for the URI template parsing.
             param original_name: The original query parameter name in the class.
@@ -198,5 +200,19 @@ class DeletedTeamsRequestBuilder(BaseRequestBuilder):
         # Show only the first n items
         top: Optional[int] = None
 
+    
+    @dataclass
+    class DeletedTeamsRequestBuilderGetRequestConfiguration(RequestConfiguration[DeletedTeamsRequestBuilderGetQueryParameters]):
+        """
+        Configuration for the request such as headers, query parameters, and middleware options.
+        """
+        warn("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.", DeprecationWarning)
+    
+    @dataclass
+    class DeletedTeamsRequestBuilderPostRequestConfiguration(RequestConfiguration[QueryParameters]):
+        """
+        Configuration for the request such as headers, query parameters, and middleware options.
+        """
+        warn("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.", DeprecationWarning)
     
 

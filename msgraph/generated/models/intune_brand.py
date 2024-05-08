@@ -19,13 +19,13 @@ class IntuneBrand(AdditionalDataHolder, BackedModel, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: Dict[str, Any] = field(default_factory=dict)
     # Email address of the person/organization responsible for IT support.
-    contact_i_t_email_address: Optional[str] = None
+    contact_itemail_address: Optional[str] = None
     # Name of the person/organization responsible for IT support.
-    contact_i_t_name: Optional[str] = None
+    contact_itname: Optional[str] = None
     # Text comments regarding the person/organization responsible for IT support.
-    contact_i_t_notes: Optional[str] = None
+    contact_itnotes: Optional[str] = None
     # Phone number of the person/organization responsible for IT support.
-    contact_i_t_phone_number: Optional[str] = None
+    contact_itphone_number: Optional[str] = None
     # Logo image displayed in Company Portal apps which have a dark background behind the logo.
     dark_background_logo: Optional[MimeContent] = None
     # Company/organization name that is displayed to end users.
@@ -50,7 +50,7 @@ class IntuneBrand(AdditionalDataHolder, BackedModel, Parsable):
     theme_color: Optional[RgbColor] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> IntuneBrand:
+    def create_from_discriminator_value(parse_node: ParseNode) -> IntuneBrand:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -72,10 +72,10 @@ class IntuneBrand(AdditionalDataHolder, BackedModel, Parsable):
         from .rgb_color import RgbColor
 
         fields: Dict[str, Callable[[Any], None]] = {
-            "contactITEmailAddress": lambda n : setattr(self, 'contact_i_t_email_address', n.get_str_value()),
-            "contactITName": lambda n : setattr(self, 'contact_i_t_name', n.get_str_value()),
-            "contactITNotes": lambda n : setattr(self, 'contact_i_t_notes', n.get_str_value()),
-            "contactITPhoneNumber": lambda n : setattr(self, 'contact_i_t_phone_number', n.get_str_value()),
+            "contactITEmailAddress": lambda n : setattr(self, 'contact_itemail_address', n.get_str_value()),
+            "contactITName": lambda n : setattr(self, 'contact_itname', n.get_str_value()),
+            "contactITNotes": lambda n : setattr(self, 'contact_itnotes', n.get_str_value()),
+            "contactITPhoneNumber": lambda n : setattr(self, 'contact_itphone_number', n.get_str_value()),
             "darkBackgroundLogo": lambda n : setattr(self, 'dark_background_logo', n.get_object_value(MimeContent)),
             "displayName": lambda n : setattr(self, 'display_name', n.get_str_value()),
             "lightBackgroundLogo": lambda n : setattr(self, 'light_background_logo', n.get_object_value(MimeContent)),
@@ -98,10 +98,10 @@ class IntuneBrand(AdditionalDataHolder, BackedModel, Parsable):
         """
         if not writer:
             raise TypeError("writer cannot be null.")
-        writer.write_str_value("contactITEmailAddress", self.contact_i_t_email_address)
-        writer.write_str_value("contactITName", self.contact_i_t_name)
-        writer.write_str_value("contactITNotes", self.contact_i_t_notes)
-        writer.write_str_value("contactITPhoneNumber", self.contact_i_t_phone_number)
+        writer.write_str_value("contactITEmailAddress", self.contact_itemail_address)
+        writer.write_str_value("contactITName", self.contact_itname)
+        writer.write_str_value("contactITNotes", self.contact_itnotes)
+        writer.write_str_value("contactITPhoneNumber", self.contact_itphone_number)
         writer.write_object_value("darkBackgroundLogo", self.dark_background_logo)
         writer.write_str_value("displayName", self.display_name)
         writer.write_object_value("lightBackgroundLogo", self.light_background_logo)

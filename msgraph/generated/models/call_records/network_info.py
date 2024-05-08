@@ -43,9 +43,9 @@ class NetworkInfo(AdditionalDataHolder, BackedModel, Parsable):
     # Fraction of the call that the media endpoint detected the network was causing poor quality of the audio received.
     received_quality_event_ratio: Optional[float] = None
     # IP address of the media endpoint as seen by the media relay server. This is typically the public internet IP address associated to the endpoint.
-    reflexive_i_p_address: Optional[str] = None
+    reflexive_ipaddress: Optional[str] = None
     # IP address of the media relay server allocated by the media endpoint.
-    relay_i_p_address: Optional[str] = None
+    relay_ipaddress: Optional[str] = None
     # Network port number allocated on the media relay server by the media endpoint.
     relay_port: Optional[int] = None
     # Fraction of the call that the media endpoint detected the network was causing poor quality of the audio sent.
@@ -74,7 +74,7 @@ class NetworkInfo(AdditionalDataHolder, BackedModel, Parsable):
     wifi_vendor_driver_version: Optional[str] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> NetworkInfo:
+    def create_from_discriminator_value(parse_node: ParseNode) -> NetworkInfo:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -114,8 +114,8 @@ class NetworkInfo(AdditionalDataHolder, BackedModel, Parsable):
             "@odata.type": lambda n : setattr(self, 'odata_type', n.get_str_value()),
             "port": lambda n : setattr(self, 'port', n.get_int_value()),
             "receivedQualityEventRatio": lambda n : setattr(self, 'received_quality_event_ratio', n.get_float_value()),
-            "reflexiveIPAddress": lambda n : setattr(self, 'reflexive_i_p_address', n.get_str_value()),
-            "relayIPAddress": lambda n : setattr(self, 'relay_i_p_address', n.get_str_value()),
+            "reflexiveIPAddress": lambda n : setattr(self, 'reflexive_ipaddress', n.get_str_value()),
+            "relayIPAddress": lambda n : setattr(self, 'relay_ipaddress', n.get_str_value()),
             "relayPort": lambda n : setattr(self, 'relay_port', n.get_int_value()),
             "sentQualityEventRatio": lambda n : setattr(self, 'sent_quality_event_ratio', n.get_float_value()),
             "subnet": lambda n : setattr(self, 'subnet', n.get_str_value()),
@@ -152,8 +152,8 @@ class NetworkInfo(AdditionalDataHolder, BackedModel, Parsable):
         writer.write_str_value("@odata.type", self.odata_type)
         writer.write_int_value("port", self.port)
         writer.write_float_value("receivedQualityEventRatio", self.received_quality_event_ratio)
-        writer.write_str_value("reflexiveIPAddress", self.reflexive_i_p_address)
-        writer.write_str_value("relayIPAddress", self.relay_i_p_address)
+        writer.write_str_value("reflexiveIPAddress", self.reflexive_ipaddress)
+        writer.write_str_value("relayIPAddress", self.relay_ipaddress)
         writer.write_int_value("relayPort", self.relay_port)
         writer.write_float_value("sentQualityEventRatio", self.sent_quality_event_ratio)
         writer.write_str_value("subnet", self.subnet)

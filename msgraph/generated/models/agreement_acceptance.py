@@ -21,9 +21,9 @@ class AgreementAcceptance(Entity):
     # The unique identifier of the device used for accepting the agreement. Supports $filter (eq) and eq for null values.
     device_id: Optional[str] = None
     # The operating system used to accept the agreement.
-    device_o_s_type: Optional[str] = None
+    device_ostype: Optional[str] = None
     # The operating system version of the device used to accept the agreement.
-    device_o_s_version: Optional[str] = None
+    device_osversion: Optional[str] = None
     # The expiration date time of the acceptance. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Supports $filter (eq, ge, le) and eq for null values.
     expiration_date_time: Optional[datetime.datetime] = None
     # The OdataType property
@@ -42,7 +42,7 @@ class AgreementAcceptance(Entity):
     user_principal_name: Optional[str] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> AgreementAcceptance:
+    def create_from_discriminator_value(parse_node: ParseNode) -> AgreementAcceptance:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -68,8 +68,8 @@ class AgreementAcceptance(Entity):
             "agreementId": lambda n : setattr(self, 'agreement_id', n.get_str_value()),
             "deviceDisplayName": lambda n : setattr(self, 'device_display_name', n.get_str_value()),
             "deviceId": lambda n : setattr(self, 'device_id', n.get_str_value()),
-            "deviceOSType": lambda n : setattr(self, 'device_o_s_type', n.get_str_value()),
-            "deviceOSVersion": lambda n : setattr(self, 'device_o_s_version', n.get_str_value()),
+            "deviceOSType": lambda n : setattr(self, 'device_ostype', n.get_str_value()),
+            "deviceOSVersion": lambda n : setattr(self, 'device_osversion', n.get_str_value()),
             "expirationDateTime": lambda n : setattr(self, 'expiration_date_time', n.get_datetime_value()),
             "recordedDateTime": lambda n : setattr(self, 'recorded_date_time', n.get_datetime_value()),
             "state": lambda n : setattr(self, 'state', n.get_enum_value(AgreementAcceptanceState)),
@@ -95,8 +95,8 @@ class AgreementAcceptance(Entity):
         writer.write_str_value("agreementId", self.agreement_id)
         writer.write_str_value("deviceDisplayName", self.device_display_name)
         writer.write_str_value("deviceId", self.device_id)
-        writer.write_str_value("deviceOSType", self.device_o_s_type)
-        writer.write_str_value("deviceOSVersion", self.device_o_s_version)
+        writer.write_str_value("deviceOSType", self.device_ostype)
+        writer.write_str_value("deviceOSVersion", self.device_osversion)
         writer.write_datetime_value("expirationDateTime", self.expiration_date_time)
         writer.write_datetime_value("recordedDateTime", self.recorded_date_time)
         writer.write_enum_value("state", self.state)

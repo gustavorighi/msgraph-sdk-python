@@ -13,7 +13,7 @@ class MessageSecurityState(AdditionalDataHolder, BackedModel, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: Dict[str, Any] = field(default_factory=dict)
     # The connectingIP property
-    connecting_i_p: Optional[str] = None
+    connecting_ip: Optional[str] = None
     # The deliveryAction property
     delivery_action: Optional[str] = None
     # The deliveryLocation property
@@ -34,7 +34,7 @@ class MessageSecurityState(AdditionalDataHolder, BackedModel, Parsable):
     odata_type: Optional[str] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> MessageSecurityState:
+    def create_from_discriminator_value(parse_node: ParseNode) -> MessageSecurityState:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -50,7 +50,7 @@ class MessageSecurityState(AdditionalDataHolder, BackedModel, Parsable):
         Returns: Dict[str, Callable[[ParseNode], None]]
         """
         fields: Dict[str, Callable[[Any], None]] = {
-            "connectingIP": lambda n : setattr(self, 'connecting_i_p', n.get_str_value()),
+            "connectingIP": lambda n : setattr(self, 'connecting_ip', n.get_str_value()),
             "deliveryAction": lambda n : setattr(self, 'delivery_action', n.get_str_value()),
             "deliveryLocation": lambda n : setattr(self, 'delivery_location', n.get_str_value()),
             "directionality": lambda n : setattr(self, 'directionality', n.get_str_value()),
@@ -71,7 +71,7 @@ class MessageSecurityState(AdditionalDataHolder, BackedModel, Parsable):
         """
         if not writer:
             raise TypeError("writer cannot be null.")
-        writer.write_str_value("connectingIP", self.connecting_i_p)
+        writer.write_str_value("connectingIP", self.connecting_ip)
         writer.write_str_value("deliveryAction", self.delivery_action)
         writer.write_str_value("deliveryLocation", self.delivery_location)
         writer.write_str_value("directionality", self.directionality)

@@ -32,9 +32,9 @@ class Windows10EndpointProtectionConfiguration(DeviceConfiguration):
     # Allow printing to Network Printers from Container
     application_guard_allow_print_to_network_printers: Optional[bool] = None
     # Allow printing to PDF from Container
-    application_guard_allow_print_to_p_d_f: Optional[bool] = None
+    application_guard_allow_print_to_pdf: Optional[bool] = None
     # Allow printing to XPS from Container
-    application_guard_allow_print_to_x_p_s: Optional[bool] = None
+    application_guard_allow_print_to_xps: Optional[bool] = None
     # Possible values for applicationGuardBlockClipboardSharingType
     application_guard_block_clipboard_sharing: Optional[ApplicationGuardBlockClipboardSharingType] = None
     # Possible values for applicationGuardBlockFileTransfer
@@ -66,19 +66,19 @@ class Windows10EndpointProtectionConfiguration(DeviceConfiguration):
     # Indicates whether or not to block user from overriding Exploit Protection settings.
     defender_security_center_block_exploit_protection_override: Optional[bool] = None
     # Blocks stateful FTP connections to the device
-    firewall_block_stateful_f_t_p: Optional[bool] = None
+    firewall_block_stateful_ftp: Optional[bool] = None
     # Possible values for firewallCertificateRevocationListCheckMethod
     firewall_certificate_revocation_list_check_method: Optional[FirewallCertificateRevocationListCheckMethodType] = None
-    # Configures IPSec exemptions to allow both IPv4 and IPv6 DHCP traffic
-    firewall_i_p_sec_exemptions_allow_d_h_c_p: Optional[bool] = None
-    # Configures IPSec exemptions to allow ICMP
-    firewall_i_p_sec_exemptions_allow_i_c_m_p: Optional[bool] = None
-    # Configures IPSec exemptions to allow neighbor discovery IPv6 ICMP type-codes
-    firewall_i_p_sec_exemptions_allow_neighbor_discovery: Optional[bool] = None
-    # Configures IPSec exemptions to allow router discovery IPv6 ICMP type-codes
-    firewall_i_p_sec_exemptions_allow_router_discovery: Optional[bool] = None
     # Configures the idle timeout for security associations, in seconds, from 300 to 3600 inclusive. This is the period after which security associations will expire and be deleted. Valid values 300 to 3600
     firewall_idle_timeout_for_security_association_in_seconds: Optional[int] = None
+    # Configures IPSec exemptions to allow both IPv4 and IPv6 DHCP traffic
+    firewall_ipsec_exemptions_allow_dhcp: Optional[bool] = None
+    # Configures IPSec exemptions to allow ICMP
+    firewall_ipsec_exemptions_allow_icmp: Optional[bool] = None
+    # Configures IPSec exemptions to allow neighbor discovery IPv6 ICMP type-codes
+    firewall_ipsec_exemptions_allow_neighbor_discovery: Optional[bool] = None
+    # Configures IPSec exemptions to allow router discovery IPv6 ICMP type-codes
+    firewall_ipsec_exemptions_allow_router_discovery: Optional[bool] = None
     # If an authentication set is not fully supported by a keying module, direct the module to ignore only unsupported authentication suites rather than the entire set
     firewall_merge_keying_module_settings: Optional[bool] = None
     # Possible values for firewallPacketQueueingMethod
@@ -97,7 +97,7 @@ class Windows10EndpointProtectionConfiguration(DeviceConfiguration):
     smart_screen_enable_in_shell: Optional[bool] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> Windows10EndpointProtectionConfiguration:
+    def create_from_discriminator_value(parse_node: ParseNode) -> Windows10EndpointProtectionConfiguration:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -137,8 +137,8 @@ class Windows10EndpointProtectionConfiguration(DeviceConfiguration):
             "applicationGuardAllowPersistence": lambda n : setattr(self, 'application_guard_allow_persistence', n.get_bool_value()),
             "applicationGuardAllowPrintToLocalPrinters": lambda n : setattr(self, 'application_guard_allow_print_to_local_printers', n.get_bool_value()),
             "applicationGuardAllowPrintToNetworkPrinters": lambda n : setattr(self, 'application_guard_allow_print_to_network_printers', n.get_bool_value()),
-            "applicationGuardAllowPrintToPDF": lambda n : setattr(self, 'application_guard_allow_print_to_p_d_f', n.get_bool_value()),
-            "applicationGuardAllowPrintToXPS": lambda n : setattr(self, 'application_guard_allow_print_to_x_p_s', n.get_bool_value()),
+            "applicationGuardAllowPrintToPDF": lambda n : setattr(self, 'application_guard_allow_print_to_pdf', n.get_bool_value()),
+            "applicationGuardAllowPrintToXPS": lambda n : setattr(self, 'application_guard_allow_print_to_xps', n.get_bool_value()),
             "applicationGuardBlockClipboardSharing": lambda n : setattr(self, 'application_guard_block_clipboard_sharing', n.get_enum_value(ApplicationGuardBlockClipboardSharingType)),
             "applicationGuardBlockFileTransfer": lambda n : setattr(self, 'application_guard_block_file_transfer', n.get_enum_value(ApplicationGuardBlockFileTransferType)),
             "applicationGuardBlockNonEnterpriseContent": lambda n : setattr(self, 'application_guard_block_non_enterprise_content', n.get_bool_value()),
@@ -154,13 +154,13 @@ class Windows10EndpointProtectionConfiguration(DeviceConfiguration):
             "defenderExploitProtectionXmlFileName": lambda n : setattr(self, 'defender_exploit_protection_xml_file_name', n.get_str_value()),
             "defenderGuardedFoldersAllowedAppPaths": lambda n : setattr(self, 'defender_guarded_folders_allowed_app_paths', n.get_collection_of_primitive_values(str)),
             "defenderSecurityCenterBlockExploitProtectionOverride": lambda n : setattr(self, 'defender_security_center_block_exploit_protection_override', n.get_bool_value()),
-            "firewallBlockStatefulFTP": lambda n : setattr(self, 'firewall_block_stateful_f_t_p', n.get_bool_value()),
+            "firewallBlockStatefulFTP": lambda n : setattr(self, 'firewall_block_stateful_ftp', n.get_bool_value()),
             "firewallCertificateRevocationListCheckMethod": lambda n : setattr(self, 'firewall_certificate_revocation_list_check_method', n.get_enum_value(FirewallCertificateRevocationListCheckMethodType)),
-            "firewallIPSecExemptionsAllowDHCP": lambda n : setattr(self, 'firewall_i_p_sec_exemptions_allow_d_h_c_p', n.get_bool_value()),
-            "firewallIPSecExemptionsAllowICMP": lambda n : setattr(self, 'firewall_i_p_sec_exemptions_allow_i_c_m_p', n.get_bool_value()),
-            "firewallIPSecExemptionsAllowNeighborDiscovery": lambda n : setattr(self, 'firewall_i_p_sec_exemptions_allow_neighbor_discovery', n.get_bool_value()),
-            "firewallIPSecExemptionsAllowRouterDiscovery": lambda n : setattr(self, 'firewall_i_p_sec_exemptions_allow_router_discovery', n.get_bool_value()),
             "firewallIdleTimeoutForSecurityAssociationInSeconds": lambda n : setattr(self, 'firewall_idle_timeout_for_security_association_in_seconds', n.get_int_value()),
+            "firewallIPSecExemptionsAllowDHCP": lambda n : setattr(self, 'firewall_ipsec_exemptions_allow_dhcp', n.get_bool_value()),
+            "firewallIPSecExemptionsAllowICMP": lambda n : setattr(self, 'firewall_ipsec_exemptions_allow_icmp', n.get_bool_value()),
+            "firewallIPSecExemptionsAllowNeighborDiscovery": lambda n : setattr(self, 'firewall_ipsec_exemptions_allow_neighbor_discovery', n.get_bool_value()),
+            "firewallIPSecExemptionsAllowRouterDiscovery": lambda n : setattr(self, 'firewall_ipsec_exemptions_allow_router_discovery', n.get_bool_value()),
             "firewallMergeKeyingModuleSettings": lambda n : setattr(self, 'firewall_merge_keying_module_settings', n.get_bool_value()),
             "firewallPacketQueueingMethod": lambda n : setattr(self, 'firewall_packet_queueing_method', n.get_enum_value(FirewallPacketQueueingMethodType)),
             "firewallPreSharedKeyEncodingMethod": lambda n : setattr(self, 'firewall_pre_shared_key_encoding_method', n.get_enum_value(FirewallPreSharedKeyEncodingMethodType)),
@@ -187,8 +187,8 @@ class Windows10EndpointProtectionConfiguration(DeviceConfiguration):
         writer.write_bool_value("applicationGuardAllowPersistence", self.application_guard_allow_persistence)
         writer.write_bool_value("applicationGuardAllowPrintToLocalPrinters", self.application_guard_allow_print_to_local_printers)
         writer.write_bool_value("applicationGuardAllowPrintToNetworkPrinters", self.application_guard_allow_print_to_network_printers)
-        writer.write_bool_value("applicationGuardAllowPrintToPDF", self.application_guard_allow_print_to_p_d_f)
-        writer.write_bool_value("applicationGuardAllowPrintToXPS", self.application_guard_allow_print_to_x_p_s)
+        writer.write_bool_value("applicationGuardAllowPrintToPDF", self.application_guard_allow_print_to_pdf)
+        writer.write_bool_value("applicationGuardAllowPrintToXPS", self.application_guard_allow_print_to_xps)
         writer.write_enum_value("applicationGuardBlockClipboardSharing", self.application_guard_block_clipboard_sharing)
         writer.write_enum_value("applicationGuardBlockFileTransfer", self.application_guard_block_file_transfer)
         writer.write_bool_value("applicationGuardBlockNonEnterpriseContent", self.application_guard_block_non_enterprise_content)
@@ -204,13 +204,13 @@ class Windows10EndpointProtectionConfiguration(DeviceConfiguration):
         writer.write_str_value("defenderExploitProtectionXmlFileName", self.defender_exploit_protection_xml_file_name)
         writer.write_collection_of_primitive_values("defenderGuardedFoldersAllowedAppPaths", self.defender_guarded_folders_allowed_app_paths)
         writer.write_bool_value("defenderSecurityCenterBlockExploitProtectionOverride", self.defender_security_center_block_exploit_protection_override)
-        writer.write_bool_value("firewallBlockStatefulFTP", self.firewall_block_stateful_f_t_p)
+        writer.write_bool_value("firewallBlockStatefulFTP", self.firewall_block_stateful_ftp)
         writer.write_enum_value("firewallCertificateRevocationListCheckMethod", self.firewall_certificate_revocation_list_check_method)
-        writer.write_bool_value("firewallIPSecExemptionsAllowDHCP", self.firewall_i_p_sec_exemptions_allow_d_h_c_p)
-        writer.write_bool_value("firewallIPSecExemptionsAllowICMP", self.firewall_i_p_sec_exemptions_allow_i_c_m_p)
-        writer.write_bool_value("firewallIPSecExemptionsAllowNeighborDiscovery", self.firewall_i_p_sec_exemptions_allow_neighbor_discovery)
-        writer.write_bool_value("firewallIPSecExemptionsAllowRouterDiscovery", self.firewall_i_p_sec_exemptions_allow_router_discovery)
         writer.write_int_value("firewallIdleTimeoutForSecurityAssociationInSeconds", self.firewall_idle_timeout_for_security_association_in_seconds)
+        writer.write_bool_value("firewallIPSecExemptionsAllowDHCP", self.firewall_ipsec_exemptions_allow_dhcp)
+        writer.write_bool_value("firewallIPSecExemptionsAllowICMP", self.firewall_ipsec_exemptions_allow_icmp)
+        writer.write_bool_value("firewallIPSecExemptionsAllowNeighborDiscovery", self.firewall_ipsec_exemptions_allow_neighbor_discovery)
+        writer.write_bool_value("firewallIPSecExemptionsAllowRouterDiscovery", self.firewall_ipsec_exemptions_allow_router_discovery)
         writer.write_bool_value("firewallMergeKeyingModuleSettings", self.firewall_merge_keying_module_settings)
         writer.write_enum_value("firewallPacketQueueingMethod", self.firewall_packet_queueing_method)
         writer.write_enum_value("firewallPreSharedKeyEncodingMethod", self.firewall_pre_shared_key_encoding_method)

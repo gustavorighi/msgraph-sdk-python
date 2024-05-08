@@ -186,15 +186,15 @@ class Windows10GeneralConfiguration(DeviceConfiguration):
     # OAuth resource URI for printer discovery service as configured in Azure portal.
     enterprise_cloud_print_mopria_discovery_resource_identifier: Optional[str] = None
     # Authentication endpoint for acquiring OAuth tokens.
-    enterprise_cloud_print_o_auth_authority: Optional[str] = None
+    enterprise_cloud_print_oauth_authority: Optional[str] = None
     # GUID of a client application authorized to retrieve OAuth tokens from the OAuth Authority.
-    enterprise_cloud_print_o_auth_client_identifier: Optional[str] = None
+    enterprise_cloud_print_oauth_client_identifier: Optional[str] = None
     # OAuth resource URI for print service as configured in the Azure portal.
     enterprise_cloud_print_resource_identifier: Optional[str] = None
     # Indicates whether or not to enable device discovery UX.
     experience_block_device_discovery: Optional[bool] = None
     # Indicates whether or not to allow the error dialog from displaying if no SIM card is detected.
-    experience_block_error_dialog_when_no_s_i_m: Optional[bool] = None
+    experience_block_error_dialog_when_no_sim: Optional[bool] = None
     # Indicates whether or not to enable task switching on the device.
     experience_block_task_switcher: Optional[bool] = None
     # Indicates whether or not to block DVR and broadcasting.
@@ -437,7 +437,7 @@ class Windows10GeneralConfiguration(DeviceConfiguration):
     wireless_display_require_pin_for_pairing: Optional[bool] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> Windows10GeneralConfiguration:
+    def create_from_discriminator_value(parse_node: ParseNode) -> Windows10GeneralConfiguration:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -567,11 +567,11 @@ class Windows10GeneralConfiguration(DeviceConfiguration):
             "enterpriseCloudPrintDiscoveryEndPoint": lambda n : setattr(self, 'enterprise_cloud_print_discovery_end_point', n.get_str_value()),
             "enterpriseCloudPrintDiscoveryMaxLimit": lambda n : setattr(self, 'enterprise_cloud_print_discovery_max_limit', n.get_int_value()),
             "enterpriseCloudPrintMopriaDiscoveryResourceIdentifier": lambda n : setattr(self, 'enterprise_cloud_print_mopria_discovery_resource_identifier', n.get_str_value()),
-            "enterpriseCloudPrintOAuthAuthority": lambda n : setattr(self, 'enterprise_cloud_print_o_auth_authority', n.get_str_value()),
-            "enterpriseCloudPrintOAuthClientIdentifier": lambda n : setattr(self, 'enterprise_cloud_print_o_auth_client_identifier', n.get_str_value()),
+            "enterpriseCloudPrintOAuthAuthority": lambda n : setattr(self, 'enterprise_cloud_print_oauth_authority', n.get_str_value()),
+            "enterpriseCloudPrintOAuthClientIdentifier": lambda n : setattr(self, 'enterprise_cloud_print_oauth_client_identifier', n.get_str_value()),
             "enterpriseCloudPrintResourceIdentifier": lambda n : setattr(self, 'enterprise_cloud_print_resource_identifier', n.get_str_value()),
             "experienceBlockDeviceDiscovery": lambda n : setattr(self, 'experience_block_device_discovery', n.get_bool_value()),
-            "experienceBlockErrorDialogWhenNoSIM": lambda n : setattr(self, 'experience_block_error_dialog_when_no_s_i_m', n.get_bool_value()),
+            "experienceBlockErrorDialogWhenNoSIM": lambda n : setattr(self, 'experience_block_error_dialog_when_no_sim', n.get_bool_value()),
             "experienceBlockTaskSwitcher": lambda n : setattr(self, 'experience_block_task_switcher', n.get_bool_value()),
             "gameDvrBlocked": lambda n : setattr(self, 'game_dvr_blocked', n.get_bool_value()),
             "internetSharingBlocked": lambda n : setattr(self, 'internet_sharing_blocked', n.get_bool_value()),
@@ -782,11 +782,11 @@ class Windows10GeneralConfiguration(DeviceConfiguration):
         writer.write_str_value("enterpriseCloudPrintDiscoveryEndPoint", self.enterprise_cloud_print_discovery_end_point)
         writer.write_int_value("enterpriseCloudPrintDiscoveryMaxLimit", self.enterprise_cloud_print_discovery_max_limit)
         writer.write_str_value("enterpriseCloudPrintMopriaDiscoveryResourceIdentifier", self.enterprise_cloud_print_mopria_discovery_resource_identifier)
-        writer.write_str_value("enterpriseCloudPrintOAuthAuthority", self.enterprise_cloud_print_o_auth_authority)
-        writer.write_str_value("enterpriseCloudPrintOAuthClientIdentifier", self.enterprise_cloud_print_o_auth_client_identifier)
+        writer.write_str_value("enterpriseCloudPrintOAuthAuthority", self.enterprise_cloud_print_oauth_authority)
+        writer.write_str_value("enterpriseCloudPrintOAuthClientIdentifier", self.enterprise_cloud_print_oauth_client_identifier)
         writer.write_str_value("enterpriseCloudPrintResourceIdentifier", self.enterprise_cloud_print_resource_identifier)
         writer.write_bool_value("experienceBlockDeviceDiscovery", self.experience_block_device_discovery)
-        writer.write_bool_value("experienceBlockErrorDialogWhenNoSIM", self.experience_block_error_dialog_when_no_s_i_m)
+        writer.write_bool_value("experienceBlockErrorDialogWhenNoSIM", self.experience_block_error_dialog_when_no_sim)
         writer.write_bool_value("experienceBlockTaskSwitcher", self.experience_block_task_switcher)
         writer.write_bool_value("gameDvrBlocked", self.game_dvr_blocked)
         writer.write_bool_value("internetSharingBlocked", self.internet_sharing_blocked)

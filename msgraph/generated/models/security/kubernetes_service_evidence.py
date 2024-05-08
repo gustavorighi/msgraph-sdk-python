@@ -18,9 +18,9 @@ class KubernetesServiceEvidence(AlertEvidence):
     # The OdataType property
     odata_type: Optional[str] = "#microsoft.graph.security.kubernetesServiceEvidence"
     # The service cluster IP.
-    cluster_i_p: Optional[IpEvidence] = None
+    cluster_ip: Optional[IpEvidence] = None
     # The service external IPs.
-    external_i_ps: Optional[List[IpEvidence]] = None
+    external_ips: Optional[List[IpEvidence]] = None
     # The service labels.
     labels: Optional[Dictionary] = None
     # The service name.
@@ -35,7 +35,7 @@ class KubernetesServiceEvidence(AlertEvidence):
     service_type: Optional[KubernetesServiceType] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> KubernetesServiceEvidence:
+    def create_from_discriminator_value(parse_node: ParseNode) -> KubernetesServiceEvidence:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -65,8 +65,8 @@ class KubernetesServiceEvidence(AlertEvidence):
         from .kubernetes_service_type import KubernetesServiceType
 
         fields: Dict[str, Callable[[Any], None]] = {
-            "clusterIP": lambda n : setattr(self, 'cluster_i_p', n.get_object_value(IpEvidence)),
-            "externalIPs": lambda n : setattr(self, 'external_i_ps', n.get_collection_of_object_values(IpEvidence)),
+            "clusterIP": lambda n : setattr(self, 'cluster_ip', n.get_object_value(IpEvidence)),
+            "externalIPs": lambda n : setattr(self, 'external_ips', n.get_collection_of_object_values(IpEvidence)),
             "labels": lambda n : setattr(self, 'labels', n.get_object_value(Dictionary)),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "namespace": lambda n : setattr(self, 'namespace', n.get_object_value(KubernetesNamespaceEvidence)),
@@ -87,8 +87,8 @@ class KubernetesServiceEvidence(AlertEvidence):
         if not writer:
             raise TypeError("writer cannot be null.")
         super().serialize(writer)
-        writer.write_object_value("clusterIP", self.cluster_i_p)
-        writer.write_collection_of_object_values("externalIPs", self.external_i_ps)
+        writer.write_object_value("clusterIP", self.cluster_ip)
+        writer.write_collection_of_object_values("externalIPs", self.external_ips)
         writer.write_object_value("labels", self.labels)
         writer.write_str_value("name", self.name)
         writer.write_object_value("namespace", self.namespace)

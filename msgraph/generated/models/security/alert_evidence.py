@@ -27,7 +27,7 @@ if TYPE_CHECKING:
     from .git_hub_user_evidence import GitHubUserEvidence
     from .google_cloud_resource_evidence import GoogleCloudResourceEvidence
     from .host_logon_session_evidence import HostLogonSessionEvidence
-    from .io_t_device_evidence import IoTDeviceEvidence
+    from .io_tdevice_evidence import IoTDeviceEvidence
     from .ip_evidence import IpEvidence
     from .kubernetes_cluster_evidence import KubernetesClusterEvidence
     from .kubernetes_controller_evidence import KubernetesControllerEvidence
@@ -78,7 +78,7 @@ class AlertEvidence(AdditionalDataHolder, BackedModel, Parsable):
     verdict: Optional[EvidenceVerdict] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> AlertEvidence:
+    def create_from_discriminator_value(parse_node: ParseNode) -> AlertEvidence:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -163,7 +163,7 @@ class AlertEvidence(AdditionalDataHolder, BackedModel, Parsable):
 
             return HostLogonSessionEvidence()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.security.ioTDeviceEvidence".casefold():
-            from .io_t_device_evidence import IoTDeviceEvidence
+            from .io_tdevice_evidence import IoTDeviceEvidence
 
             return IoTDeviceEvidence()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.security.ipEvidence".casefold():
@@ -290,7 +290,7 @@ class AlertEvidence(AdditionalDataHolder, BackedModel, Parsable):
         from .git_hub_user_evidence import GitHubUserEvidence
         from .google_cloud_resource_evidence import GoogleCloudResourceEvidence
         from .host_logon_session_evidence import HostLogonSessionEvidence
-        from .io_t_device_evidence import IoTDeviceEvidence
+        from .io_tdevice_evidence import IoTDeviceEvidence
         from .ip_evidence import IpEvidence
         from .kubernetes_cluster_evidence import KubernetesClusterEvidence
         from .kubernetes_controller_evidence import KubernetesControllerEvidence
@@ -337,7 +337,7 @@ class AlertEvidence(AdditionalDataHolder, BackedModel, Parsable):
         from .git_hub_user_evidence import GitHubUserEvidence
         from .google_cloud_resource_evidence import GoogleCloudResourceEvidence
         from .host_logon_session_evidence import HostLogonSessionEvidence
-        from .io_t_device_evidence import IoTDeviceEvidence
+        from .io_tdevice_evidence import IoTDeviceEvidence
         from .ip_evidence import IpEvidence
         from .kubernetes_cluster_evidence import KubernetesClusterEvidence
         from .kubernetes_controller_evidence import KubernetesControllerEvidence

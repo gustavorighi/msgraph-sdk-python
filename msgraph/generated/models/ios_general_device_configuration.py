@@ -45,7 +45,7 @@ class IosGeneralDeviceConfiguration(DeviceConfiguration):
     # Indicates whether or not to block the user from making in app purchases.
     app_store_block_in_app_purchases: Optional[bool] = None
     # Indicates whether or not to block the App Store app, not restricting installation through Host apps. Applies to supervised mode only (iOS 9.0 and later).
-    app_store_block_u_i_app_installation: Optional[bool] = None
+    app_store_block_uiapp_installation: Optional[bool] = None
     # Indicates whether or not to block the user from using the App Store. Requires a supervised device for iOS 13 and later.
     app_store_blocked: Optional[bool] = None
     # Indicates whether or not to require a password when using the app store.
@@ -294,7 +294,7 @@ class IosGeneralDeviceConfiguration(DeviceConfiguration):
     wi_fi_connect_only_to_configured_networks: Optional[bool] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> IosGeneralDeviceConfiguration:
+    def create_from_discriminator_value(parse_node: ParseNode) -> IosGeneralDeviceConfiguration:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -351,7 +351,7 @@ class IosGeneralDeviceConfiguration(DeviceConfiguration):
             "airPlayForcePairingPasswordForOutgoingRequests": lambda n : setattr(self, 'air_play_force_pairing_password_for_outgoing_requests', n.get_bool_value()),
             "appStoreBlockAutomaticDownloads": lambda n : setattr(self, 'app_store_block_automatic_downloads', n.get_bool_value()),
             "appStoreBlockInAppPurchases": lambda n : setattr(self, 'app_store_block_in_app_purchases', n.get_bool_value()),
-            "appStoreBlockUIAppInstallation": lambda n : setattr(self, 'app_store_block_u_i_app_installation', n.get_bool_value()),
+            "appStoreBlockUIAppInstallation": lambda n : setattr(self, 'app_store_block_uiapp_installation', n.get_bool_value()),
             "appStoreBlocked": lambda n : setattr(self, 'app_store_blocked', n.get_bool_value()),
             "appStoreRequirePassword": lambda n : setattr(self, 'app_store_require_password', n.get_bool_value()),
             "appleNewsBlocked": lambda n : setattr(self, 'apple_news_blocked', n.get_bool_value()),
@@ -496,7 +496,7 @@ class IosGeneralDeviceConfiguration(DeviceConfiguration):
         writer.write_bool_value("airPlayForcePairingPasswordForOutgoingRequests", self.air_play_force_pairing_password_for_outgoing_requests)
         writer.write_bool_value("appStoreBlockAutomaticDownloads", self.app_store_block_automatic_downloads)
         writer.write_bool_value("appStoreBlockInAppPurchases", self.app_store_block_in_app_purchases)
-        writer.write_bool_value("appStoreBlockUIAppInstallation", self.app_store_block_u_i_app_installation)
+        writer.write_bool_value("appStoreBlockUIAppInstallation", self.app_store_block_uiapp_installation)
         writer.write_bool_value("appStoreBlocked", self.app_store_blocked)
         writer.write_bool_value("appStoreRequirePassword", self.app_store_require_password)
         writer.write_bool_value("appleNewsBlocked", self.apple_news_blocked)

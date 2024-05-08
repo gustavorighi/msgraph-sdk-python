@@ -18,7 +18,7 @@ if TYPE_CHECKING:
     from .home_realm_discovery_policy import HomeRealmDiscoveryPolicy
     from .informational_url import InformationalUrl
     from .key_credential import KeyCredential
-    from .o_auth2_permission_grant import OAuth2PermissionGrant
+    from .oauth2_permission_grant import OAuth2PermissionGrant
     from .password_credential import PasswordCredential
     from .permission_scope import PermissionScope
     from .remote_desktop_security_configuration import RemoteDesktopSecurityConfiguration
@@ -141,7 +141,7 @@ class ServicePrincipal(DirectoryObject):
     verified_publisher: Optional[VerifiedPublisher] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> ServicePrincipal:
+    def create_from_discriminator_value(parse_node: ParseNode) -> ServicePrincipal:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -169,7 +169,7 @@ class ServicePrincipal(DirectoryObject):
         from .home_realm_discovery_policy import HomeRealmDiscoveryPolicy
         from .informational_url import InformationalUrl
         from .key_credential import KeyCredential
-        from .o_auth2_permission_grant import OAuth2PermissionGrant
+        from .oauth2_permission_grant import OAuth2PermissionGrant
         from .password_credential import PasswordCredential
         from .permission_scope import PermissionScope
         from .remote_desktop_security_configuration import RemoteDesktopSecurityConfiguration
@@ -193,7 +193,7 @@ class ServicePrincipal(DirectoryObject):
         from .home_realm_discovery_policy import HomeRealmDiscoveryPolicy
         from .informational_url import InformationalUrl
         from .key_credential import KeyCredential
-        from .o_auth2_permission_grant import OAuth2PermissionGrant
+        from .oauth2_permission_grant import OAuth2PermissionGrant
         from .password_credential import PasswordCredential
         from .permission_scope import PermissionScope
         from .remote_desktop_security_configuration import RemoteDesktopSecurityConfiguration

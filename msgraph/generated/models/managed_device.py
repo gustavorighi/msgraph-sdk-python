@@ -36,9 +36,9 @@ class ManagedDevice(Entity):
     # Android security patch level. This property is read-only.
     android_security_patch_level: Optional[str] = None
     # The unique identifier for the Azure Active Directory device. Read only. This property is read-only.
-    azure_a_d_device_id: Optional[str] = None
+    azure_addevice_id: Optional[str] = None
     # Whether the device is Azure Active Directory registered. This property is read-only.
-    azure_a_d_registered: Optional[bool] = None
+    azure_adregistered: Optional[bool] = None
     # The DateTime when device compliance grace period expires. This property is read-only.
     compliance_grace_period_expiration_date_time: Optional[datetime.datetime] = None
     # Compliance state.
@@ -155,7 +155,7 @@ class ManagedDevice(Entity):
     windows_protection_state: Optional[WindowsProtectionState] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> ManagedDevice:
+    def create_from_discriminator_value(parse_node: ParseNode) -> ManagedDevice:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -211,8 +211,8 @@ class ManagedDevice(Entity):
         fields: Dict[str, Callable[[Any], None]] = {
             "activationLockBypassCode": lambda n : setattr(self, 'activation_lock_bypass_code', n.get_str_value()),
             "androidSecurityPatchLevel": lambda n : setattr(self, 'android_security_patch_level', n.get_str_value()),
-            "azureADDeviceId": lambda n : setattr(self, 'azure_a_d_device_id', n.get_str_value()),
-            "azureADRegistered": lambda n : setattr(self, 'azure_a_d_registered', n.get_bool_value()),
+            "azureADDeviceId": lambda n : setattr(self, 'azure_addevice_id', n.get_str_value()),
+            "azureADRegistered": lambda n : setattr(self, 'azure_adregistered', n.get_bool_value()),
             "complianceGracePeriodExpirationDateTime": lambda n : setattr(self, 'compliance_grace_period_expiration_date_time', n.get_datetime_value()),
             "complianceState": lambda n : setattr(self, 'compliance_state', n.get_enum_value(ComplianceState)),
             "configurationManagerClientEnabledFeatures": lambda n : setattr(self, 'configuration_manager_client_enabled_features', n.get_object_value(ConfigurationManagerClientEnabledFeatures)),

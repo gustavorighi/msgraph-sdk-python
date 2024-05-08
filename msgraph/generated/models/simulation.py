@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from .entity import Entity
     from .landing_page import LandingPage
     from .login_page import LoginPage
-    from .o_auth_consent_app_detail import OAuthConsentAppDetail
+    from .oauth_consent_app_detail import OAuthConsentAppDetail
     from .payload import Payload
     from .payload_delivery_platform import PayloadDeliveryPlatform
     from .simulation_attack_technique import SimulationAttackTechnique
@@ -76,7 +76,7 @@ class Simulation(Entity):
     training_setting: Optional[TrainingSetting] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> Simulation:
+    def create_from_discriminator_value(parse_node: ParseNode) -> Simulation:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -97,7 +97,7 @@ class Simulation(Entity):
         from .entity import Entity
         from .landing_page import LandingPage
         from .login_page import LoginPage
-        from .o_auth_consent_app_detail import OAuthConsentAppDetail
+        from .oauth_consent_app_detail import OAuthConsentAppDetail
         from .payload import Payload
         from .payload_delivery_platform import PayloadDeliveryPlatform
         from .simulation_attack_technique import SimulationAttackTechnique
@@ -112,7 +112,7 @@ class Simulation(Entity):
         from .entity import Entity
         from .landing_page import LandingPage
         from .login_page import LoginPage
-        from .o_auth_consent_app_detail import OAuthConsentAppDetail
+        from .oauth_consent_app_detail import OAuthConsentAppDetail
         from .payload import Payload
         from .payload_delivery_platform import PayloadDeliveryPlatform
         from .simulation_attack_technique import SimulationAttackTechnique

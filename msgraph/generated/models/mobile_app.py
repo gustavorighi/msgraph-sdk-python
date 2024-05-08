@@ -8,20 +8,20 @@ if TYPE_CHECKING:
     from .android_lob_app import AndroidLobApp
     from .android_store_app import AndroidStoreApp
     from .entity import Entity
-    from .iosi_pad_o_s_web_clip import IosiPadOSWebClip
+    from .iosi_pad_osweb_clip import IosiPadOSWebClip
     from .ios_lob_app import IosLobApp
     from .ios_store_app import IosStoreApp
     from .ios_vpp_app import IosVppApp
-    from .mac_o_s_dmg_app import MacOSDmgApp
-    from .mac_o_s_lob_app import MacOSLobApp
-    from .mac_o_s_microsoft_defender_app import MacOSMicrosoftDefenderApp
-    from .mac_o_s_microsoft_edge_app import MacOSMicrosoftEdgeApp
-    from .mac_o_s_office_suite_app import MacOSOfficeSuiteApp
+    from .mac_osdmg_app import MacOSDmgApp
+    from .mac_oslob_app import MacOSLobApp
+    from .mac_osmicrosoft_defender_app import MacOSMicrosoftDefenderApp
+    from .mac_osmicrosoft_edge_app import MacOSMicrosoftEdgeApp
+    from .mac_osoffice_suite_app import MacOSOfficeSuiteApp
     from .managed_android_lob_app import ManagedAndroidLobApp
     from .managed_android_store_app import ManagedAndroidStoreApp
     from .managed_app import ManagedApp
-    from .managed_i_o_s_lob_app import ManagedIOSLobApp
-    from .managed_i_o_s_store_app import ManagedIOSStoreApp
+    from .managed_ioslob_app import ManagedIOSLobApp
+    from .managed_iosstore_app import ManagedIOSStoreApp
     from .managed_mobile_lob_app import ManagedMobileLobApp
     from .microsoft_store_for_business_app import MicrosoftStoreForBusinessApp
     from .mime_content import MimeContent
@@ -33,7 +33,7 @@ if TYPE_CHECKING:
     from .win32_lob_app import Win32LobApp
     from .windows_app_x import WindowsAppX
     from .windows_microsoft_edge_app import WindowsMicrosoftEdgeApp
-    from .windows_mobile_m_s_i import WindowsMobileMSI
+    from .windows_mobile_msi import WindowsMobileMSI
     from .windows_universal_app_x import WindowsUniversalAppX
     from .windows_web_app import WindowsWebApp
 
@@ -78,7 +78,7 @@ class MobileApp(Entity):
     publishing_state: Optional[MobileAppPublishingState] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> MobileApp:
+    def create_from_discriminator_value(parse_node: ParseNode) -> MobileApp:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -99,7 +99,7 @@ class MobileApp(Entity):
 
             return AndroidStoreApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.iosiPadOSWebClip".casefold():
-            from .iosi_pad_o_s_web_clip import IosiPadOSWebClip
+            from .iosi_pad_osweb_clip import IosiPadOSWebClip
 
             return IosiPadOSWebClip()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.iosLobApp".casefold():
@@ -115,23 +115,23 @@ class MobileApp(Entity):
 
             return IosVppApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSDmgApp".casefold():
-            from .mac_o_s_dmg_app import MacOSDmgApp
+            from .mac_osdmg_app import MacOSDmgApp
 
             return MacOSDmgApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSLobApp".casefold():
-            from .mac_o_s_lob_app import MacOSLobApp
+            from .mac_oslob_app import MacOSLobApp
 
             return MacOSLobApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSMicrosoftDefenderApp".casefold():
-            from .mac_o_s_microsoft_defender_app import MacOSMicrosoftDefenderApp
+            from .mac_osmicrosoft_defender_app import MacOSMicrosoftDefenderApp
 
             return MacOSMicrosoftDefenderApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSMicrosoftEdgeApp".casefold():
-            from .mac_o_s_microsoft_edge_app import MacOSMicrosoftEdgeApp
+            from .mac_osmicrosoft_edge_app import MacOSMicrosoftEdgeApp
 
             return MacOSMicrosoftEdgeApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSOfficeSuiteApp".casefold():
-            from .mac_o_s_office_suite_app import MacOSOfficeSuiteApp
+            from .mac_osoffice_suite_app import MacOSOfficeSuiteApp
 
             return MacOSOfficeSuiteApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.managedAndroidLobApp".casefold():
@@ -147,11 +147,11 @@ class MobileApp(Entity):
 
             return ManagedApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.managedIOSLobApp".casefold():
-            from .managed_i_o_s_lob_app import ManagedIOSLobApp
+            from .managed_ioslob_app import ManagedIOSLobApp
 
             return ManagedIOSLobApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.managedIOSStoreApp".casefold():
-            from .managed_i_o_s_store_app import ManagedIOSStoreApp
+            from .managed_iosstore_app import ManagedIOSStoreApp
 
             return ManagedIOSStoreApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.managedMobileLobApp".casefold():
@@ -183,7 +183,7 @@ class MobileApp(Entity):
 
             return WindowsMicrosoftEdgeApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.windowsMobileMSI".casefold():
-            from .windows_mobile_m_s_i import WindowsMobileMSI
+            from .windows_mobile_msi import WindowsMobileMSI
 
             return WindowsMobileMSI()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.windowsUniversalAppX".casefold():
@@ -204,20 +204,20 @@ class MobileApp(Entity):
         from .android_lob_app import AndroidLobApp
         from .android_store_app import AndroidStoreApp
         from .entity import Entity
-        from .iosi_pad_o_s_web_clip import IosiPadOSWebClip
+        from .iosi_pad_osweb_clip import IosiPadOSWebClip
         from .ios_lob_app import IosLobApp
         from .ios_store_app import IosStoreApp
         from .ios_vpp_app import IosVppApp
-        from .mac_o_s_dmg_app import MacOSDmgApp
-        from .mac_o_s_lob_app import MacOSLobApp
-        from .mac_o_s_microsoft_defender_app import MacOSMicrosoftDefenderApp
-        from .mac_o_s_microsoft_edge_app import MacOSMicrosoftEdgeApp
-        from .mac_o_s_office_suite_app import MacOSOfficeSuiteApp
+        from .mac_osdmg_app import MacOSDmgApp
+        from .mac_oslob_app import MacOSLobApp
+        from .mac_osmicrosoft_defender_app import MacOSMicrosoftDefenderApp
+        from .mac_osmicrosoft_edge_app import MacOSMicrosoftEdgeApp
+        from .mac_osoffice_suite_app import MacOSOfficeSuiteApp
         from .managed_android_lob_app import ManagedAndroidLobApp
         from .managed_android_store_app import ManagedAndroidStoreApp
         from .managed_app import ManagedApp
-        from .managed_i_o_s_lob_app import ManagedIOSLobApp
-        from .managed_i_o_s_store_app import ManagedIOSStoreApp
+        from .managed_ioslob_app import ManagedIOSLobApp
+        from .managed_iosstore_app import ManagedIOSStoreApp
         from .managed_mobile_lob_app import ManagedMobileLobApp
         from .microsoft_store_for_business_app import MicrosoftStoreForBusinessApp
         from .mime_content import MimeContent
@@ -229,27 +229,27 @@ class MobileApp(Entity):
         from .win32_lob_app import Win32LobApp
         from .windows_app_x import WindowsAppX
         from .windows_microsoft_edge_app import WindowsMicrosoftEdgeApp
-        from .windows_mobile_m_s_i import WindowsMobileMSI
+        from .windows_mobile_msi import WindowsMobileMSI
         from .windows_universal_app_x import WindowsUniversalAppX
         from .windows_web_app import WindowsWebApp
 
         from .android_lob_app import AndroidLobApp
         from .android_store_app import AndroidStoreApp
         from .entity import Entity
-        from .iosi_pad_o_s_web_clip import IosiPadOSWebClip
+        from .iosi_pad_osweb_clip import IosiPadOSWebClip
         from .ios_lob_app import IosLobApp
         from .ios_store_app import IosStoreApp
         from .ios_vpp_app import IosVppApp
-        from .mac_o_s_dmg_app import MacOSDmgApp
-        from .mac_o_s_lob_app import MacOSLobApp
-        from .mac_o_s_microsoft_defender_app import MacOSMicrosoftDefenderApp
-        from .mac_o_s_microsoft_edge_app import MacOSMicrosoftEdgeApp
-        from .mac_o_s_office_suite_app import MacOSOfficeSuiteApp
+        from .mac_osdmg_app import MacOSDmgApp
+        from .mac_oslob_app import MacOSLobApp
+        from .mac_osmicrosoft_defender_app import MacOSMicrosoftDefenderApp
+        from .mac_osmicrosoft_edge_app import MacOSMicrosoftEdgeApp
+        from .mac_osoffice_suite_app import MacOSOfficeSuiteApp
         from .managed_android_lob_app import ManagedAndroidLobApp
         from .managed_android_store_app import ManagedAndroidStoreApp
         from .managed_app import ManagedApp
-        from .managed_i_o_s_lob_app import ManagedIOSLobApp
-        from .managed_i_o_s_store_app import ManagedIOSStoreApp
+        from .managed_ioslob_app import ManagedIOSLobApp
+        from .managed_iosstore_app import ManagedIOSStoreApp
         from .managed_mobile_lob_app import ManagedMobileLobApp
         from .microsoft_store_for_business_app import MicrosoftStoreForBusinessApp
         from .mime_content import MimeContent
@@ -261,7 +261,7 @@ class MobileApp(Entity):
         from .win32_lob_app import Win32LobApp
         from .windows_app_x import WindowsAppX
         from .windows_microsoft_edge_app import WindowsMicrosoftEdgeApp
-        from .windows_mobile_m_s_i import WindowsMobileMSI
+        from .windows_mobile_msi import WindowsMobileMSI
         from .windows_universal_app_x import WindowsUniversalAppX
         from .windows_web_app import WindowsWebApp
 

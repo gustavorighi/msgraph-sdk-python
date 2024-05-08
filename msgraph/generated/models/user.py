@@ -33,6 +33,7 @@ if TYPE_CHECKING:
     from .managed_app_registration import ManagedAppRegistration
     from .managed_device import ManagedDevice
     from .message import Message
+    from .oauth2_permission_grant import OAuth2PermissionGrant
     from .object_identity import ObjectIdentity
     from .office_graph_insights import OfficeGraphInsights
     from .onenote import Onenote
@@ -40,7 +41,6 @@ if TYPE_CHECKING:
     from .on_premises_extension_attributes import OnPremisesExtensionAttributes
     from .on_premises_provisioning_error import OnPremisesProvisioningError
     from .outlook_user import OutlookUser
-    from .o_auth2_permission_grant import OAuth2PermissionGrant
     from .password_profile import PasswordProfile
     from .person import Person
     from .planner_user import PlannerUser
@@ -321,7 +321,7 @@ class User(DirectoryObject):
     user_type: Optional[str] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> User:
+    def create_from_discriminator_value(parse_node: ParseNode) -> User:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -364,6 +364,7 @@ class User(DirectoryObject):
         from .managed_app_registration import ManagedAppRegistration
         from .managed_device import ManagedDevice
         from .message import Message
+        from .oauth2_permission_grant import OAuth2PermissionGrant
         from .object_identity import ObjectIdentity
         from .office_graph_insights import OfficeGraphInsights
         from .onenote import Onenote
@@ -371,7 +372,6 @@ class User(DirectoryObject):
         from .on_premises_extension_attributes import OnPremisesExtensionAttributes
         from .on_premises_provisioning_error import OnPremisesProvisioningError
         from .outlook_user import OutlookUser
-        from .o_auth2_permission_grant import OAuth2PermissionGrant
         from .password_profile import PasswordProfile
         from .person import Person
         from .planner_user import PlannerUser
@@ -418,6 +418,7 @@ class User(DirectoryObject):
         from .managed_app_registration import ManagedAppRegistration
         from .managed_device import ManagedDevice
         from .message import Message
+        from .oauth2_permission_grant import OAuth2PermissionGrant
         from .object_identity import ObjectIdentity
         from .office_graph_insights import OfficeGraphInsights
         from .onenote import Onenote
@@ -425,7 +426,6 @@ class User(DirectoryObject):
         from .on_premises_extension_attributes import OnPremisesExtensionAttributes
         from .on_premises_provisioning_error import OnPremisesProvisioningError
         from .outlook_user import OutlookUser
-        from .o_auth2_permission_grant import OAuth2PermissionGrant
         from .password_profile import PasswordProfile
         from .person import Person
         from .planner_user import PlannerUser

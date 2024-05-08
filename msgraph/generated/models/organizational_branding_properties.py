@@ -28,14 +28,14 @@ class OrganizationalBrandingProperties(Entity):
     cdn_list: Optional[List[str]] = None
     # A custom URL for resetting account credentials. This URL must be in ASCII format or non-ASCII characters must be URL encoded, and not exceed 128 characters.
     custom_account_reset_credentials_url: Optional[str] = None
-    # CSS styling that appears on the sign-in page. The allowed format is .css format only and not larger than 25 KB.
-    custom_c_s_s: Optional[bytes] = None
-    # A relative URL for the customCSS property that is combined with a CDN base URL from the cdnList to provide the version served by a CDN. Read-only.
-    custom_c_s_s_relative_url: Optional[str] = None
     # A string to replace the default 'Can't access your account?' self-service password reset (SSPR) hyperlink text on the sign-in page. This text must be in Unicode format and not exceed 256 characters.
     custom_cannot_access_your_account_text: Optional[str] = None
     # A custom URL to replace the default URL of the self-service password reset (SSPR) 'Can't access your account?' hyperlink on the sign-in page. This URL must be in ASCII format or non-ASCII characters must be URL encoded, and not exceed 128 characters. DO NOT USE. Use customAccountResetCredentialsUrl instead.
     custom_cannot_access_your_account_url: Optional[str] = None
+    # CSS styling that appears on the sign-in page. The allowed format is .css format only and not larger than 25 KB.
+    custom_css: Optional[bytes] = None
+    # A relative URL for the customCSS property that is combined with a CDN base URL from the cdnList to provide the version served by a CDN. Read-only.
+    custom_cssrelative_url: Optional[str] = None
     # A string to replace the default 'Forgot my password' hyperlink text on the sign-in form. This text must be in Unicode format and not exceed 256 characters.
     custom_forgot_my_password_text: Optional[str] = None
     # A string to replace the default 'Privacy and Cookies' hyperlink text in the footer. This text must be in Unicode format and not exceed 256 characters.
@@ -78,7 +78,7 @@ class OrganizationalBrandingProperties(Entity):
     username_hint_text: Optional[str] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> OrganizationalBrandingProperties:
+    def create_from_discriminator_value(parse_node: ParseNode) -> OrganizationalBrandingProperties:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -125,10 +125,10 @@ class OrganizationalBrandingProperties(Entity):
             "bannerLogoRelativeUrl": lambda n : setattr(self, 'banner_logo_relative_url', n.get_str_value()),
             "cdnList": lambda n : setattr(self, 'cdn_list', n.get_collection_of_primitive_values(str)),
             "customAccountResetCredentialsUrl": lambda n : setattr(self, 'custom_account_reset_credentials_url', n.get_str_value()),
-            "customCSS": lambda n : setattr(self, 'custom_c_s_s', n.get_bytes_value()),
-            "customCSSRelativeUrl": lambda n : setattr(self, 'custom_c_s_s_relative_url', n.get_str_value()),
             "customCannotAccessYourAccountText": lambda n : setattr(self, 'custom_cannot_access_your_account_text', n.get_str_value()),
             "customCannotAccessYourAccountUrl": lambda n : setattr(self, 'custom_cannot_access_your_account_url', n.get_str_value()),
+            "customCSS": lambda n : setattr(self, 'custom_css', n.get_bytes_value()),
+            "customCSSRelativeUrl": lambda n : setattr(self, 'custom_cssrelative_url', n.get_str_value()),
             "customForgotMyPasswordText": lambda n : setattr(self, 'custom_forgot_my_password_text', n.get_str_value()),
             "customPrivacyAndCookiesText": lambda n : setattr(self, 'custom_privacy_and_cookies_text', n.get_str_value()),
             "customPrivacyAndCookiesUrl": lambda n : setattr(self, 'custom_privacy_and_cookies_url', n.get_str_value()),
@@ -169,10 +169,10 @@ class OrganizationalBrandingProperties(Entity):
         writer.write_str_value("bannerLogoRelativeUrl", self.banner_logo_relative_url)
         writer.write_collection_of_primitive_values("cdnList", self.cdn_list)
         writer.write_str_value("customAccountResetCredentialsUrl", self.custom_account_reset_credentials_url)
-        writer.write_bytes_value("customCSS", self.custom_c_s_s)
-        writer.write_str_value("customCSSRelativeUrl", self.custom_c_s_s_relative_url)
         writer.write_str_value("customCannotAccessYourAccountText", self.custom_cannot_access_your_account_text)
         writer.write_str_value("customCannotAccessYourAccountUrl", self.custom_cannot_access_your_account_url)
+        writer.write_bytes_value("customCSS", self.custom_css)
+        writer.write_str_value("customCSSRelativeUrl", self.custom_cssrelative_url)
         writer.write_str_value("customForgotMyPasswordText", self.custom_forgot_my_password_text)
         writer.write_str_value("customPrivacyAndCookiesText", self.custom_privacy_and_cookies_text)
         writer.write_str_value("customPrivacyAndCookiesUrl", self.custom_privacy_and_cookies_url)

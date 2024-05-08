@@ -25,7 +25,7 @@ class CloudPcGalleryImage(Entity):
     # The publisher name of this gallery image that is passed to Azure Resource Manager (ARM) to retrieve the image resource. Read-only.
     publisher_name: Optional[str] = None
     # Indicates the size of this image in gigabytes. For example, 64. Read-only.
-    size_in_g_b: Optional[int] = None
+    size_in_gb: Optional[int] = None
     # The SKU name of this image that is passed to Azure Resource Manager (ARM) to retrieve the image resource. Read-only.
     sku_name: Optional[str] = None
     # The date when the Cloud PC image is available for provisioning new Cloud PCs. For example, 2022-09-20. Read-only.
@@ -34,7 +34,7 @@ class CloudPcGalleryImage(Entity):
     status: Optional[CloudPcGalleryImageStatus] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> CloudPcGalleryImage:
+    def create_from_discriminator_value(parse_node: ParseNode) -> CloudPcGalleryImage:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -61,7 +61,7 @@ class CloudPcGalleryImage(Entity):
             "expirationDate": lambda n : setattr(self, 'expiration_date', n.get_date_value()),
             "offerName": lambda n : setattr(self, 'offer_name', n.get_str_value()),
             "publisherName": lambda n : setattr(self, 'publisher_name', n.get_str_value()),
-            "sizeInGB": lambda n : setattr(self, 'size_in_g_b', n.get_int_value()),
+            "sizeInGB": lambda n : setattr(self, 'size_in_gb', n.get_int_value()),
             "skuName": lambda n : setattr(self, 'sku_name', n.get_str_value()),
             "startDate": lambda n : setattr(self, 'start_date', n.get_date_value()),
             "status": lambda n : setattr(self, 'status', n.get_enum_value(CloudPcGalleryImageStatus)),
@@ -84,7 +84,7 @@ class CloudPcGalleryImage(Entity):
         writer.write_date_value("expirationDate", self.expiration_date)
         writer.write_str_value("offerName", self.offer_name)
         writer.write_str_value("publisherName", self.publisher_name)
-        writer.write_int_value("sizeInGB", self.size_in_g_b)
+        writer.write_int_value("sizeInGB", self.size_in_gb)
         writer.write_str_value("skuName", self.sku_name)
         writer.write_date_value("startDate", self.start_date)
         writer.write_enum_value("status", self.status)

@@ -5,8 +5,8 @@ from kiota_abstractions.store import BackedModel, BackingStore, BackingStoreFact
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .windows_device_azure_a_d_account import WindowsDeviceAzureADAccount
-    from .windows_device_a_d_account import WindowsDeviceADAccount
+    from .windows_device_adaccount import WindowsDeviceADAccount
+    from .windows_device_azure_adaccount import WindowsDeviceAzureADAccount
 
 @dataclass
 class WindowsDeviceAccount(AdditionalDataHolder, BackedModel, Parsable):
@@ -21,7 +21,7 @@ class WindowsDeviceAccount(AdditionalDataHolder, BackedModel, Parsable):
     password: Optional[str] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> WindowsDeviceAccount:
+    def create_from_discriminator_value(parse_node: ParseNode) -> WindowsDeviceAccount:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -34,11 +34,11 @@ class WindowsDeviceAccount(AdditionalDataHolder, BackedModel, Parsable):
         except AttributeError:
             mapping_value = None
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.windowsDeviceADAccount".casefold():
-            from .windows_device_a_d_account import WindowsDeviceADAccount
+            from .windows_device_adaccount import WindowsDeviceADAccount
 
             return WindowsDeviceADAccount()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.windowsDeviceAzureADAccount".casefold():
-            from .windows_device_azure_a_d_account import WindowsDeviceAzureADAccount
+            from .windows_device_azure_adaccount import WindowsDeviceAzureADAccount
 
             return WindowsDeviceAzureADAccount()
         return WindowsDeviceAccount()
@@ -48,11 +48,11 @@ class WindowsDeviceAccount(AdditionalDataHolder, BackedModel, Parsable):
         The deserialization information for the current model
         Returns: Dict[str, Callable[[ParseNode], None]]
         """
-        from .windows_device_azure_a_d_account import WindowsDeviceAzureADAccount
-        from .windows_device_a_d_account import WindowsDeviceADAccount
+        from .windows_device_adaccount import WindowsDeviceADAccount
+        from .windows_device_azure_adaccount import WindowsDeviceAzureADAccount
 
-        from .windows_device_azure_a_d_account import WindowsDeviceAzureADAccount
-        from .windows_device_a_d_account import WindowsDeviceADAccount
+        from .windows_device_adaccount import WindowsDeviceADAccount
+        from .windows_device_azure_adaccount import WindowsDeviceAzureADAccount
 
         fields: Dict[str, Callable[[Any], None]] = {
             "@odata.type": lambda n : setattr(self, 'odata_type', n.get_str_value()),

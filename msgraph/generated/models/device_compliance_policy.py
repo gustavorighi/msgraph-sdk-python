@@ -15,7 +15,7 @@ if TYPE_CHECKING:
     from .device_compliance_user_status import DeviceComplianceUserStatus
     from .entity import Entity
     from .ios_compliance_policy import IosCompliancePolicy
-    from .mac_o_s_compliance_policy import MacOSCompliancePolicy
+    from .mac_oscompliance_policy import MacOSCompliancePolicy
     from .setting_state_device_summary import SettingStateDeviceSummary
     from .windows10_compliance_policy import Windows10CompliancePolicy
     from .windows10_mobile_compliance_policy import Windows10MobileCompliancePolicy
@@ -57,7 +57,7 @@ class DeviceCompliancePolicy(Entity):
     version: Optional[int] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> DeviceCompliancePolicy:
+    def create_from_discriminator_value(parse_node: ParseNode) -> DeviceCompliancePolicy:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -82,7 +82,7 @@ class DeviceCompliancePolicy(Entity):
 
             return IosCompliancePolicy()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSCompliancePolicy".casefold():
-            from .mac_o_s_compliance_policy import MacOSCompliancePolicy
+            from .mac_oscompliance_policy import MacOSCompliancePolicy
 
             return MacOSCompliancePolicy()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.windows10CompliancePolicy".casefold():
@@ -118,7 +118,7 @@ class DeviceCompliancePolicy(Entity):
         from .device_compliance_user_status import DeviceComplianceUserStatus
         from .entity import Entity
         from .ios_compliance_policy import IosCompliancePolicy
-        from .mac_o_s_compliance_policy import MacOSCompliancePolicy
+        from .mac_oscompliance_policy import MacOSCompliancePolicy
         from .setting_state_device_summary import SettingStateDeviceSummary
         from .windows10_compliance_policy import Windows10CompliancePolicy
         from .windows10_mobile_compliance_policy import Windows10MobileCompliancePolicy
@@ -135,7 +135,7 @@ class DeviceCompliancePolicy(Entity):
         from .device_compliance_user_status import DeviceComplianceUserStatus
         from .entity import Entity
         from .ios_compliance_policy import IosCompliancePolicy
-        from .mac_o_s_compliance_policy import MacOSCompliancePolicy
+        from .mac_oscompliance_policy import MacOSCompliancePolicy
         from .setting_state_device_summary import SettingStateDeviceSummary
         from .windows10_compliance_policy import Windows10CompliancePolicy
         from .windows10_mobile_compliance_policy import Windows10MobileCompliancePolicy

@@ -22,11 +22,11 @@ if TYPE_CHECKING:
     from .ios_device_features_configuration import IosDeviceFeaturesConfiguration
     from .ios_general_device_configuration import IosGeneralDeviceConfiguration
     from .ios_update_configuration import IosUpdateConfiguration
-    from .mac_o_s_custom_configuration import MacOSCustomConfiguration
-    from .mac_o_s_device_features_configuration import MacOSDeviceFeaturesConfiguration
-    from .mac_o_s_general_device_configuration import MacOSGeneralDeviceConfiguration
+    from .mac_oscustom_configuration import MacOSCustomConfiguration
+    from .mac_osdevice_features_configuration import MacOSDeviceFeaturesConfiguration
+    from .mac_osgeneral_device_configuration import MacOSGeneralDeviceConfiguration
     from .setting_state_device_summary import SettingStateDeviceSummary
-    from .shared_p_c_configuration import SharedPCConfiguration
+    from .shared_pcconfiguration import SharedPCConfiguration
     from .windows10_custom_configuration import Windows10CustomConfiguration
     from .windows10_endpoint_protection_configuration import Windows10EndpointProtectionConfiguration
     from .windows10_enterprise_modern_app_management_configuration import Windows10EnterpriseModernAppManagementConfiguration
@@ -72,7 +72,7 @@ class DeviceConfiguration(Entity):
     version: Optional[int] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> DeviceConfiguration:
+    def create_from_discriminator_value(parse_node: ParseNode) -> DeviceConfiguration:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -129,19 +129,19 @@ class DeviceConfiguration(Entity):
 
             return IosUpdateConfiguration()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSCustomConfiguration".casefold():
-            from .mac_o_s_custom_configuration import MacOSCustomConfiguration
+            from .mac_oscustom_configuration import MacOSCustomConfiguration
 
             return MacOSCustomConfiguration()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSDeviceFeaturesConfiguration".casefold():
-            from .mac_o_s_device_features_configuration import MacOSDeviceFeaturesConfiguration
+            from .mac_osdevice_features_configuration import MacOSDeviceFeaturesConfiguration
 
             return MacOSDeviceFeaturesConfiguration()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSGeneralDeviceConfiguration".casefold():
-            from .mac_o_s_general_device_configuration import MacOSGeneralDeviceConfiguration
+            from .mac_osgeneral_device_configuration import MacOSGeneralDeviceConfiguration
 
             return MacOSGeneralDeviceConfiguration()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.sharedPCConfiguration".casefold():
-            from .shared_p_c_configuration import SharedPCConfiguration
+            from .shared_pcconfiguration import SharedPCConfiguration
 
             return SharedPCConfiguration()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.windows10CustomConfiguration".casefold():
@@ -212,11 +212,11 @@ class DeviceConfiguration(Entity):
         from .ios_device_features_configuration import IosDeviceFeaturesConfiguration
         from .ios_general_device_configuration import IosGeneralDeviceConfiguration
         from .ios_update_configuration import IosUpdateConfiguration
-        from .mac_o_s_custom_configuration import MacOSCustomConfiguration
-        from .mac_o_s_device_features_configuration import MacOSDeviceFeaturesConfiguration
-        from .mac_o_s_general_device_configuration import MacOSGeneralDeviceConfiguration
+        from .mac_oscustom_configuration import MacOSCustomConfiguration
+        from .mac_osdevice_features_configuration import MacOSDeviceFeaturesConfiguration
+        from .mac_osgeneral_device_configuration import MacOSGeneralDeviceConfiguration
         from .setting_state_device_summary import SettingStateDeviceSummary
-        from .shared_p_c_configuration import SharedPCConfiguration
+        from .shared_pcconfiguration import SharedPCConfiguration
         from .windows10_custom_configuration import Windows10CustomConfiguration
         from .windows10_endpoint_protection_configuration import Windows10EndpointProtectionConfiguration
         from .windows10_enterprise_modern_app_management_configuration import Windows10EnterpriseModernAppManagementConfiguration
@@ -246,11 +246,11 @@ class DeviceConfiguration(Entity):
         from .ios_device_features_configuration import IosDeviceFeaturesConfiguration
         from .ios_general_device_configuration import IosGeneralDeviceConfiguration
         from .ios_update_configuration import IosUpdateConfiguration
-        from .mac_o_s_custom_configuration import MacOSCustomConfiguration
-        from .mac_o_s_device_features_configuration import MacOSDeviceFeaturesConfiguration
-        from .mac_o_s_general_device_configuration import MacOSGeneralDeviceConfiguration
+        from .mac_oscustom_configuration import MacOSCustomConfiguration
+        from .mac_osdevice_features_configuration import MacOSDeviceFeaturesConfiguration
+        from .mac_osgeneral_device_configuration import MacOSGeneralDeviceConfiguration
         from .setting_state_device_summary import SettingStateDeviceSummary
-        from .shared_p_c_configuration import SharedPCConfiguration
+        from .shared_pcconfiguration import SharedPCConfiguration
         from .windows10_custom_configuration import Windows10CustomConfiguration
         from .windows10_endpoint_protection_configuration import Windows10EndpointProtectionConfiguration
         from .windows10_enterprise_modern_app_management_configuration import Windows10EnterpriseModernAppManagementConfiguration

@@ -13,7 +13,7 @@ if TYPE_CHECKING:
     from .managed_app_registration import ManagedAppRegistration
     from .managed_app_status import ManagedAppStatus
     from .managed_device_mobile_app_configuration import ManagedDeviceMobileAppConfiguration
-    from .managed_e_book import ManagedEBook
+    from .managed_ebook import ManagedEBook
     from .mdm_windows_information_protection_policy import MdmWindowsInformationProtectionPolicy
     from .mobile_app import MobileApp
     from .mobile_app_category import MobileAppCategory
@@ -43,7 +43,7 @@ class DeviceAppManagement(Entity):
     # The managed app statuses.
     managed_app_statuses: Optional[List[ManagedAppStatus]] = None
     # The Managed eBook.
-    managed_e_books: Optional[List[ManagedEBook]] = None
+    managed_ebooks: Optional[List[ManagedEBook]] = None
     # Windows information protection for apps running on devices which are MDM enrolled.
     mdm_windows_information_protection_policies: Optional[List[MdmWindowsInformationProtectionPolicy]] = None
     # The locale information used to sync applications from the Microsoft Store for Business. Cultures that are specific to a country/region. The names of these cultures follow RFC 4646 (Windows Vista and later). The format is -<country/regioncode2>, where  is a lowercase two-letter code derived from ISO 639-1 and <country/regioncode2> is an uppercase two-letter code derived from ISO 3166. For example, en-US for English (United States) is a specific culture.
@@ -68,7 +68,7 @@ class DeviceAppManagement(Entity):
     windows_information_protection_policies: Optional[List[WindowsInformationProtectionPolicy]] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> DeviceAppManagement:
+    def create_from_discriminator_value(parse_node: ParseNode) -> DeviceAppManagement:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -91,7 +91,7 @@ class DeviceAppManagement(Entity):
         from .managed_app_registration import ManagedAppRegistration
         from .managed_app_status import ManagedAppStatus
         from .managed_device_mobile_app_configuration import ManagedDeviceMobileAppConfiguration
-        from .managed_e_book import ManagedEBook
+        from .managed_ebook import ManagedEBook
         from .mdm_windows_information_protection_policy import MdmWindowsInformationProtectionPolicy
         from .mobile_app import MobileApp
         from .mobile_app_category import MobileAppCategory
@@ -107,7 +107,7 @@ class DeviceAppManagement(Entity):
         from .managed_app_registration import ManagedAppRegistration
         from .managed_app_status import ManagedAppStatus
         from .managed_device_mobile_app_configuration import ManagedDeviceMobileAppConfiguration
-        from .managed_e_book import ManagedEBook
+        from .managed_ebook import ManagedEBook
         from .mdm_windows_information_protection_policy import MdmWindowsInformationProtectionPolicy
         from .mobile_app import MobileApp
         from .mobile_app_category import MobileAppCategory
@@ -123,7 +123,7 @@ class DeviceAppManagement(Entity):
             "managedAppPolicies": lambda n : setattr(self, 'managed_app_policies', n.get_collection_of_object_values(ManagedAppPolicy)),
             "managedAppRegistrations": lambda n : setattr(self, 'managed_app_registrations', n.get_collection_of_object_values(ManagedAppRegistration)),
             "managedAppStatuses": lambda n : setattr(self, 'managed_app_statuses', n.get_collection_of_object_values(ManagedAppStatus)),
-            "managedEBooks": lambda n : setattr(self, 'managed_e_books', n.get_collection_of_object_values(ManagedEBook)),
+            "managedEBooks": lambda n : setattr(self, 'managed_ebooks', n.get_collection_of_object_values(ManagedEBook)),
             "mdmWindowsInformationProtectionPolicies": lambda n : setattr(self, 'mdm_windows_information_protection_policies', n.get_collection_of_object_values(MdmWindowsInformationProtectionPolicy)),
             "microsoftStoreForBusinessLanguage": lambda n : setattr(self, 'microsoft_store_for_business_language', n.get_str_value()),
             "microsoftStoreForBusinessLastCompletedApplicationSyncTime": lambda n : setattr(self, 'microsoft_store_for_business_last_completed_application_sync_time', n.get_datetime_value()),
@@ -155,7 +155,7 @@ class DeviceAppManagement(Entity):
         writer.write_collection_of_object_values("managedAppPolicies", self.managed_app_policies)
         writer.write_collection_of_object_values("managedAppRegistrations", self.managed_app_registrations)
         writer.write_collection_of_object_values("managedAppStatuses", self.managed_app_statuses)
-        writer.write_collection_of_object_values("managedEBooks", self.managed_e_books)
+        writer.write_collection_of_object_values("managedEBooks", self.managed_ebooks)
         writer.write_collection_of_object_values("mdmWindowsInformationProtectionPolicies", self.mdm_windows_information_protection_policies)
         writer.write_str_value("microsoftStoreForBusinessLanguage", self.microsoft_store_for_business_language)
         writer.write_datetime_value("microsoftStoreForBusinessLastCompletedApplicationSyncTime", self.microsoft_store_for_business_last_completed_application_sync_time)

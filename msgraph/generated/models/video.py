@@ -24,7 +24,7 @@ class Video(AdditionalDataHolder, BackedModel, Parsable):
     # Duration of the file in milliseconds.
     duration: Optional[int] = None
     # 'Four character code' name of the video format.
-    four_c_c: Optional[str] = None
+    four_cc: Optional[str] = None
     # Frame rate of the video.
     frame_rate: Optional[float] = None
     # Height of the video, in pixels.
@@ -35,7 +35,7 @@ class Video(AdditionalDataHolder, BackedModel, Parsable):
     width: Optional[int] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> Video:
+    def create_from_discriminator_value(parse_node: ParseNode) -> Video:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -57,7 +57,7 @@ class Video(AdditionalDataHolder, BackedModel, Parsable):
             "audioSamplesPerSecond": lambda n : setattr(self, 'audio_samples_per_second', n.get_int_value()),
             "bitrate": lambda n : setattr(self, 'bitrate', n.get_int_value()),
             "duration": lambda n : setattr(self, 'duration', n.get_int_value()),
-            "fourCC": lambda n : setattr(self, 'four_c_c', n.get_str_value()),
+            "fourCC": lambda n : setattr(self, 'four_cc', n.get_str_value()),
             "frameRate": lambda n : setattr(self, 'frame_rate', n.get_float_value()),
             "height": lambda n : setattr(self, 'height', n.get_int_value()),
             "@odata.type": lambda n : setattr(self, 'odata_type', n.get_str_value()),
@@ -79,7 +79,7 @@ class Video(AdditionalDataHolder, BackedModel, Parsable):
         writer.write_int_value("audioSamplesPerSecond", self.audio_samples_per_second)
         writer.write_int_value("bitrate", self.bitrate)
         writer.write_int_value("duration", self.duration)
-        writer.write_str_value("fourCC", self.four_c_c)
+        writer.write_str_value("fourCC", self.four_cc)
         writer.write_float_value("frameRate", self.frame_rate)
         writer.write_int_value("height", self.height)
         writer.write_str_value("@odata.type", self.odata_type)

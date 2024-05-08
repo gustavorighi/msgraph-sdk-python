@@ -4,8 +4,8 @@ from kiota_abstractions.serialization import Parsable, ParseNode, SerializationW
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .azure_a_d_join_policy import AzureADJoinPolicy
-    from .azure_a_d_registration_policy import AzureADRegistrationPolicy
+    from .azure_adjoin_policy import AzureADJoinPolicy
+    from .azure_adregistration_policy import AzureADRegistrationPolicy
     from .entity import Entity
     from .local_admin_password_settings import LocalAdminPasswordSettings
     from .multi_factor_auth_configuration import MultiFactorAuthConfiguration
@@ -15,9 +15,9 @@ from .entity import Entity
 @dataclass
 class DeviceRegistrationPolicy(Entity):
     # The azureADJoin property
-    azure_a_d_join: Optional[AzureADJoinPolicy] = None
+    azure_adjoin: Optional[AzureADJoinPolicy] = None
     # The azureADRegistration property
-    azure_a_d_registration: Optional[AzureADRegistrationPolicy] = None
+    azure_adregistration: Optional[AzureADRegistrationPolicy] = None
     # The description property
     description: Optional[str] = None
     # The displayName property
@@ -32,7 +32,7 @@ class DeviceRegistrationPolicy(Entity):
     user_device_quota: Optional[int] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> DeviceRegistrationPolicy:
+    def create_from_discriminator_value(parse_node: ParseNode) -> DeviceRegistrationPolicy:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -47,21 +47,21 @@ class DeviceRegistrationPolicy(Entity):
         The deserialization information for the current model
         Returns: Dict[str, Callable[[ParseNode], None]]
         """
-        from .azure_a_d_join_policy import AzureADJoinPolicy
-        from .azure_a_d_registration_policy import AzureADRegistrationPolicy
+        from .azure_adjoin_policy import AzureADJoinPolicy
+        from .azure_adregistration_policy import AzureADRegistrationPolicy
         from .entity import Entity
         from .local_admin_password_settings import LocalAdminPasswordSettings
         from .multi_factor_auth_configuration import MultiFactorAuthConfiguration
 
-        from .azure_a_d_join_policy import AzureADJoinPolicy
-        from .azure_a_d_registration_policy import AzureADRegistrationPolicy
+        from .azure_adjoin_policy import AzureADJoinPolicy
+        from .azure_adregistration_policy import AzureADRegistrationPolicy
         from .entity import Entity
         from .local_admin_password_settings import LocalAdminPasswordSettings
         from .multi_factor_auth_configuration import MultiFactorAuthConfiguration
 
         fields: Dict[str, Callable[[Any], None]] = {
-            "azureADJoin": lambda n : setattr(self, 'azure_a_d_join', n.get_object_value(AzureADJoinPolicy)),
-            "azureADRegistration": lambda n : setattr(self, 'azure_a_d_registration', n.get_object_value(AzureADRegistrationPolicy)),
+            "azureADJoin": lambda n : setattr(self, 'azure_adjoin', n.get_object_value(AzureADJoinPolicy)),
+            "azureADRegistration": lambda n : setattr(self, 'azure_adregistration', n.get_object_value(AzureADRegistrationPolicy)),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "displayName": lambda n : setattr(self, 'display_name', n.get_str_value()),
             "localAdminPassword": lambda n : setattr(self, 'local_admin_password', n.get_object_value(LocalAdminPasswordSettings)),
@@ -81,8 +81,8 @@ class DeviceRegistrationPolicy(Entity):
         if not writer:
             raise TypeError("writer cannot be null.")
         super().serialize(writer)
-        writer.write_object_value("azureADJoin", self.azure_a_d_join)
-        writer.write_object_value("azureADRegistration", self.azure_a_d_registration)
+        writer.write_object_value("azureADJoin", self.azure_adjoin)
+        writer.write_object_value("azureADRegistration", self.azure_adregistration)
         writer.write_str_value("description", self.description)
         writer.write_str_value("displayName", self.display_name)
         writer.write_object_value("localAdminPassword", self.local_admin_password)

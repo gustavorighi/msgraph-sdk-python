@@ -16,9 +16,9 @@ class MobileThreatDefenseConnector(Entity):
     Entity which represents a connection to Mobile Threat Defense partner.
     """
     # When TRUE, indicates the Mobile Threat Defense partner may collect metadata about installed applications from Intune for IOS devices. When FALSE, indicates the Mobile Threat Defense partner may not collect metadata about installed applications from Intune for IOS devices. Default value is FALSE.
-    allow_partner_to_collect_i_o_s_application_metadata: Optional[bool] = None
+    allow_partner_to_collect_iosapplication_metadata: Optional[bool] = None
     # When TRUE, indicates the Mobile Threat Defense partner may collect metadata about personally installed applications from Intune for IOS devices. When FALSE, indicates the Mobile Threat Defense partner may not collect metadata about personally installed applications from Intune for IOS devices. Default value is FALSE.
-    allow_partner_to_collect_i_o_s_personal_application_metadata: Optional[bool] = None
+    allow_partner_to_collect_iospersonal_application_metadata: Optional[bool] = None
     # For Android, set whether Intune must receive data from the Mobile Threat Defense partner prior to marking a device compliant
     android_device_blocked_on_missing_partner_data: Optional[bool] = None
     # For Android, set whether data from the Mobile Threat Defense partner should be used during compliance evaluations
@@ -49,7 +49,7 @@ class MobileThreatDefenseConnector(Entity):
     windows_enabled: Optional[bool] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> MobileThreatDefenseConnector:
+    def create_from_discriminator_value(parse_node: ParseNode) -> MobileThreatDefenseConnector:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -71,8 +71,8 @@ class MobileThreatDefenseConnector(Entity):
         from .mobile_threat_partner_tenant_state import MobileThreatPartnerTenantState
 
         fields: Dict[str, Callable[[Any], None]] = {
-            "allowPartnerToCollectIOSApplicationMetadata": lambda n : setattr(self, 'allow_partner_to_collect_i_o_s_application_metadata', n.get_bool_value()),
-            "allowPartnerToCollectIOSPersonalApplicationMetadata": lambda n : setattr(self, 'allow_partner_to_collect_i_o_s_personal_application_metadata', n.get_bool_value()),
+            "allowPartnerToCollectIOSApplicationMetadata": lambda n : setattr(self, 'allow_partner_to_collect_iosapplication_metadata', n.get_bool_value()),
+            "allowPartnerToCollectIOSPersonalApplicationMetadata": lambda n : setattr(self, 'allow_partner_to_collect_iospersonal_application_metadata', n.get_bool_value()),
             "androidDeviceBlockedOnMissingPartnerData": lambda n : setattr(self, 'android_device_blocked_on_missing_partner_data', n.get_bool_value()),
             "androidEnabled": lambda n : setattr(self, 'android_enabled', n.get_bool_value()),
             "androidMobileApplicationManagementEnabled": lambda n : setattr(self, 'android_mobile_application_management_enabled', n.get_bool_value()),
@@ -100,8 +100,8 @@ class MobileThreatDefenseConnector(Entity):
         if not writer:
             raise TypeError("writer cannot be null.")
         super().serialize(writer)
-        writer.write_bool_value("allowPartnerToCollectIOSApplicationMetadata", self.allow_partner_to_collect_i_o_s_application_metadata)
-        writer.write_bool_value("allowPartnerToCollectIOSPersonalApplicationMetadata", self.allow_partner_to_collect_i_o_s_personal_application_metadata)
+        writer.write_bool_value("allowPartnerToCollectIOSApplicationMetadata", self.allow_partner_to_collect_iosapplication_metadata)
+        writer.write_bool_value("allowPartnerToCollectIOSPersonalApplicationMetadata", self.allow_partner_to_collect_iospersonal_application_metadata)
         writer.write_bool_value("androidDeviceBlockedOnMissingPartnerData", self.android_device_blocked_on_missing_partner_data)
         writer.write_bool_value("androidEnabled", self.android_enabled)
         writer.write_bool_value("androidMobileApplicationManagementEnabled", self.android_mobile_application_management_enabled)

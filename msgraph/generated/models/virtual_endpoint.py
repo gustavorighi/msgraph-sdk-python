@@ -4,13 +4,13 @@ from kiota_abstractions.serialization import Parsable, ParseNode, SerializationW
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .cloud_pc import CloudPC
     from .cloud_pc_audit_event import CloudPcAuditEvent
     from .cloud_pc_device_image import CloudPcDeviceImage
     from .cloud_pc_gallery_image import CloudPcGalleryImage
     from .cloud_pc_on_premises_connection import CloudPcOnPremisesConnection
     from .cloud_pc_provisioning_policy import CloudPcProvisioningPolicy
     from .cloud_pc_user_setting import CloudPcUserSetting
-    from .cloud_p_c import CloudPC
     from .entity import Entity
 
 from .entity import Entity
@@ -20,7 +20,7 @@ class VirtualEndpoint(Entity):
     # A collection of Cloud PC audit events.
     audit_events: Optional[List[CloudPcAuditEvent]] = None
     # A collection of cloud-managed virtual desktops.
-    cloud_p_cs: Optional[List[CloudPC]] = None
+    cloud_pcs: Optional[List[CloudPC]] = None
     # A collection of device image resources on Cloud PC.
     device_images: Optional[List[CloudPcDeviceImage]] = None
     # A collection of gallery image resources on Cloud PC.
@@ -35,7 +35,7 @@ class VirtualEndpoint(Entity):
     user_settings: Optional[List[CloudPcUserSetting]] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> VirtualEndpoint:
+    def create_from_discriminator_value(parse_node: ParseNode) -> VirtualEndpoint:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -50,27 +50,27 @@ class VirtualEndpoint(Entity):
         The deserialization information for the current model
         Returns: Dict[str, Callable[[ParseNode], None]]
         """
+        from .cloud_pc import CloudPC
         from .cloud_pc_audit_event import CloudPcAuditEvent
         from .cloud_pc_device_image import CloudPcDeviceImage
         from .cloud_pc_gallery_image import CloudPcGalleryImage
         from .cloud_pc_on_premises_connection import CloudPcOnPremisesConnection
         from .cloud_pc_provisioning_policy import CloudPcProvisioningPolicy
         from .cloud_pc_user_setting import CloudPcUserSetting
-        from .cloud_p_c import CloudPC
         from .entity import Entity
 
+        from .cloud_pc import CloudPC
         from .cloud_pc_audit_event import CloudPcAuditEvent
         from .cloud_pc_device_image import CloudPcDeviceImage
         from .cloud_pc_gallery_image import CloudPcGalleryImage
         from .cloud_pc_on_premises_connection import CloudPcOnPremisesConnection
         from .cloud_pc_provisioning_policy import CloudPcProvisioningPolicy
         from .cloud_pc_user_setting import CloudPcUserSetting
-        from .cloud_p_c import CloudPC
         from .entity import Entity
 
         fields: Dict[str, Callable[[Any], None]] = {
             "auditEvents": lambda n : setattr(self, 'audit_events', n.get_collection_of_object_values(CloudPcAuditEvent)),
-            "cloudPCs": lambda n : setattr(self, 'cloud_p_cs', n.get_collection_of_object_values(CloudPC)),
+            "cloudPCs": lambda n : setattr(self, 'cloud_pcs', n.get_collection_of_object_values(CloudPC)),
             "deviceImages": lambda n : setattr(self, 'device_images', n.get_collection_of_object_values(CloudPcDeviceImage)),
             "galleryImages": lambda n : setattr(self, 'gallery_images', n.get_collection_of_object_values(CloudPcGalleryImage)),
             "onPremisesConnections": lambda n : setattr(self, 'on_premises_connections', n.get_collection_of_object_values(CloudPcOnPremisesConnection)),
@@ -91,7 +91,7 @@ class VirtualEndpoint(Entity):
             raise TypeError("writer cannot be null.")
         super().serialize(writer)
         writer.write_collection_of_object_values("auditEvents", self.audit_events)
-        writer.write_collection_of_object_values("cloudPCs", self.cloud_p_cs)
+        writer.write_collection_of_object_values("cloudPCs", self.cloud_pcs)
         writer.write_collection_of_object_values("deviceImages", self.device_images)
         writer.write_collection_of_object_values("galleryImages", self.gallery_images)
         writer.write_collection_of_object_values("onPremisesConnections", self.on_premises_connections)

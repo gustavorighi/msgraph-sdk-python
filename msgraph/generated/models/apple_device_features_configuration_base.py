@@ -6,7 +6,7 @@ from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .device_configuration import DeviceConfiguration
     from .ios_device_features_configuration import IosDeviceFeaturesConfiguration
-    from .mac_o_s_device_features_configuration import MacOSDeviceFeaturesConfiguration
+    from .mac_osdevice_features_configuration import MacOSDeviceFeaturesConfiguration
 
 from .device_configuration import DeviceConfiguration
 
@@ -19,7 +19,7 @@ class AppleDeviceFeaturesConfigurationBase(DeviceConfiguration):
     odata_type: Optional[str] = "#microsoft.graph.appleDeviceFeaturesConfigurationBase"
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> AppleDeviceFeaturesConfigurationBase:
+    def create_from_discriminator_value(parse_node: ParseNode) -> AppleDeviceFeaturesConfigurationBase:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -36,7 +36,7 @@ class AppleDeviceFeaturesConfigurationBase(DeviceConfiguration):
 
             return IosDeviceFeaturesConfiguration()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSDeviceFeaturesConfiguration".casefold():
-            from .mac_o_s_device_features_configuration import MacOSDeviceFeaturesConfiguration
+            from .mac_osdevice_features_configuration import MacOSDeviceFeaturesConfiguration
 
             return MacOSDeviceFeaturesConfiguration()
         return AppleDeviceFeaturesConfigurationBase()
@@ -48,11 +48,11 @@ class AppleDeviceFeaturesConfigurationBase(DeviceConfiguration):
         """
         from .device_configuration import DeviceConfiguration
         from .ios_device_features_configuration import IosDeviceFeaturesConfiguration
-        from .mac_o_s_device_features_configuration import MacOSDeviceFeaturesConfiguration
+        from .mac_osdevice_features_configuration import MacOSDeviceFeaturesConfiguration
 
         from .device_configuration import DeviceConfiguration
         from .ios_device_features_configuration import IosDeviceFeaturesConfiguration
-        from .mac_o_s_device_features_configuration import MacOSDeviceFeaturesConfiguration
+        from .mac_osdevice_features_configuration import MacOSDeviceFeaturesConfiguration
 
         fields: Dict[str, Callable[[Any], None]] = {
         }

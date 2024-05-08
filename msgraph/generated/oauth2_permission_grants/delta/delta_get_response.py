@@ -5,7 +5,7 @@ from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from ...models.base_delta_function_response import BaseDeltaFunctionResponse
-    from ...models.o_auth2_permission_grant import OAuth2PermissionGrant
+    from ...models.oauth2_permission_grant import OAuth2PermissionGrant
 
 from ...models.base_delta_function_response import BaseDeltaFunctionResponse
 
@@ -15,7 +15,7 @@ class DeltaGetResponse(BaseDeltaFunctionResponse):
     value: Optional[List[OAuth2PermissionGrant]] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> DeltaGetResponse:
+    def create_from_discriminator_value(parse_node: ParseNode) -> DeltaGetResponse:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -31,10 +31,10 @@ class DeltaGetResponse(BaseDeltaFunctionResponse):
         Returns: Dict[str, Callable[[ParseNode], None]]
         """
         from ...models.base_delta_function_response import BaseDeltaFunctionResponse
-        from ...models.o_auth2_permission_grant import OAuth2PermissionGrant
+        from ...models.oauth2_permission_grant import OAuth2PermissionGrant
 
         from ...models.base_delta_function_response import BaseDeltaFunctionResponse
-        from ...models.o_auth2_permission_grant import OAuth2PermissionGrant
+        from ...models.oauth2_permission_grant import OAuth2PermissionGrant
 
         fields: Dict[str, Callable[[Any], None]] = {
             "value": lambda n : setattr(self, 'value', n.get_collection_of_object_values(OAuth2PermissionGrant)),

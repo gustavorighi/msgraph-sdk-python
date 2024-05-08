@@ -19,14 +19,14 @@ class DeviceComplianceActionItem(Entity):
     # Number of hours to wait till the action will be enforced. Valid values 0 to 8760
     grace_period_hours: Optional[int] = None
     # A list of group IDs to speicify who to CC this notification message to.
-    notification_message_c_c_list: Optional[List[str]] = None
+    notification_message_cclist: Optional[List[str]] = None
     # What notification Message template to use
     notification_template_id: Optional[str] = None
     # The OdataType property
     odata_type: Optional[str] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> DeviceComplianceActionItem:
+    def create_from_discriminator_value(parse_node: ParseNode) -> DeviceComplianceActionItem:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -50,7 +50,7 @@ class DeviceComplianceActionItem(Entity):
         fields: Dict[str, Callable[[Any], None]] = {
             "actionType": lambda n : setattr(self, 'action_type', n.get_enum_value(DeviceComplianceActionType)),
             "gracePeriodHours": lambda n : setattr(self, 'grace_period_hours', n.get_int_value()),
-            "notificationMessageCCList": lambda n : setattr(self, 'notification_message_c_c_list', n.get_collection_of_primitive_values(str)),
+            "notificationMessageCCList": lambda n : setattr(self, 'notification_message_cclist', n.get_collection_of_primitive_values(str)),
             "notificationTemplateId": lambda n : setattr(self, 'notification_template_id', n.get_str_value()),
         }
         super_fields = super().get_field_deserializers()
@@ -68,7 +68,7 @@ class DeviceComplianceActionItem(Entity):
         super().serialize(writer)
         writer.write_enum_value("actionType", self.action_type)
         writer.write_int_value("gracePeriodHours", self.grace_period_hours)
-        writer.write_collection_of_primitive_values("notificationMessageCCList", self.notification_message_c_c_list)
+        writer.write_collection_of_primitive_values("notificationMessageCCList", self.notification_message_cclist)
         writer.write_str_value("notificationTemplateId", self.notification_template_id)
     
 

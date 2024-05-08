@@ -24,7 +24,7 @@ class AuthorizationPolicy(PolicyBase):
     # Indicates whether users can sign up for email based subscriptions.
     allowed_to_sign_up_email_based_subscriptions: Optional[bool] = None
     # Indicates whether administrators of the tenant can use the Self-Service Password Reset (SSPR). For more information, see Self-service password reset for administrators.
-    allowed_to_use_s_s_p_r: Optional[bool] = None
+    allowed_to_use_sspr: Optional[bool] = None
     # To disable the use of MSOL PowerShell, set this property to true. This also disables user-based access to the legacy service endpoint used by MSOL PowerShell. This doesn't affect Microsoft Entra Connect or Microsoft Graph.
     block_msol_power_shell: Optional[bool] = None
     # The defaultUserRolePermissions property
@@ -33,7 +33,7 @@ class AuthorizationPolicy(PolicyBase):
     guest_user_role_id: Optional[UUID] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> AuthorizationPolicy:
+    def create_from_discriminator_value(parse_node: ParseNode) -> AuthorizationPolicy:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -61,7 +61,7 @@ class AuthorizationPolicy(PolicyBase):
             "allowInvitesFrom": lambda n : setattr(self, 'allow_invites_from', n.get_enum_value(AllowInvitesFrom)),
             "allowUserConsentForRiskyApps": lambda n : setattr(self, 'allow_user_consent_for_risky_apps', n.get_bool_value()),
             "allowedToSignUpEmailBasedSubscriptions": lambda n : setattr(self, 'allowed_to_sign_up_email_based_subscriptions', n.get_bool_value()),
-            "allowedToUseSSPR": lambda n : setattr(self, 'allowed_to_use_s_s_p_r', n.get_bool_value()),
+            "allowedToUseSSPR": lambda n : setattr(self, 'allowed_to_use_sspr', n.get_bool_value()),
             "blockMsolPowerShell": lambda n : setattr(self, 'block_msol_power_shell', n.get_bool_value()),
             "defaultUserRolePermissions": lambda n : setattr(self, 'default_user_role_permissions', n.get_object_value(DefaultUserRolePermissions)),
             "guestUserRoleId": lambda n : setattr(self, 'guest_user_role_id', n.get_uuid_value()),
@@ -83,7 +83,7 @@ class AuthorizationPolicy(PolicyBase):
         writer.write_enum_value("allowInvitesFrom", self.allow_invites_from)
         writer.write_bool_value("allowUserConsentForRiskyApps", self.allow_user_consent_for_risky_apps)
         writer.write_bool_value("allowedToSignUpEmailBasedSubscriptions", self.allowed_to_sign_up_email_based_subscriptions)
-        writer.write_bool_value("allowedToUseSSPR", self.allowed_to_use_s_s_p_r)
+        writer.write_bool_value("allowedToUseSSPR", self.allowed_to_use_sspr)
         writer.write_bool_value("blockMsolPowerShell", self.block_msol_power_shell)
         writer.write_object_value("defaultUserRolePermissions", self.default_user_role_permissions)
         writer.write_uuid_value("guestUserRoleId", self.guest_user_role_id)

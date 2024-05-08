@@ -43,7 +43,7 @@ class UserExperienceAnalyticsWorkFromAnywhereDevicesSummary(AdditionalDataHolder
     # The total count of devices. Read-only. Valid values -2147483648 to 2147483647
     total_devices: Optional[int] = None
     # The count of Windows 10 devices that have unsupported OS versions. Read-only. Valid values -2147483648 to 2147483647
-    unsupported_o_sversion_devices: Optional[int] = None
+    unsupported_osversion_devices: Optional[int] = None
     # The count of windows 10 devices. Read-only. Valid values -2147483648 to 2147483647
     windows10_devices: Optional[int] = None
     # The user experience analytics work from anywhere Windows 10 devices summary. Read-only.
@@ -52,7 +52,7 @@ class UserExperienceAnalyticsWorkFromAnywhereDevicesSummary(AdditionalDataHolder
     windows10_devices_without_tenant_attach: Optional[int] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> UserExperienceAnalyticsWorkFromAnywhereDevicesSummary:
+    def create_from_discriminator_value(parse_node: ParseNode) -> UserExperienceAnalyticsWorkFromAnywhereDevicesSummary:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -89,7 +89,7 @@ class UserExperienceAnalyticsWorkFromAnywhereDevicesSummary(AdditionalDataHolder
             "@odata.type": lambda n : setattr(self, 'odata_type', n.get_str_value()),
             "tenantAttachDevices": lambda n : setattr(self, 'tenant_attach_devices', n.get_int_value()),
             "totalDevices": lambda n : setattr(self, 'total_devices', n.get_int_value()),
-            "unsupportedOSversionDevices": lambda n : setattr(self, 'unsupported_o_sversion_devices', n.get_int_value()),
+            "unsupportedOSversionDevices": lambda n : setattr(self, 'unsupported_osversion_devices', n.get_int_value()),
             "windows10Devices": lambda n : setattr(self, 'windows10_devices', n.get_int_value()),
             "windows10DevicesSummary": lambda n : setattr(self, 'windows10_devices_summary', n.get_object_value(UserExperienceAnalyticsWindows10DevicesSummary)),
             "windows10DevicesWithoutTenantAttach": lambda n : setattr(self, 'windows10_devices_without_tenant_attach', n.get_int_value()),
@@ -115,7 +115,7 @@ class UserExperienceAnalyticsWorkFromAnywhereDevicesSummary(AdditionalDataHolder
         writer.write_str_value("@odata.type", self.odata_type)
         writer.write_int_value("tenantAttachDevices", self.tenant_attach_devices)
         writer.write_int_value("totalDevices", self.total_devices)
-        writer.write_int_value("unsupportedOSversionDevices", self.unsupported_o_sversion_devices)
+        writer.write_int_value("unsupportedOSversionDevices", self.unsupported_osversion_devices)
         writer.write_int_value("windows10Devices", self.windows10_devices)
         writer.write_object_value("windows10DevicesSummary", self.windows10_devices_summary)
         writer.write_int_value("windows10DevicesWithoutTenantAttach", self.windows10_devices_without_tenant_attach)

@@ -15,7 +15,7 @@ class ClientUserAgent(UserAgent):
     # The OdataType property
     odata_type: Optional[str] = "#microsoft.graph.callRecords.clientUserAgent"
     # The unique identifier of the Microsoft Entra application used by this endpoint.
-    azure_a_d_app_id: Optional[str] = None
+    azure_adapp_id: Optional[str] = None
     # Immutable resource identifier of the Azure Communication Service associated with this endpoint based on Communication Services APIs.
     communication_service_id: Optional[str] = None
     # The platform property
@@ -24,7 +24,7 @@ class ClientUserAgent(UserAgent):
     product_family: Optional[ProductFamily] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> ClientUserAgent:
+    def create_from_discriminator_value(parse_node: ParseNode) -> ClientUserAgent:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -48,7 +48,7 @@ class ClientUserAgent(UserAgent):
         from .user_agent import UserAgent
 
         fields: Dict[str, Callable[[Any], None]] = {
-            "azureADAppId": lambda n : setattr(self, 'azure_a_d_app_id', n.get_str_value()),
+            "azureADAppId": lambda n : setattr(self, 'azure_adapp_id', n.get_str_value()),
             "communicationServiceId": lambda n : setattr(self, 'communication_service_id', n.get_str_value()),
             "platform": lambda n : setattr(self, 'platform', n.get_enum_value(ClientPlatform)),
             "productFamily": lambda n : setattr(self, 'product_family', n.get_enum_value(ProductFamily)),
@@ -66,7 +66,7 @@ class ClientUserAgent(UserAgent):
         if not writer:
             raise TypeError("writer cannot be null.")
         super().serialize(writer)
-        writer.write_str_value("azureADAppId", self.azure_a_d_app_id)
+        writer.write_str_value("azureADAppId", self.azure_adapp_id)
         writer.write_str_value("communicationServiceId", self.communication_service_id)
         writer.write_enum_value("platform", self.platform)
         writer.write_enum_value("productFamily", self.product_family)

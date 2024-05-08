@@ -7,8 +7,8 @@ if TYPE_CHECKING:
     from .managed_android_lob_app import ManagedAndroidLobApp
     from .managed_android_store_app import ManagedAndroidStoreApp
     from .managed_app_availability import ManagedAppAvailability
-    from .managed_i_o_s_lob_app import ManagedIOSLobApp
-    from .managed_i_o_s_store_app import ManagedIOSStoreApp
+    from .managed_ioslob_app import ManagedIOSLobApp
+    from .managed_iosstore_app import ManagedIOSStoreApp
     from .managed_mobile_lob_app import ManagedMobileLobApp
     from .mobile_app import MobileApp
 
@@ -27,7 +27,7 @@ class ManagedApp(MobileApp):
     version: Optional[str] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> ManagedApp:
+    def create_from_discriminator_value(parse_node: ParseNode) -> ManagedApp:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -48,11 +48,11 @@ class ManagedApp(MobileApp):
 
             return ManagedAndroidStoreApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.managedIOSLobApp".casefold():
-            from .managed_i_o_s_lob_app import ManagedIOSLobApp
+            from .managed_ioslob_app import ManagedIOSLobApp
 
             return ManagedIOSLobApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.managedIOSStoreApp".casefold():
-            from .managed_i_o_s_store_app import ManagedIOSStoreApp
+            from .managed_iosstore_app import ManagedIOSStoreApp
 
             return ManagedIOSStoreApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.managedMobileLobApp".casefold():
@@ -69,16 +69,16 @@ class ManagedApp(MobileApp):
         from .managed_android_lob_app import ManagedAndroidLobApp
         from .managed_android_store_app import ManagedAndroidStoreApp
         from .managed_app_availability import ManagedAppAvailability
-        from .managed_i_o_s_lob_app import ManagedIOSLobApp
-        from .managed_i_o_s_store_app import ManagedIOSStoreApp
+        from .managed_ioslob_app import ManagedIOSLobApp
+        from .managed_iosstore_app import ManagedIOSStoreApp
         from .managed_mobile_lob_app import ManagedMobileLobApp
         from .mobile_app import MobileApp
 
         from .managed_android_lob_app import ManagedAndroidLobApp
         from .managed_android_store_app import ManagedAndroidStoreApp
         from .managed_app_availability import ManagedAppAvailability
-        from .managed_i_o_s_lob_app import ManagedIOSLobApp
-        from .managed_i_o_s_store_app import ManagedIOSStoreApp
+        from .managed_ioslob_app import ManagedIOSLobApp
+        from .managed_iosstore_app import ManagedIOSStoreApp
         from .managed_mobile_lob_app import ManagedMobileLobApp
         from .mobile_app import MobileApp
 

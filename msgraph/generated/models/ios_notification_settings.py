@@ -24,7 +24,7 @@ class IosNotificationSettings(AdditionalDataHolder, BackedModel, Parsable):
     # Indicates whether badges are allowed for this app.
     badges_enabled: Optional[bool] = None
     # Bundle id of app to which to apply these notification settings.
-    bundle_i_d: Optional[str] = None
+    bundle_id: Optional[str] = None
     # Indicates whether notifications are allowed for this app.
     enabled: Optional[bool] = None
     # The OdataType property
@@ -39,7 +39,7 @@ class IosNotificationSettings(AdditionalDataHolder, BackedModel, Parsable):
     sounds_enabled: Optional[bool] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> IosNotificationSettings:
+    def create_from_discriminator_value(parse_node: ParseNode) -> IosNotificationSettings:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -62,7 +62,7 @@ class IosNotificationSettings(AdditionalDataHolder, BackedModel, Parsable):
             "alertType": lambda n : setattr(self, 'alert_type', n.get_enum_value(IosNotificationAlertType)),
             "appName": lambda n : setattr(self, 'app_name', n.get_str_value()),
             "badgesEnabled": lambda n : setattr(self, 'badges_enabled', n.get_bool_value()),
-            "bundleID": lambda n : setattr(self, 'bundle_i_d', n.get_str_value()),
+            "bundleID": lambda n : setattr(self, 'bundle_id', n.get_str_value()),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "@odata.type": lambda n : setattr(self, 'odata_type', n.get_str_value()),
             "publisher": lambda n : setattr(self, 'publisher', n.get_str_value()),
@@ -83,7 +83,7 @@ class IosNotificationSettings(AdditionalDataHolder, BackedModel, Parsable):
         writer.write_enum_value("alertType", self.alert_type)
         writer.write_str_value("appName", self.app_name)
         writer.write_bool_value("badgesEnabled", self.badges_enabled)
-        writer.write_str_value("bundleID", self.bundle_i_d)
+        writer.write_str_value("bundleID", self.bundle_id)
         writer.write_bool_value("enabled", self.enabled)
         writer.write_str_value("@odata.type", self.odata_type)
         writer.write_str_value("publisher", self.publisher)

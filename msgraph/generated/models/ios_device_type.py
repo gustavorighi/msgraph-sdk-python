@@ -17,12 +17,12 @@ class IosDeviceType(AdditionalDataHolder, BackedModel, Parsable):
     # Whether the app should run on iPads.
     i_pad: Optional[bool] = None
     # Whether the app should run on iPhones and iPods.
-    i_phone_and_i_pod: Optional[bool] = None
+    i_phone_and_ipod: Optional[bool] = None
     # The OdataType property
     odata_type: Optional[str] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> IosDeviceType:
+    def create_from_discriminator_value(parse_node: ParseNode) -> IosDeviceType:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -39,7 +39,7 @@ class IosDeviceType(AdditionalDataHolder, BackedModel, Parsable):
         """
         fields: Dict[str, Callable[[Any], None]] = {
             "iPad": lambda n : setattr(self, 'i_pad', n.get_bool_value()),
-            "iPhoneAndIPod": lambda n : setattr(self, 'i_phone_and_i_pod', n.get_bool_value()),
+            "iPhoneAndIPod": lambda n : setattr(self, 'i_phone_and_ipod', n.get_bool_value()),
             "@odata.type": lambda n : setattr(self, 'odata_type', n.get_str_value()),
         }
         return fields
@@ -53,7 +53,7 @@ class IosDeviceType(AdditionalDataHolder, BackedModel, Parsable):
         if not writer:
             raise TypeError("writer cannot be null.")
         writer.write_bool_value("iPad", self.i_pad)
-        writer.write_bool_value("iPhoneAndIPod", self.i_phone_and_i_pod)
+        writer.write_bool_value("iPhoneAndIPod", self.i_phone_and_ipod)
         writer.write_str_value("@odata.type", self.odata_type)
         writer.write_additional_data_value(self.additional_data)
     

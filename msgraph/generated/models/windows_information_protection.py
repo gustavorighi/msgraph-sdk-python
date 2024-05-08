@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     from .windows_information_protection_app_locker_file import WindowsInformationProtectionAppLockerFile
     from .windows_information_protection_data_recovery_certificate import WindowsInformationProtectionDataRecoveryCertificate
     from .windows_information_protection_enforcement_level import WindowsInformationProtectionEnforcementLevel
-    from .windows_information_protection_i_p_range_collection import WindowsInformationProtectionIPRangeCollection
+    from .windows_information_protection_iprange_collection import WindowsInformationProtectionIPRangeCollection
     from .windows_information_protection_policy import WindowsInformationProtectionPolicy
     from .windows_information_protection_proxied_domain_collection import WindowsInformationProtectionProxiedDomainCollection
     from .windows_information_protection_resource_collection import WindowsInformationProtectionResourceCollection
@@ -36,12 +36,12 @@ class WindowsInformationProtection(ManagedAppPolicy):
     enforcement_level: Optional[WindowsInformationProtectionEnforcementLevel] = None
     # Primary enterprise domain
     enterprise_domain: Optional[str] = None
-    # Sets the enterprise IP ranges that define the computers in the enterprise network. Data that comes from those computers will be considered part of the enterprise and protected. These locations will be considered a safe destination for enterprise data to be shared to
-    enterprise_i_p_ranges: Optional[List[WindowsInformationProtectionIPRangeCollection]] = None
-    # Boolean value that tells the client to accept the configured list and not to use heuristics to attempt to find other subnets. Default is false
-    enterprise_i_p_ranges_are_authoritative: Optional[bool] = None
     # This is the comma-separated list of internal proxy servers. For example, '157.54.14.28, 157.54.11.118, 10.202.14.167, 157.53.14.163, 157.69.210.59'. These proxies have been configured by the admin to connect to specific resources on the Internet. They are considered to be enterprise network locations. The proxies are only leveraged in configuring the EnterpriseProxiedDomains policy to force traffic to the matched domains through these proxies
     enterprise_internal_proxy_servers: Optional[List[WindowsInformationProtectionResourceCollection]] = None
+    # Sets the enterprise IP ranges that define the computers in the enterprise network. Data that comes from those computers will be considered part of the enterprise and protected. These locations will be considered a safe destination for enterprise data to be shared to
+    enterprise_ipranges: Optional[List[WindowsInformationProtectionIPRangeCollection]] = None
+    # Boolean value that tells the client to accept the configured list and not to use heuristics to attempt to find other subnets. Default is false
+    enterprise_ipranges_are_authoritative: Optional[bool] = None
     # This is the list of domains that comprise the boundaries of the enterprise. Data from one of these domains that is sent to a device will be considered enterprise data and protected These locations will be considered a safe destination for enterprise data to be shared to
     enterprise_network_domain_names: Optional[List[WindowsInformationProtectionResourceCollection]] = None
     # List of enterprise domains to be protected
@@ -78,7 +78,7 @@ class WindowsInformationProtection(ManagedAppPolicy):
     smb_auto_encrypted_file_extensions: Optional[List[WindowsInformationProtectionResourceCollection]] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> WindowsInformationProtection:
+    def create_from_discriminator_value(parse_node: ParseNode) -> WindowsInformationProtection:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -112,7 +112,7 @@ class WindowsInformationProtection(ManagedAppPolicy):
         from .windows_information_protection_app_locker_file import WindowsInformationProtectionAppLockerFile
         from .windows_information_protection_data_recovery_certificate import WindowsInformationProtectionDataRecoveryCertificate
         from .windows_information_protection_enforcement_level import WindowsInformationProtectionEnforcementLevel
-        from .windows_information_protection_i_p_range_collection import WindowsInformationProtectionIPRangeCollection
+        from .windows_information_protection_iprange_collection import WindowsInformationProtectionIPRangeCollection
         from .windows_information_protection_policy import WindowsInformationProtectionPolicy
         from .windows_information_protection_proxied_domain_collection import WindowsInformationProtectionProxiedDomainCollection
         from .windows_information_protection_resource_collection import WindowsInformationProtectionResourceCollection
@@ -124,7 +124,7 @@ class WindowsInformationProtection(ManagedAppPolicy):
         from .windows_information_protection_app_locker_file import WindowsInformationProtectionAppLockerFile
         from .windows_information_protection_data_recovery_certificate import WindowsInformationProtectionDataRecoveryCertificate
         from .windows_information_protection_enforcement_level import WindowsInformationProtectionEnforcementLevel
-        from .windows_information_protection_i_p_range_collection import WindowsInformationProtectionIPRangeCollection
+        from .windows_information_protection_iprange_collection import WindowsInformationProtectionIPRangeCollection
         from .windows_information_protection_policy import WindowsInformationProtectionPolicy
         from .windows_information_protection_proxied_domain_collection import WindowsInformationProtectionProxiedDomainCollection
         from .windows_information_protection_resource_collection import WindowsInformationProtectionResourceCollection
@@ -135,9 +135,9 @@ class WindowsInformationProtection(ManagedAppPolicy):
             "dataRecoveryCertificate": lambda n : setattr(self, 'data_recovery_certificate', n.get_object_value(WindowsInformationProtectionDataRecoveryCertificate)),
             "enforcementLevel": lambda n : setattr(self, 'enforcement_level', n.get_enum_value(WindowsInformationProtectionEnforcementLevel)),
             "enterpriseDomain": lambda n : setattr(self, 'enterprise_domain', n.get_str_value()),
-            "enterpriseIPRanges": lambda n : setattr(self, 'enterprise_i_p_ranges', n.get_collection_of_object_values(WindowsInformationProtectionIPRangeCollection)),
-            "enterpriseIPRangesAreAuthoritative": lambda n : setattr(self, 'enterprise_i_p_ranges_are_authoritative', n.get_bool_value()),
             "enterpriseInternalProxyServers": lambda n : setattr(self, 'enterprise_internal_proxy_servers', n.get_collection_of_object_values(WindowsInformationProtectionResourceCollection)),
+            "enterpriseIPRanges": lambda n : setattr(self, 'enterprise_ipranges', n.get_collection_of_object_values(WindowsInformationProtectionIPRangeCollection)),
+            "enterpriseIPRangesAreAuthoritative": lambda n : setattr(self, 'enterprise_ipranges_are_authoritative', n.get_bool_value()),
             "enterpriseNetworkDomainNames": lambda n : setattr(self, 'enterprise_network_domain_names', n.get_collection_of_object_values(WindowsInformationProtectionResourceCollection)),
             "enterpriseProtectedDomainNames": lambda n : setattr(self, 'enterprise_protected_domain_names', n.get_collection_of_object_values(WindowsInformationProtectionResourceCollection)),
             "enterpriseProxiedDomains": lambda n : setattr(self, 'enterprise_proxied_domains', n.get_collection_of_object_values(WindowsInformationProtectionProxiedDomainCollection)),
@@ -174,9 +174,9 @@ class WindowsInformationProtection(ManagedAppPolicy):
         writer.write_object_value("dataRecoveryCertificate", self.data_recovery_certificate)
         writer.write_enum_value("enforcementLevel", self.enforcement_level)
         writer.write_str_value("enterpriseDomain", self.enterprise_domain)
-        writer.write_collection_of_object_values("enterpriseIPRanges", self.enterprise_i_p_ranges)
-        writer.write_bool_value("enterpriseIPRangesAreAuthoritative", self.enterprise_i_p_ranges_are_authoritative)
         writer.write_collection_of_object_values("enterpriseInternalProxyServers", self.enterprise_internal_proxy_servers)
+        writer.write_collection_of_object_values("enterpriseIPRanges", self.enterprise_ipranges)
+        writer.write_bool_value("enterpriseIPRangesAreAuthoritative", self.enterprise_ipranges_are_authoritative)
         writer.write_collection_of_object_values("enterpriseNetworkDomainNames", self.enterprise_network_domain_names)
         writer.write_collection_of_object_values("enterpriseProtectedDomainNames", self.enterprise_protected_domain_names)
         writer.write_collection_of_object_values("enterpriseProxiedDomains", self.enterprise_proxied_domains)

@@ -11,8 +11,8 @@ if TYPE_CHECKING:
     from .mac_os_lob_app_assignment_settings import MacOsLobAppAssignmentSettings
     from .microsoft_store_for_business_app_assignment_settings import MicrosoftStoreForBusinessAppAssignmentSettings
     from .win32_lob_app_assignment_settings import Win32LobAppAssignmentSettings
-    from .windows_app_x_app_assignment_settings import WindowsAppXAppAssignmentSettings
-    from .windows_universal_app_x_app_assignment_settings import WindowsUniversalAppXAppAssignmentSettings
+    from .windows_app_xapp_assignment_settings import WindowsAppXAppAssignmentSettings
+    from .windows_universal_app_xapp_assignment_settings import WindowsUniversalAppXAppAssignmentSettings
 
 @dataclass
 class MobileAppAssignmentSettings(AdditionalDataHolder, BackedModel, Parsable):
@@ -28,7 +28,7 @@ class MobileAppAssignmentSettings(AdditionalDataHolder, BackedModel, Parsable):
     odata_type: Optional[str] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> MobileAppAssignmentSettings:
+    def create_from_discriminator_value(parse_node: ParseNode) -> MobileAppAssignmentSettings:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -65,11 +65,11 @@ class MobileAppAssignmentSettings(AdditionalDataHolder, BackedModel, Parsable):
 
             return Win32LobAppAssignmentSettings()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.windowsAppXAppAssignmentSettings".casefold():
-            from .windows_app_x_app_assignment_settings import WindowsAppXAppAssignmentSettings
+            from .windows_app_xapp_assignment_settings import WindowsAppXAppAssignmentSettings
 
             return WindowsAppXAppAssignmentSettings()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.windowsUniversalAppXAppAssignmentSettings".casefold():
-            from .windows_universal_app_x_app_assignment_settings import WindowsUniversalAppXAppAssignmentSettings
+            from .windows_universal_app_xapp_assignment_settings import WindowsUniversalAppXAppAssignmentSettings
 
             return WindowsUniversalAppXAppAssignmentSettings()
         return MobileAppAssignmentSettings()
@@ -85,8 +85,8 @@ class MobileAppAssignmentSettings(AdditionalDataHolder, BackedModel, Parsable):
         from .mac_os_lob_app_assignment_settings import MacOsLobAppAssignmentSettings
         from .microsoft_store_for_business_app_assignment_settings import MicrosoftStoreForBusinessAppAssignmentSettings
         from .win32_lob_app_assignment_settings import Win32LobAppAssignmentSettings
-        from .windows_app_x_app_assignment_settings import WindowsAppXAppAssignmentSettings
-        from .windows_universal_app_x_app_assignment_settings import WindowsUniversalAppXAppAssignmentSettings
+        from .windows_app_xapp_assignment_settings import WindowsAppXAppAssignmentSettings
+        from .windows_universal_app_xapp_assignment_settings import WindowsUniversalAppXAppAssignmentSettings
 
         from .ios_lob_app_assignment_settings import IosLobAppAssignmentSettings
         from .ios_store_app_assignment_settings import IosStoreAppAssignmentSettings
@@ -94,8 +94,8 @@ class MobileAppAssignmentSettings(AdditionalDataHolder, BackedModel, Parsable):
         from .mac_os_lob_app_assignment_settings import MacOsLobAppAssignmentSettings
         from .microsoft_store_for_business_app_assignment_settings import MicrosoftStoreForBusinessAppAssignmentSettings
         from .win32_lob_app_assignment_settings import Win32LobAppAssignmentSettings
-        from .windows_app_x_app_assignment_settings import WindowsAppXAppAssignmentSettings
-        from .windows_universal_app_x_app_assignment_settings import WindowsUniversalAppXAppAssignmentSettings
+        from .windows_app_xapp_assignment_settings import WindowsAppXAppAssignmentSettings
+        from .windows_universal_app_xapp_assignment_settings import WindowsUniversalAppXAppAssignmentSettings
 
         fields: Dict[str, Callable[[Any], None]] = {
             "@odata.type": lambda n : setattr(self, 'odata_type', n.get_str_value()),

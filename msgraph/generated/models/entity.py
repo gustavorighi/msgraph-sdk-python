@@ -85,6 +85,7 @@ if TYPE_CHECKING:
     from .authentication import Authentication
     from .authentication_combination_configuration import AuthenticationCombinationConfiguration
     from .authentication_context_class_reference import AuthenticationContextClassReference
+    from .authentication_event_listener import AuthenticationEventListener
     from .authentication_flows_policy import AuthenticationFlowsPolicy
     from .authentication_method import AuthenticationMethod
     from .authentication_methods_policy import AuthenticationMethodsPolicy
@@ -140,6 +141,7 @@ if TYPE_CHECKING:
     from .claims_mapping_policy import ClaimsMappingPolicy
     from .cloud_clipboard_item import CloudClipboardItem
     from .cloud_clipboard_root import CloudClipboardRoot
+    from .cloud_pc import CloudPC
     from .cloud_pc_audit_event import CloudPcAuditEvent
     from .cloud_pc_device_image import CloudPcDeviceImage
     from .cloud_pc_gallery_image import CloudPcGalleryImage
@@ -148,10 +150,10 @@ if TYPE_CHECKING:
     from .cloud_pc_provisioning_policy_assignment import CloudPcProvisioningPolicyAssignment
     from .cloud_pc_user_setting import CloudPcUserSetting
     from .cloud_pc_user_setting_assignment import CloudPcUserSettingAssignment
-    from .cloud_p_c import CloudPC
     from .column_definition import ColumnDefinition
     from .column_link import ColumnLink
     from .comms_operation import CommsOperation
+    from .company_subscription import CompanySubscription
     from .compliance_management_partner import ComplianceManagementPartner
     from .conditional_access_policy import ConditionalAccessPolicy
     from .conditional_access_root import ConditionalAccessRoot
@@ -168,6 +170,7 @@ if TYPE_CHECKING:
     from .country_named_location import CountryNamedLocation
     from .cross_tenant_access_policy import CrossTenantAccessPolicy
     from .cross_tenant_access_policy_configuration_default import CrossTenantAccessPolicyConfigurationDefault
+    from .custom_authentication_extension import CustomAuthenticationExtension
     from .custom_callout_extension import CustomCalloutExtension
     from .custom_extension_stage_setting import CustomExtensionStageSetting
     from .custom_security_attribute_definition import CustomSecurityAttributeDefinition
@@ -243,6 +246,7 @@ if TYPE_CHECKING:
     from .drive import Drive
     from .drive_item import DriveItem
     from .drive_item_version import DriveItemVersion
+    from .ebook_install_summary import EBookInstallSummary
     from .edge import Edge
     from .edition_upgrade_configuration import EditionUpgradeConfiguration
     from .education_assignment import EducationAssignment
@@ -292,7 +296,6 @@ if TYPE_CHECKING:
     from .external_connectors.identity import Identity
     from .external_connectors.schema import Schema
     from .external_domain_name import ExternalDomainName
-    from .e_book_install_summary import EBookInstallSummary
     from .feature_rollout_policy import FeatureRolloutPolicy
     from .federated_identity_credential import FederatedIdentityCredential
     from .fido2_authentication_method import Fido2AuthenticationMethod
@@ -338,7 +341,7 @@ if TYPE_CHECKING:
     from .internet_explorer_mode import InternetExplorerMode
     from .invitation import Invitation
     from .invite_participants_operation import InviteParticipantsOperation
-    from .iosi_pad_o_s_web_clip import IosiPadOSWebClip
+    from .iosi_pad_osweb_clip import IosiPadOSWebClip
     from .ios_certificate_profile import IosCertificateProfile
     from .ios_compliance_policy import IosCompliancePolicy
     from .ios_custom_configuration import IosCustomConfiguration
@@ -353,8 +356,8 @@ if TYPE_CHECKING:
     from .ios_update_configuration import IosUpdateConfiguration
     from .ios_update_device_status import IosUpdateDeviceStatus
     from .ios_vpp_app import IosVppApp
-    from .ios_vpp_e_book import IosVppEBook
-    from .ios_vpp_e_book_assignment import IosVppEBookAssignment
+    from .ios_vpp_ebook import IosVppEBook
+    from .ios_vpp_ebook_assignment import IosVppEBookAssignment
     from .ip_named_location import IpNamedLocation
     from .item_activity import ItemActivity
     from .item_activity_stat import ItemActivityStat
@@ -377,15 +380,15 @@ if TYPE_CHECKING:
     from .login_page import LoginPage
     from .long_running_operation import LongRunningOperation
     from .m365_apps_installation_options import M365AppsInstallationOptions
-    from .mac_o_s_compliance_policy import MacOSCompliancePolicy
-    from .mac_o_s_custom_configuration import MacOSCustomConfiguration
-    from .mac_o_s_device_features_configuration import MacOSDeviceFeaturesConfiguration
-    from .mac_o_s_dmg_app import MacOSDmgApp
-    from .mac_o_s_general_device_configuration import MacOSGeneralDeviceConfiguration
-    from .mac_o_s_lob_app import MacOSLobApp
-    from .mac_o_s_microsoft_defender_app import MacOSMicrosoftDefenderApp
-    from .mac_o_s_microsoft_edge_app import MacOSMicrosoftEdgeApp
-    from .mac_o_s_office_suite_app import MacOSOfficeSuiteApp
+    from .mac_oscompliance_policy import MacOSCompliancePolicy
+    from .mac_oscustom_configuration import MacOSCustomConfiguration
+    from .mac_osdevice_features_configuration import MacOSDeviceFeaturesConfiguration
+    from .mac_osdmg_app import MacOSDmgApp
+    from .mac_osgeneral_device_configuration import MacOSGeneralDeviceConfiguration
+    from .mac_oslob_app import MacOSLobApp
+    from .mac_osmicrosoft_defender_app import MacOSMicrosoftDefenderApp
+    from .mac_osmicrosoft_edge_app import MacOSMicrosoftEdgeApp
+    from .mac_osoffice_suite_app import MacOSOfficeSuiteApp
     from .mail_assessment_request import MailAssessmentRequest
     from .mail_folder import MailFolder
     from .mail_search_folder import MailSearchFolder
@@ -409,10 +412,10 @@ if TYPE_CHECKING:
     from .managed_device_mobile_app_configuration_user_status import ManagedDeviceMobileAppConfigurationUserStatus
     from .managed_device_mobile_app_configuration_user_summary import ManagedDeviceMobileAppConfigurationUserSummary
     from .managed_device_overview import ManagedDeviceOverview
-    from .managed_e_book import ManagedEBook
-    from .managed_e_book_assignment import ManagedEBookAssignment
-    from .managed_i_o_s_lob_app import ManagedIOSLobApp
-    from .managed_i_o_s_store_app import ManagedIOSStoreApp
+    from .managed_ebook import ManagedEBook
+    from .managed_ebook_assignment import ManagedEBookAssignment
+    from .managed_ioslob_app import ManagedIOSLobApp
+    from .managed_iosstore_app import ManagedIOSStoreApp
     from .managed_mobile_app import ManagedMobileApp
     from .managed_mobile_lob_app import ManagedMobileLobApp
     from .mdm_windows_information_protection_policy import MdmWindowsInformationProtectionPolicy
@@ -434,11 +437,17 @@ if TYPE_CHECKING:
     from .mobile_contained_app import MobileContainedApp
     from .mobile_lob_app import MobileLobApp
     from .mobile_threat_defense_connector import MobileThreatDefenseConnector
+    from .multi_tenant_organization import MultiTenantOrganization
+    from .multi_tenant_organization_identity_sync_policy_template import MultiTenantOrganizationIdentitySyncPolicyTemplate
+    from .multi_tenant_organization_join_request_record import MultiTenantOrganizationJoinRequestRecord
+    from .multi_tenant_organization_member import MultiTenantOrganizationMember
+    from .multi_tenant_organization_partner_configuration_template import MultiTenantOrganizationPartnerConfigurationTemplate
     from .multi_value_legacy_extended_property import MultiValueLegacyExtendedProperty
     from .mute_participant_operation import MuteParticipantOperation
     from .named_location import NamedLocation
     from .notebook import Notebook
     from .notification_message_template import NotificationMessageTemplate
+    from .oauth2_permission_grant import OAuth2PermissionGrant
     from .offer_shift_request import OfferShiftRequest
     from .office_graph_insights import OfficeGraphInsights
     from .onenote import Onenote
@@ -453,6 +462,8 @@ if TYPE_CHECKING:
     from .online_meeting_base import OnlineMeetingBase
     from .on_premises_conditional_access_settings import OnPremisesConditionalAccessSettings
     from .on_premises_directory_synchronization import OnPremisesDirectorySynchronization
+    from .on_token_issuance_start_custom_extension import OnTokenIssuanceStartCustomExtension
+    from .on_token_issuance_start_listener import OnTokenIssuanceStartListener
     from .open_shift import OpenShift
     from .open_shift_change_request import OpenShiftChangeRequest
     from .open_type_extension import OpenTypeExtension
@@ -465,7 +476,6 @@ if TYPE_CHECKING:
     from .outlook_category import OutlookCategory
     from .outlook_item import OutlookItem
     from .outlook_user import OutlookUser
-    from .o_auth2_permission_grant import OAuth2PermissionGrant
     from .participant import Participant
     from .participant_joining_notification import ParticipantJoiningNotification
     from .participant_left_notification import ParticipantLeftNotification
@@ -505,6 +515,7 @@ if TYPE_CHECKING:
     from .play_prompt_operation import PlayPromptOperation
     from .policy_base import PolicyBase
     from .policy_root import PolicyRoot
+    from .policy_template import PolicyTemplate
     from .post import Post
     from .presence import Presence
     from .printer import Printer
@@ -656,7 +667,7 @@ if TYPE_CHECKING:
     from .setting_state_device_summary import SettingStateDeviceSummary
     from .shared_drive_item import SharedDriveItem
     from .shared_insight import SharedInsight
-    from .shared_p_c_configuration import SharedPCConfiguration
+    from .shared_pcconfiguration import SharedPCConfiguration
     from .shared_with_channel_team_info import SharedWithChannelTeamInfo
     from .sharepoint import Sharepoint
     from .sharepoint_settings import SharepointSettings
@@ -767,11 +778,11 @@ if TYPE_CHECKING:
     from .user_experience_analytics_app_health_application_performance import UserExperienceAnalyticsAppHealthApplicationPerformance
     from .user_experience_analytics_app_health_app_performance_by_app_version_details import UserExperienceAnalyticsAppHealthAppPerformanceByAppVersionDetails
     from .user_experience_analytics_app_health_app_performance_by_app_version_device_id import UserExperienceAnalyticsAppHealthAppPerformanceByAppVersionDeviceId
-    from .user_experience_analytics_app_health_app_performance_by_o_s_version import UserExperienceAnalyticsAppHealthAppPerformanceByOSVersion
+    from .user_experience_analytics_app_health_app_performance_by_osversion import UserExperienceAnalyticsAppHealthAppPerformanceByOSVersion
     from .user_experience_analytics_app_health_device_model_performance import UserExperienceAnalyticsAppHealthDeviceModelPerformance
     from .user_experience_analytics_app_health_device_performance import UserExperienceAnalyticsAppHealthDevicePerformance
     from .user_experience_analytics_app_health_device_performance_details import UserExperienceAnalyticsAppHealthDevicePerformanceDetails
-    from .user_experience_analytics_app_health_o_s_version_performance import UserExperienceAnalyticsAppHealthOSVersionPerformance
+    from .user_experience_analytics_app_health_osversion_performance import UserExperienceAnalyticsAppHealthOSVersionPerformance
     from .user_experience_analytics_baseline import UserExperienceAnalyticsBaseline
     from .user_experience_analytics_category import UserExperienceAnalyticsCategory
     from .user_experience_analytics_device_performance import UserExperienceAnalyticsDevicePerformance
@@ -831,7 +842,7 @@ if TYPE_CHECKING:
     from .windows_information_protection_policy import WindowsInformationProtectionPolicy
     from .windows_malware_information import WindowsMalwareInformation
     from .windows_microsoft_edge_app import WindowsMicrosoftEdgeApp
-    from .windows_mobile_m_s_i import WindowsMobileMSI
+    from .windows_mobile_msi import WindowsMobileMSI
     from .windows_phone81_compliance_policy import WindowsPhone81CompliancePolicy
     from .windows_phone81_custom_configuration import WindowsPhone81CustomConfiguration
     from .windows_phone81_general_configuration import WindowsPhone81GeneralConfiguration
@@ -839,7 +850,7 @@ if TYPE_CHECKING:
     from .windows_setting import WindowsSetting
     from .windows_setting_instance import WindowsSettingInstance
     from .windows_universal_app_x import WindowsUniversalAppX
-    from .windows_universal_app_x_contained_app import WindowsUniversalAppXContainedApp
+    from .windows_universal_app_xcontained_app import WindowsUniversalAppXContainedApp
     from .windows_update_for_business_configuration import WindowsUpdateForBusinessConfiguration
     from .windows_web_app import WindowsWebApp
     from .workbook import Workbook
@@ -904,7 +915,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
     odata_type: Optional[str] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> Entity:
+    def create_from_discriminator_value(parse_node: ParseNode) -> Entity:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -1237,6 +1248,10 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
             from .authentication_context_class_reference import AuthenticationContextClassReference
 
             return AuthenticationContextClassReference()
+        if mapping_value and mapping_value.casefold() == "#microsoft.graph.authenticationEventListener".casefold():
+            from .authentication_event_listener import AuthenticationEventListener
+
+            return AuthenticationEventListener()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.authenticationFlowsPolicy".casefold():
             from .authentication_flows_policy import AuthenticationFlowsPolicy
 
@@ -1458,7 +1473,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
 
             return CloudClipboardRoot()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.cloudPC".casefold():
-            from .cloud_p_c import CloudPC
+            from .cloud_pc import CloudPC
 
             return CloudPC()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.cloudPcAuditEvent".casefold():
@@ -1505,6 +1520,10 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
             from .comms_operation import CommsOperation
 
             return CommsOperation()
+        if mapping_value and mapping_value.casefold() == "#microsoft.graph.companySubscription".casefold():
+            from .company_subscription import CompanySubscription
+
+            return CompanySubscription()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.complianceManagementPartner".casefold():
             from .compliance_management_partner import ComplianceManagementPartner
 
@@ -1569,6 +1588,10 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
             from .cross_tenant_access_policy_configuration_default import CrossTenantAccessPolicyConfigurationDefault
 
             return CrossTenantAccessPolicyConfigurationDefault()
+        if mapping_value and mapping_value.casefold() == "#microsoft.graph.customAuthenticationExtension".casefold():
+            from .custom_authentication_extension import CustomAuthenticationExtension
+
+            return CustomAuthenticationExtension()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.customCalloutExtension".casefold():
             from .custom_callout_extension import CustomCalloutExtension
 
@@ -1870,7 +1893,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
 
             return DriveItemVersion()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.eBookInstallSummary".casefold():
-            from .e_book_install_summary import EBookInstallSummary
+            from .ebook_install_summary import EBookInstallSummary
 
             return EBookInstallSummary()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.edge".casefold():
@@ -2271,7 +2294,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
 
             return IosGeneralDeviceConfiguration()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.iosiPadOSWebClip".casefold():
-            from .iosi_pad_o_s_web_clip import IosiPadOSWebClip
+            from .iosi_pad_osweb_clip import IosiPadOSWebClip
 
             return IosiPadOSWebClip()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.iosLobApp".casefold():
@@ -2311,11 +2334,11 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
 
             return IosVppApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.iosVppEBook".casefold():
-            from .ios_vpp_e_book import IosVppEBook
+            from .ios_vpp_ebook import IosVppEBook
 
             return IosVppEBook()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.iosVppEBookAssignment".casefold():
-            from .ios_vpp_e_book_assignment import IosVppEBookAssignment
+            from .ios_vpp_ebook_assignment import IosVppEBookAssignment
 
             return IosVppEBookAssignment()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.ipNamedLocation".casefold():
@@ -2407,39 +2430,39 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
 
             return M365AppsInstallationOptions()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSCompliancePolicy".casefold():
-            from .mac_o_s_compliance_policy import MacOSCompliancePolicy
+            from .mac_oscompliance_policy import MacOSCompliancePolicy
 
             return MacOSCompliancePolicy()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSCustomConfiguration".casefold():
-            from .mac_o_s_custom_configuration import MacOSCustomConfiguration
+            from .mac_oscustom_configuration import MacOSCustomConfiguration
 
             return MacOSCustomConfiguration()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSDeviceFeaturesConfiguration".casefold():
-            from .mac_o_s_device_features_configuration import MacOSDeviceFeaturesConfiguration
+            from .mac_osdevice_features_configuration import MacOSDeviceFeaturesConfiguration
 
             return MacOSDeviceFeaturesConfiguration()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSDmgApp".casefold():
-            from .mac_o_s_dmg_app import MacOSDmgApp
+            from .mac_osdmg_app import MacOSDmgApp
 
             return MacOSDmgApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSGeneralDeviceConfiguration".casefold():
-            from .mac_o_s_general_device_configuration import MacOSGeneralDeviceConfiguration
+            from .mac_osgeneral_device_configuration import MacOSGeneralDeviceConfiguration
 
             return MacOSGeneralDeviceConfiguration()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSLobApp".casefold():
-            from .mac_o_s_lob_app import MacOSLobApp
+            from .mac_oslob_app import MacOSLobApp
 
             return MacOSLobApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSMicrosoftDefenderApp".casefold():
-            from .mac_o_s_microsoft_defender_app import MacOSMicrosoftDefenderApp
+            from .mac_osmicrosoft_defender_app import MacOSMicrosoftDefenderApp
 
             return MacOSMicrosoftDefenderApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSMicrosoftEdgeApp".casefold():
-            from .mac_o_s_microsoft_edge_app import MacOSMicrosoftEdgeApp
+            from .mac_osmicrosoft_edge_app import MacOSMicrosoftEdgeApp
 
             return MacOSMicrosoftEdgeApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.macOSOfficeSuiteApp".casefold():
-            from .mac_o_s_office_suite_app import MacOSOfficeSuiteApp
+            from .mac_osoffice_suite_app import MacOSOfficeSuiteApp
 
             return MacOSOfficeSuiteApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.mailAssessmentRequest".casefold():
@@ -2535,19 +2558,19 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
 
             return ManagedDeviceOverview()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.managedEBook".casefold():
-            from .managed_e_book import ManagedEBook
+            from .managed_ebook import ManagedEBook
 
             return ManagedEBook()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.managedEBookAssignment".casefold():
-            from .managed_e_book_assignment import ManagedEBookAssignment
+            from .managed_ebook_assignment import ManagedEBookAssignment
 
             return ManagedEBookAssignment()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.managedIOSLobApp".casefold():
-            from .managed_i_o_s_lob_app import ManagedIOSLobApp
+            from .managed_ioslob_app import ManagedIOSLobApp
 
             return ManagedIOSLobApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.managedIOSStoreApp".casefold():
-            from .managed_i_o_s_store_app import ManagedIOSStoreApp
+            from .managed_iosstore_app import ManagedIOSStoreApp
 
             return ManagedIOSStoreApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.managedMobileApp".casefold():
@@ -2634,6 +2657,26 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
             from .mobile_threat_defense_connector import MobileThreatDefenseConnector
 
             return MobileThreatDefenseConnector()
+        if mapping_value and mapping_value.casefold() == "#microsoft.graph.multiTenantOrganization".casefold():
+            from .multi_tenant_organization import MultiTenantOrganization
+
+            return MultiTenantOrganization()
+        if mapping_value and mapping_value.casefold() == "#microsoft.graph.multiTenantOrganizationIdentitySyncPolicyTemplate".casefold():
+            from .multi_tenant_organization_identity_sync_policy_template import MultiTenantOrganizationIdentitySyncPolicyTemplate
+
+            return MultiTenantOrganizationIdentitySyncPolicyTemplate()
+        if mapping_value and mapping_value.casefold() == "#microsoft.graph.multiTenantOrganizationJoinRequestRecord".casefold():
+            from .multi_tenant_organization_join_request_record import MultiTenantOrganizationJoinRequestRecord
+
+            return MultiTenantOrganizationJoinRequestRecord()
+        if mapping_value and mapping_value.casefold() == "#microsoft.graph.multiTenantOrganizationMember".casefold():
+            from .multi_tenant_organization_member import MultiTenantOrganizationMember
+
+            return MultiTenantOrganizationMember()
+        if mapping_value and mapping_value.casefold() == "#microsoft.graph.multiTenantOrganizationPartnerConfigurationTemplate".casefold():
+            from .multi_tenant_organization_partner_configuration_template import MultiTenantOrganizationPartnerConfigurationTemplate
+
+            return MultiTenantOrganizationPartnerConfigurationTemplate()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.multiValueLegacyExtendedProperty".casefold():
             from .multi_value_legacy_extended_property import MultiValueLegacyExtendedProperty
 
@@ -2655,7 +2698,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
 
             return NotificationMessageTemplate()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.oAuth2PermissionGrant".casefold():
-            from .o_auth2_permission_grant import OAuth2PermissionGrant
+            from .oauth2_permission_grant import OAuth2PermissionGrant
 
             return OAuth2PermissionGrant()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.offerShiftRequest".casefold():
@@ -2714,6 +2757,14 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
             from .on_premises_directory_synchronization import OnPremisesDirectorySynchronization
 
             return OnPremisesDirectorySynchronization()
+        if mapping_value and mapping_value.casefold() == "#microsoft.graph.onTokenIssuanceStartCustomExtension".casefold():
+            from .on_token_issuance_start_custom_extension import OnTokenIssuanceStartCustomExtension
+
+            return OnTokenIssuanceStartCustomExtension()
+        if mapping_value and mapping_value.casefold() == "#microsoft.graph.onTokenIssuanceStartListener".casefold():
+            from .on_token_issuance_start_listener import OnTokenIssuanceStartListener
+
+            return OnTokenIssuanceStartListener()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.openShift".casefold():
             from .open_shift import OpenShift
 
@@ -2920,6 +2971,10 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
             from .policy_root import PolicyRoot
 
             return PolicyRoot()
+        if mapping_value and mapping_value.casefold() == "#microsoft.graph.policyTemplate".casefold():
+            from .policy_template import PolicyTemplate
+
+            return PolicyTemplate()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.post".casefold():
             from .post import Post
 
@@ -3526,7 +3581,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
 
             return SharedInsight()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.sharedPCConfiguration".casefold():
-            from .shared_p_c_configuration import SharedPCConfiguration
+            from .shared_pcconfiguration import SharedPCConfiguration
 
             return SharedPCConfiguration()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.sharedWithChannelTeamInfo".casefold():
@@ -3971,7 +4026,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
 
             return UserExperienceAnalyticsAppHealthAppPerformanceByAppVersionDeviceId()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.userExperienceAnalyticsAppHealthAppPerformanceByOSVersion".casefold():
-            from .user_experience_analytics_app_health_app_performance_by_o_s_version import UserExperienceAnalyticsAppHealthAppPerformanceByOSVersion
+            from .user_experience_analytics_app_health_app_performance_by_osversion import UserExperienceAnalyticsAppHealthAppPerformanceByOSVersion
 
             return UserExperienceAnalyticsAppHealthAppPerformanceByOSVersion()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.userExperienceAnalyticsAppHealthDeviceModelPerformance".casefold():
@@ -3987,7 +4042,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
 
             return UserExperienceAnalyticsAppHealthDevicePerformanceDetails()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.userExperienceAnalyticsAppHealthOSVersionPerformance".casefold():
-            from .user_experience_analytics_app_health_o_s_version_performance import UserExperienceAnalyticsAppHealthOSVersionPerformance
+            from .user_experience_analytics_app_health_osversion_performance import UserExperienceAnalyticsAppHealthOSVersionPerformance
 
             return UserExperienceAnalyticsAppHealthOSVersionPerformance()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.userExperienceAnalyticsBaseline".casefold():
@@ -4227,7 +4282,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
 
             return WindowsMicrosoftEdgeApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.windowsMobileMSI".casefold():
-            from .windows_mobile_m_s_i import WindowsMobileMSI
+            from .windows_mobile_msi import WindowsMobileMSI
 
             return WindowsMobileMSI()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.windowsPhone81CompliancePolicy".casefold():
@@ -4259,7 +4314,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
 
             return WindowsUniversalAppX()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.windowsUniversalAppXContainedApp".casefold():
-            from .windows_universal_app_x_contained_app import WindowsUniversalAppXContainedApp
+            from .windows_universal_app_xcontained_app import WindowsUniversalAppXContainedApp
 
             return WindowsUniversalAppXContainedApp()
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.windowsUpdateForBusinessConfiguration".casefold():
@@ -4549,6 +4604,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .authentication import Authentication
         from .authentication_combination_configuration import AuthenticationCombinationConfiguration
         from .authentication_context_class_reference import AuthenticationContextClassReference
+        from .authentication_event_listener import AuthenticationEventListener
         from .authentication_flows_policy import AuthenticationFlowsPolicy
         from .authentication_method import AuthenticationMethod
         from .authentication_methods_policy import AuthenticationMethodsPolicy
@@ -4604,6 +4660,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .claims_mapping_policy import ClaimsMappingPolicy
         from .cloud_clipboard_item import CloudClipboardItem
         from .cloud_clipboard_root import CloudClipboardRoot
+        from .cloud_pc import CloudPC
         from .cloud_pc_audit_event import CloudPcAuditEvent
         from .cloud_pc_device_image import CloudPcDeviceImage
         from .cloud_pc_gallery_image import CloudPcGalleryImage
@@ -4612,10 +4669,10 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .cloud_pc_provisioning_policy_assignment import CloudPcProvisioningPolicyAssignment
         from .cloud_pc_user_setting import CloudPcUserSetting
         from .cloud_pc_user_setting_assignment import CloudPcUserSettingAssignment
-        from .cloud_p_c import CloudPC
         from .column_definition import ColumnDefinition
         from .column_link import ColumnLink
         from .comms_operation import CommsOperation
+        from .company_subscription import CompanySubscription
         from .compliance_management_partner import ComplianceManagementPartner
         from .conditional_access_policy import ConditionalAccessPolicy
         from .conditional_access_root import ConditionalAccessRoot
@@ -4632,6 +4689,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .country_named_location import CountryNamedLocation
         from .cross_tenant_access_policy import CrossTenantAccessPolicy
         from .cross_tenant_access_policy_configuration_default import CrossTenantAccessPolicyConfigurationDefault
+        from .custom_authentication_extension import CustomAuthenticationExtension
         from .custom_callout_extension import CustomCalloutExtension
         from .custom_extension_stage_setting import CustomExtensionStageSetting
         from .custom_security_attribute_definition import CustomSecurityAttributeDefinition
@@ -4707,6 +4765,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .drive import Drive
         from .drive_item import DriveItem
         from .drive_item_version import DriveItemVersion
+        from .ebook_install_summary import EBookInstallSummary
         from .edge import Edge
         from .edition_upgrade_configuration import EditionUpgradeConfiguration
         from .education_assignment import EducationAssignment
@@ -4756,7 +4815,6 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .external_connectors.identity import Identity
         from .external_connectors.schema import Schema
         from .external_domain_name import ExternalDomainName
-        from .e_book_install_summary import EBookInstallSummary
         from .feature_rollout_policy import FeatureRolloutPolicy
         from .federated_identity_credential import FederatedIdentityCredential
         from .fido2_authentication_method import Fido2AuthenticationMethod
@@ -4802,7 +4860,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .internet_explorer_mode import InternetExplorerMode
         from .invitation import Invitation
         from .invite_participants_operation import InviteParticipantsOperation
-        from .iosi_pad_o_s_web_clip import IosiPadOSWebClip
+        from .iosi_pad_osweb_clip import IosiPadOSWebClip
         from .ios_certificate_profile import IosCertificateProfile
         from .ios_compliance_policy import IosCompliancePolicy
         from .ios_custom_configuration import IosCustomConfiguration
@@ -4817,8 +4875,8 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .ios_update_configuration import IosUpdateConfiguration
         from .ios_update_device_status import IosUpdateDeviceStatus
         from .ios_vpp_app import IosVppApp
-        from .ios_vpp_e_book import IosVppEBook
-        from .ios_vpp_e_book_assignment import IosVppEBookAssignment
+        from .ios_vpp_ebook import IosVppEBook
+        from .ios_vpp_ebook_assignment import IosVppEBookAssignment
         from .ip_named_location import IpNamedLocation
         from .item_activity import ItemActivity
         from .item_activity_stat import ItemActivityStat
@@ -4841,15 +4899,15 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .login_page import LoginPage
         from .long_running_operation import LongRunningOperation
         from .m365_apps_installation_options import M365AppsInstallationOptions
-        from .mac_o_s_compliance_policy import MacOSCompliancePolicy
-        from .mac_o_s_custom_configuration import MacOSCustomConfiguration
-        from .mac_o_s_device_features_configuration import MacOSDeviceFeaturesConfiguration
-        from .mac_o_s_dmg_app import MacOSDmgApp
-        from .mac_o_s_general_device_configuration import MacOSGeneralDeviceConfiguration
-        from .mac_o_s_lob_app import MacOSLobApp
-        from .mac_o_s_microsoft_defender_app import MacOSMicrosoftDefenderApp
-        from .mac_o_s_microsoft_edge_app import MacOSMicrosoftEdgeApp
-        from .mac_o_s_office_suite_app import MacOSOfficeSuiteApp
+        from .mac_oscompliance_policy import MacOSCompliancePolicy
+        from .mac_oscustom_configuration import MacOSCustomConfiguration
+        from .mac_osdevice_features_configuration import MacOSDeviceFeaturesConfiguration
+        from .mac_osdmg_app import MacOSDmgApp
+        from .mac_osgeneral_device_configuration import MacOSGeneralDeviceConfiguration
+        from .mac_oslob_app import MacOSLobApp
+        from .mac_osmicrosoft_defender_app import MacOSMicrosoftDefenderApp
+        from .mac_osmicrosoft_edge_app import MacOSMicrosoftEdgeApp
+        from .mac_osoffice_suite_app import MacOSOfficeSuiteApp
         from .mail_assessment_request import MailAssessmentRequest
         from .mail_folder import MailFolder
         from .mail_search_folder import MailSearchFolder
@@ -4873,10 +4931,10 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .managed_device_mobile_app_configuration_user_status import ManagedDeviceMobileAppConfigurationUserStatus
         from .managed_device_mobile_app_configuration_user_summary import ManagedDeviceMobileAppConfigurationUserSummary
         from .managed_device_overview import ManagedDeviceOverview
-        from .managed_e_book import ManagedEBook
-        from .managed_e_book_assignment import ManagedEBookAssignment
-        from .managed_i_o_s_lob_app import ManagedIOSLobApp
-        from .managed_i_o_s_store_app import ManagedIOSStoreApp
+        from .managed_ebook import ManagedEBook
+        from .managed_ebook_assignment import ManagedEBookAssignment
+        from .managed_ioslob_app import ManagedIOSLobApp
+        from .managed_iosstore_app import ManagedIOSStoreApp
         from .managed_mobile_app import ManagedMobileApp
         from .managed_mobile_lob_app import ManagedMobileLobApp
         from .mdm_windows_information_protection_policy import MdmWindowsInformationProtectionPolicy
@@ -4898,11 +4956,17 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .mobile_contained_app import MobileContainedApp
         from .mobile_lob_app import MobileLobApp
         from .mobile_threat_defense_connector import MobileThreatDefenseConnector
+        from .multi_tenant_organization import MultiTenantOrganization
+        from .multi_tenant_organization_identity_sync_policy_template import MultiTenantOrganizationIdentitySyncPolicyTemplate
+        from .multi_tenant_organization_join_request_record import MultiTenantOrganizationJoinRequestRecord
+        from .multi_tenant_organization_member import MultiTenantOrganizationMember
+        from .multi_tenant_organization_partner_configuration_template import MultiTenantOrganizationPartnerConfigurationTemplate
         from .multi_value_legacy_extended_property import MultiValueLegacyExtendedProperty
         from .mute_participant_operation import MuteParticipantOperation
         from .named_location import NamedLocation
         from .notebook import Notebook
         from .notification_message_template import NotificationMessageTemplate
+        from .oauth2_permission_grant import OAuth2PermissionGrant
         from .offer_shift_request import OfferShiftRequest
         from .office_graph_insights import OfficeGraphInsights
         from .onenote import Onenote
@@ -4917,6 +4981,8 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .online_meeting_base import OnlineMeetingBase
         from .on_premises_conditional_access_settings import OnPremisesConditionalAccessSettings
         from .on_premises_directory_synchronization import OnPremisesDirectorySynchronization
+        from .on_token_issuance_start_custom_extension import OnTokenIssuanceStartCustomExtension
+        from .on_token_issuance_start_listener import OnTokenIssuanceStartListener
         from .open_shift import OpenShift
         from .open_shift_change_request import OpenShiftChangeRequest
         from .open_type_extension import OpenTypeExtension
@@ -4929,7 +4995,6 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .outlook_category import OutlookCategory
         from .outlook_item import OutlookItem
         from .outlook_user import OutlookUser
-        from .o_auth2_permission_grant import OAuth2PermissionGrant
         from .participant import Participant
         from .participant_joining_notification import ParticipantJoiningNotification
         from .participant_left_notification import ParticipantLeftNotification
@@ -4969,6 +5034,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .play_prompt_operation import PlayPromptOperation
         from .policy_base import PolicyBase
         from .policy_root import PolicyRoot
+        from .policy_template import PolicyTemplate
         from .post import Post
         from .presence import Presence
         from .printer import Printer
@@ -5120,7 +5186,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .setting_state_device_summary import SettingStateDeviceSummary
         from .shared_drive_item import SharedDriveItem
         from .shared_insight import SharedInsight
-        from .shared_p_c_configuration import SharedPCConfiguration
+        from .shared_pcconfiguration import SharedPCConfiguration
         from .shared_with_channel_team_info import SharedWithChannelTeamInfo
         from .sharepoint import Sharepoint
         from .sharepoint_settings import SharepointSettings
@@ -5231,11 +5297,11 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .user_experience_analytics_app_health_application_performance import UserExperienceAnalyticsAppHealthApplicationPerformance
         from .user_experience_analytics_app_health_app_performance_by_app_version_details import UserExperienceAnalyticsAppHealthAppPerformanceByAppVersionDetails
         from .user_experience_analytics_app_health_app_performance_by_app_version_device_id import UserExperienceAnalyticsAppHealthAppPerformanceByAppVersionDeviceId
-        from .user_experience_analytics_app_health_app_performance_by_o_s_version import UserExperienceAnalyticsAppHealthAppPerformanceByOSVersion
+        from .user_experience_analytics_app_health_app_performance_by_osversion import UserExperienceAnalyticsAppHealthAppPerformanceByOSVersion
         from .user_experience_analytics_app_health_device_model_performance import UserExperienceAnalyticsAppHealthDeviceModelPerformance
         from .user_experience_analytics_app_health_device_performance import UserExperienceAnalyticsAppHealthDevicePerformance
         from .user_experience_analytics_app_health_device_performance_details import UserExperienceAnalyticsAppHealthDevicePerformanceDetails
-        from .user_experience_analytics_app_health_o_s_version_performance import UserExperienceAnalyticsAppHealthOSVersionPerformance
+        from .user_experience_analytics_app_health_osversion_performance import UserExperienceAnalyticsAppHealthOSVersionPerformance
         from .user_experience_analytics_baseline import UserExperienceAnalyticsBaseline
         from .user_experience_analytics_category import UserExperienceAnalyticsCategory
         from .user_experience_analytics_device_performance import UserExperienceAnalyticsDevicePerformance
@@ -5295,7 +5361,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .windows_information_protection_policy import WindowsInformationProtectionPolicy
         from .windows_malware_information import WindowsMalwareInformation
         from .windows_microsoft_edge_app import WindowsMicrosoftEdgeApp
-        from .windows_mobile_m_s_i import WindowsMobileMSI
+        from .windows_mobile_msi import WindowsMobileMSI
         from .windows_phone81_compliance_policy import WindowsPhone81CompliancePolicy
         from .windows_phone81_custom_configuration import WindowsPhone81CustomConfiguration
         from .windows_phone81_general_configuration import WindowsPhone81GeneralConfiguration
@@ -5303,7 +5369,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .windows_setting import WindowsSetting
         from .windows_setting_instance import WindowsSettingInstance
         from .windows_universal_app_x import WindowsUniversalAppX
-        from .windows_universal_app_x_contained_app import WindowsUniversalAppXContainedApp
+        from .windows_universal_app_xcontained_app import WindowsUniversalAppXContainedApp
         from .windows_update_for_business_configuration import WindowsUpdateForBusinessConfiguration
         from .windows_web_app import WindowsWebApp
         from .workbook import Workbook
@@ -5435,6 +5501,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .authentication import Authentication
         from .authentication_combination_configuration import AuthenticationCombinationConfiguration
         from .authentication_context_class_reference import AuthenticationContextClassReference
+        from .authentication_event_listener import AuthenticationEventListener
         from .authentication_flows_policy import AuthenticationFlowsPolicy
         from .authentication_method import AuthenticationMethod
         from .authentication_methods_policy import AuthenticationMethodsPolicy
@@ -5490,6 +5557,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .claims_mapping_policy import ClaimsMappingPolicy
         from .cloud_clipboard_item import CloudClipboardItem
         from .cloud_clipboard_root import CloudClipboardRoot
+        from .cloud_pc import CloudPC
         from .cloud_pc_audit_event import CloudPcAuditEvent
         from .cloud_pc_device_image import CloudPcDeviceImage
         from .cloud_pc_gallery_image import CloudPcGalleryImage
@@ -5498,10 +5566,10 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .cloud_pc_provisioning_policy_assignment import CloudPcProvisioningPolicyAssignment
         from .cloud_pc_user_setting import CloudPcUserSetting
         from .cloud_pc_user_setting_assignment import CloudPcUserSettingAssignment
-        from .cloud_p_c import CloudPC
         from .column_definition import ColumnDefinition
         from .column_link import ColumnLink
         from .comms_operation import CommsOperation
+        from .company_subscription import CompanySubscription
         from .compliance_management_partner import ComplianceManagementPartner
         from .conditional_access_policy import ConditionalAccessPolicy
         from .conditional_access_root import ConditionalAccessRoot
@@ -5518,6 +5586,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .country_named_location import CountryNamedLocation
         from .cross_tenant_access_policy import CrossTenantAccessPolicy
         from .cross_tenant_access_policy_configuration_default import CrossTenantAccessPolicyConfigurationDefault
+        from .custom_authentication_extension import CustomAuthenticationExtension
         from .custom_callout_extension import CustomCalloutExtension
         from .custom_extension_stage_setting import CustomExtensionStageSetting
         from .custom_security_attribute_definition import CustomSecurityAttributeDefinition
@@ -5593,6 +5662,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .drive import Drive
         from .drive_item import DriveItem
         from .drive_item_version import DriveItemVersion
+        from .ebook_install_summary import EBookInstallSummary
         from .edge import Edge
         from .edition_upgrade_configuration import EditionUpgradeConfiguration
         from .education_assignment import EducationAssignment
@@ -5642,7 +5712,6 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .external_connectors.identity import Identity
         from .external_connectors.schema import Schema
         from .external_domain_name import ExternalDomainName
-        from .e_book_install_summary import EBookInstallSummary
         from .feature_rollout_policy import FeatureRolloutPolicy
         from .federated_identity_credential import FederatedIdentityCredential
         from .fido2_authentication_method import Fido2AuthenticationMethod
@@ -5688,7 +5757,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .internet_explorer_mode import InternetExplorerMode
         from .invitation import Invitation
         from .invite_participants_operation import InviteParticipantsOperation
-        from .iosi_pad_o_s_web_clip import IosiPadOSWebClip
+        from .iosi_pad_osweb_clip import IosiPadOSWebClip
         from .ios_certificate_profile import IosCertificateProfile
         from .ios_compliance_policy import IosCompliancePolicy
         from .ios_custom_configuration import IosCustomConfiguration
@@ -5703,8 +5772,8 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .ios_update_configuration import IosUpdateConfiguration
         from .ios_update_device_status import IosUpdateDeviceStatus
         from .ios_vpp_app import IosVppApp
-        from .ios_vpp_e_book import IosVppEBook
-        from .ios_vpp_e_book_assignment import IosVppEBookAssignment
+        from .ios_vpp_ebook import IosVppEBook
+        from .ios_vpp_ebook_assignment import IosVppEBookAssignment
         from .ip_named_location import IpNamedLocation
         from .item_activity import ItemActivity
         from .item_activity_stat import ItemActivityStat
@@ -5727,15 +5796,15 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .login_page import LoginPage
         from .long_running_operation import LongRunningOperation
         from .m365_apps_installation_options import M365AppsInstallationOptions
-        from .mac_o_s_compliance_policy import MacOSCompliancePolicy
-        from .mac_o_s_custom_configuration import MacOSCustomConfiguration
-        from .mac_o_s_device_features_configuration import MacOSDeviceFeaturesConfiguration
-        from .mac_o_s_dmg_app import MacOSDmgApp
-        from .mac_o_s_general_device_configuration import MacOSGeneralDeviceConfiguration
-        from .mac_o_s_lob_app import MacOSLobApp
-        from .mac_o_s_microsoft_defender_app import MacOSMicrosoftDefenderApp
-        from .mac_o_s_microsoft_edge_app import MacOSMicrosoftEdgeApp
-        from .mac_o_s_office_suite_app import MacOSOfficeSuiteApp
+        from .mac_oscompliance_policy import MacOSCompliancePolicy
+        from .mac_oscustom_configuration import MacOSCustomConfiguration
+        from .mac_osdevice_features_configuration import MacOSDeviceFeaturesConfiguration
+        from .mac_osdmg_app import MacOSDmgApp
+        from .mac_osgeneral_device_configuration import MacOSGeneralDeviceConfiguration
+        from .mac_oslob_app import MacOSLobApp
+        from .mac_osmicrosoft_defender_app import MacOSMicrosoftDefenderApp
+        from .mac_osmicrosoft_edge_app import MacOSMicrosoftEdgeApp
+        from .mac_osoffice_suite_app import MacOSOfficeSuiteApp
         from .mail_assessment_request import MailAssessmentRequest
         from .mail_folder import MailFolder
         from .mail_search_folder import MailSearchFolder
@@ -5759,10 +5828,10 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .managed_device_mobile_app_configuration_user_status import ManagedDeviceMobileAppConfigurationUserStatus
         from .managed_device_mobile_app_configuration_user_summary import ManagedDeviceMobileAppConfigurationUserSummary
         from .managed_device_overview import ManagedDeviceOverview
-        from .managed_e_book import ManagedEBook
-        from .managed_e_book_assignment import ManagedEBookAssignment
-        from .managed_i_o_s_lob_app import ManagedIOSLobApp
-        from .managed_i_o_s_store_app import ManagedIOSStoreApp
+        from .managed_ebook import ManagedEBook
+        from .managed_ebook_assignment import ManagedEBookAssignment
+        from .managed_ioslob_app import ManagedIOSLobApp
+        from .managed_iosstore_app import ManagedIOSStoreApp
         from .managed_mobile_app import ManagedMobileApp
         from .managed_mobile_lob_app import ManagedMobileLobApp
         from .mdm_windows_information_protection_policy import MdmWindowsInformationProtectionPolicy
@@ -5784,11 +5853,17 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .mobile_contained_app import MobileContainedApp
         from .mobile_lob_app import MobileLobApp
         from .mobile_threat_defense_connector import MobileThreatDefenseConnector
+        from .multi_tenant_organization import MultiTenantOrganization
+        from .multi_tenant_organization_identity_sync_policy_template import MultiTenantOrganizationIdentitySyncPolicyTemplate
+        from .multi_tenant_organization_join_request_record import MultiTenantOrganizationJoinRequestRecord
+        from .multi_tenant_organization_member import MultiTenantOrganizationMember
+        from .multi_tenant_organization_partner_configuration_template import MultiTenantOrganizationPartnerConfigurationTemplate
         from .multi_value_legacy_extended_property import MultiValueLegacyExtendedProperty
         from .mute_participant_operation import MuteParticipantOperation
         from .named_location import NamedLocation
         from .notebook import Notebook
         from .notification_message_template import NotificationMessageTemplate
+        from .oauth2_permission_grant import OAuth2PermissionGrant
         from .offer_shift_request import OfferShiftRequest
         from .office_graph_insights import OfficeGraphInsights
         from .onenote import Onenote
@@ -5803,6 +5878,8 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .online_meeting_base import OnlineMeetingBase
         from .on_premises_conditional_access_settings import OnPremisesConditionalAccessSettings
         from .on_premises_directory_synchronization import OnPremisesDirectorySynchronization
+        from .on_token_issuance_start_custom_extension import OnTokenIssuanceStartCustomExtension
+        from .on_token_issuance_start_listener import OnTokenIssuanceStartListener
         from .open_shift import OpenShift
         from .open_shift_change_request import OpenShiftChangeRequest
         from .open_type_extension import OpenTypeExtension
@@ -5815,7 +5892,6 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .outlook_category import OutlookCategory
         from .outlook_item import OutlookItem
         from .outlook_user import OutlookUser
-        from .o_auth2_permission_grant import OAuth2PermissionGrant
         from .participant import Participant
         from .participant_joining_notification import ParticipantJoiningNotification
         from .participant_left_notification import ParticipantLeftNotification
@@ -5855,6 +5931,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .play_prompt_operation import PlayPromptOperation
         from .policy_base import PolicyBase
         from .policy_root import PolicyRoot
+        from .policy_template import PolicyTemplate
         from .post import Post
         from .presence import Presence
         from .printer import Printer
@@ -6006,7 +6083,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .setting_state_device_summary import SettingStateDeviceSummary
         from .shared_drive_item import SharedDriveItem
         from .shared_insight import SharedInsight
-        from .shared_p_c_configuration import SharedPCConfiguration
+        from .shared_pcconfiguration import SharedPCConfiguration
         from .shared_with_channel_team_info import SharedWithChannelTeamInfo
         from .sharepoint import Sharepoint
         from .sharepoint_settings import SharepointSettings
@@ -6117,11 +6194,11 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .user_experience_analytics_app_health_application_performance import UserExperienceAnalyticsAppHealthApplicationPerformance
         from .user_experience_analytics_app_health_app_performance_by_app_version_details import UserExperienceAnalyticsAppHealthAppPerformanceByAppVersionDetails
         from .user_experience_analytics_app_health_app_performance_by_app_version_device_id import UserExperienceAnalyticsAppHealthAppPerformanceByAppVersionDeviceId
-        from .user_experience_analytics_app_health_app_performance_by_o_s_version import UserExperienceAnalyticsAppHealthAppPerformanceByOSVersion
+        from .user_experience_analytics_app_health_app_performance_by_osversion import UserExperienceAnalyticsAppHealthAppPerformanceByOSVersion
         from .user_experience_analytics_app_health_device_model_performance import UserExperienceAnalyticsAppHealthDeviceModelPerformance
         from .user_experience_analytics_app_health_device_performance import UserExperienceAnalyticsAppHealthDevicePerformance
         from .user_experience_analytics_app_health_device_performance_details import UserExperienceAnalyticsAppHealthDevicePerformanceDetails
-        from .user_experience_analytics_app_health_o_s_version_performance import UserExperienceAnalyticsAppHealthOSVersionPerformance
+        from .user_experience_analytics_app_health_osversion_performance import UserExperienceAnalyticsAppHealthOSVersionPerformance
         from .user_experience_analytics_baseline import UserExperienceAnalyticsBaseline
         from .user_experience_analytics_category import UserExperienceAnalyticsCategory
         from .user_experience_analytics_device_performance import UserExperienceAnalyticsDevicePerformance
@@ -6181,7 +6258,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .windows_information_protection_policy import WindowsInformationProtectionPolicy
         from .windows_malware_information import WindowsMalwareInformation
         from .windows_microsoft_edge_app import WindowsMicrosoftEdgeApp
-        from .windows_mobile_m_s_i import WindowsMobileMSI
+        from .windows_mobile_msi import WindowsMobileMSI
         from .windows_phone81_compliance_policy import WindowsPhone81CompliancePolicy
         from .windows_phone81_custom_configuration import WindowsPhone81CustomConfiguration
         from .windows_phone81_general_configuration import WindowsPhone81GeneralConfiguration
@@ -6189,7 +6266,7 @@ class Entity(AdditionalDataHolder, BackedModel, Parsable):
         from .windows_setting import WindowsSetting
         from .windows_setting_instance import WindowsSettingInstance
         from .windows_universal_app_x import WindowsUniversalAppX
-        from .windows_universal_app_x_contained_app import WindowsUniversalAppXContainedApp
+        from .windows_universal_app_xcontained_app import WindowsUniversalAppXContainedApp
         from .windows_update_for_business_configuration import WindowsUpdateForBusinessConfiguration
         from .windows_web_app import WindowsWebApp
         from .workbook import Workbook

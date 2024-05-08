@@ -2,6 +2,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from kiota_abstractions.base_request_builder import BaseRequestBuilder
 from kiota_abstractions.base_request_configuration import RequestConfiguration
+from kiota_abstractions.default_query_parameters import QueryParameters
 from kiota_abstractions.get_path_parameters import get_path_parameters
 from kiota_abstractions.method import Method
 from kiota_abstractions.request_adapter import RequestAdapter
@@ -9,10 +10,11 @@ from kiota_abstractions.request_information import RequestInformation
 from kiota_abstractions.request_option import RequestOption
 from kiota_abstractions.serialization import Parsable, ParsableFactory
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
+from warnings import warn
 
 if TYPE_CHECKING:
     from .......models.calendar import Calendar
-    from .......models.o_data_errors.o_data_error import ODataError
+    from .......models.odata_errors.odata_error import ODataError
     from .allowed_calendar_sharing_roles_with_user.allowed_calendar_sharing_roles_with_user_request_builder import AllowedCalendarSharingRolesWithUserRequestBuilder
     from .calendar_permissions.calendar_permissions_request_builder import CalendarPermissionsRequestBuilder
     from .calendar_view.calendar_view_request_builder import CalendarViewRequestBuilder
@@ -32,7 +34,7 @@ class CalendarItemRequestBuilder(BaseRequestBuilder):
         """
         super().__init__(request_adapter, "{+baseurl}/users/{user%2Did}/calendarGroups/{calendarGroup%2Did}/calendars/{calendar%2Did}{?%24select}", path_parameters)
     
-    def allowed_calendar_sharing_roles_with_user(self,user: Optional[str] = None) -> AllowedCalendarSharingRolesWithUserRequestBuilder:
+    def allowed_calendar_sharing_roles_with_user(self,user: str) -> AllowedCalendarSharingRolesWithUserRequestBuilder:
         """
         Provides operations to call the allowedCalendarSharingRoles method.
         param user: Usage: User='{User}'
@@ -44,7 +46,7 @@ class CalendarItemRequestBuilder(BaseRequestBuilder):
 
         return AllowedCalendarSharingRolesWithUserRequestBuilder(self.request_adapter, self.path_parameters, user)
     
-    async def delete(self,request_configuration: Optional[RequestConfiguration] = None) -> None:
+    async def delete(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> None:
         """
         Delete navigation property calendars for users
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
@@ -53,7 +55,7 @@ class CalendarItemRequestBuilder(BaseRequestBuilder):
         request_info = self.to_delete_request_information(
             request_configuration
         )
-        from .......models.o_data_errors.o_data_error import ODataError
+        from .......models.odata_errors.odata_error import ODataError
 
         error_mapping: Dict[str, ParsableFactory] = {
             "XXX": ODataError,
@@ -62,7 +64,7 @@ class CalendarItemRequestBuilder(BaseRequestBuilder):
             raise Exception("Http core is null") 
         return await self.request_adapter.send_no_response_content_async(request_info, error_mapping)
     
-    async def get(self,request_configuration: Optional[RequestConfiguration] = None) -> Optional[Calendar]:
+    async def get(self,request_configuration: Optional[RequestConfiguration[CalendarItemRequestBuilderGetQueryParameters]] = None) -> Optional[Calendar]:
         """
         The calendars in the calendar group. Navigation property. Read-only. Nullable.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
@@ -71,7 +73,7 @@ class CalendarItemRequestBuilder(BaseRequestBuilder):
         request_info = self.to_get_request_information(
             request_configuration
         )
-        from .......models.o_data_errors.o_data_error import ODataError
+        from .......models.odata_errors.odata_error import ODataError
 
         error_mapping: Dict[str, ParsableFactory] = {
             "XXX": ODataError,
@@ -82,7 +84,7 @@ class CalendarItemRequestBuilder(BaseRequestBuilder):
 
         return await self.request_adapter.send_async(request_info, Calendar, error_mapping)
     
-    async def patch(self,body: Optional[Calendar] = None, request_configuration: Optional[RequestConfiguration] = None) -> Optional[Calendar]:
+    async def patch(self,body: Calendar, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[Calendar]:
         """
         Update the navigation property calendars in users
         param body: The request body
@@ -94,7 +96,7 @@ class CalendarItemRequestBuilder(BaseRequestBuilder):
         request_info = self.to_patch_request_information(
             body, request_configuration
         )
-        from .......models.o_data_errors.o_data_error import ODataError
+        from .......models.odata_errors.odata_error import ODataError
 
         error_mapping: Dict[str, ParsableFactory] = {
             "XXX": ODataError,
@@ -105,7 +107,7 @@ class CalendarItemRequestBuilder(BaseRequestBuilder):
 
         return await self.request_adapter.send_async(request_info, Calendar, error_mapping)
     
-    def to_delete_request_information(self,request_configuration: Optional[RequestConfiguration] = None) -> RequestInformation:
+    def to_delete_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Delete navigation property calendars for users
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
@@ -116,7 +118,7 @@ class CalendarItemRequestBuilder(BaseRequestBuilder):
         request_info.headers.try_add("Accept", "application/json")
         return request_info
     
-    def to_get_request_information(self,request_configuration: Optional[RequestConfiguration] = None) -> RequestInformation:
+    def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[CalendarItemRequestBuilderGetQueryParameters]] = None) -> RequestInformation:
         """
         The calendars in the calendar group. Navigation property. Read-only. Nullable.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
@@ -127,7 +129,7 @@ class CalendarItemRequestBuilder(BaseRequestBuilder):
         request_info.headers.try_add("Accept", "application/json")
         return request_info
     
-    def to_patch_request_information(self,body: Optional[Calendar] = None, request_configuration: Optional[RequestConfiguration] = None) -> RequestInformation:
+    def to_patch_request_information(self,body: Calendar, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Update the navigation property calendars in users
         param body: The request body
@@ -142,7 +144,7 @@ class CalendarItemRequestBuilder(BaseRequestBuilder):
         request_info.set_content_from_parsable(self.request_adapter, "application/json", body)
         return request_info
     
-    def with_url(self,raw_url: Optional[str] = None) -> CalendarItemRequestBuilder:
+    def with_url(self,raw_url: str) -> CalendarItemRequestBuilder:
         """
         Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         param raw_url: The raw URL to use for the request builder.
@@ -189,11 +191,18 @@ class CalendarItemRequestBuilder(BaseRequestBuilder):
         return GetScheduleRequestBuilder(self.request_adapter, self.path_parameters)
     
     @dataclass
+    class CalendarItemRequestBuilderDeleteRequestConfiguration(RequestConfiguration[QueryParameters]):
+        """
+        Configuration for the request such as headers, query parameters, and middleware options.
+        """
+        warn("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.", DeprecationWarning)
+    
+    @dataclass
     class CalendarItemRequestBuilderGetQueryParameters():
         """
         The calendars in the calendar group. Navigation property. Read-only. Nullable.
         """
-        def get_query_parameter(self,original_name: Optional[str] = None) -> str:
+        def get_query_parameter(self,original_name: str) -> str:
             """
             Maps the query parameters names to their encoded names for the URI template parsing.
             param original_name: The original query parameter name in the class.
@@ -208,5 +217,19 @@ class CalendarItemRequestBuilder(BaseRequestBuilder):
         # Select properties to be returned
         select: Optional[List[str]] = None
 
+    
+    @dataclass
+    class CalendarItemRequestBuilderGetRequestConfiguration(RequestConfiguration[CalendarItemRequestBuilderGetQueryParameters]):
+        """
+        Configuration for the request such as headers, query parameters, and middleware options.
+        """
+        warn("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.", DeprecationWarning)
+    
+    @dataclass
+    class CalendarItemRequestBuilderPatchRequestConfiguration(RequestConfiguration[QueryParameters]):
+        """
+        Configuration for the request such as headers, query parameters, and middleware options.
+        """
+        warn("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.", DeprecationWarning)
     
 

@@ -27,11 +27,11 @@ class Win32LobApp(MobileLobApp):
     # The install experience for this app.
     install_experience: Optional[Win32LobAppInstallExperience] = None
     # The value for the minimum CPU speed which is required to install this app.
-    minimum_cpu_speed_in_m_hz: Optional[int] = None
+    minimum_cpu_speed_in_mhz: Optional[int] = None
     # The value for the minimum free disk space which is required to install this app.
-    minimum_free_disk_space_in_m_b: Optional[int] = None
+    minimum_free_disk_space_in_mb: Optional[int] = None
     # The value for the minimum physical memory which is required to install this app.
-    minimum_memory_in_m_b: Optional[int] = None
+    minimum_memory_in_mb: Optional[int] = None
     # The value for the minimum number of processors which is required to install this app.
     minimum_number_of_processors: Optional[int] = None
     # The value for the minimum supported windows release.
@@ -48,7 +48,7 @@ class Win32LobApp(MobileLobApp):
     uninstall_command_line: Optional[str] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> Win32LobApp:
+    def create_from_discriminator_value(parse_node: ParseNode) -> Win32LobApp:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -81,9 +81,9 @@ class Win32LobApp(MobileLobApp):
             "applicableArchitectures": lambda n : setattr(self, 'applicable_architectures', n.get_collection_of_enum_values(WindowsArchitecture)),
             "installCommandLine": lambda n : setattr(self, 'install_command_line', n.get_str_value()),
             "installExperience": lambda n : setattr(self, 'install_experience', n.get_object_value(Win32LobAppInstallExperience)),
-            "minimumCpuSpeedInMHz": lambda n : setattr(self, 'minimum_cpu_speed_in_m_hz', n.get_int_value()),
-            "minimumFreeDiskSpaceInMB": lambda n : setattr(self, 'minimum_free_disk_space_in_m_b', n.get_int_value()),
-            "minimumMemoryInMB": lambda n : setattr(self, 'minimum_memory_in_m_b', n.get_int_value()),
+            "minimumCpuSpeedInMHz": lambda n : setattr(self, 'minimum_cpu_speed_in_mhz', n.get_int_value()),
+            "minimumFreeDiskSpaceInMB": lambda n : setattr(self, 'minimum_free_disk_space_in_mb', n.get_int_value()),
+            "minimumMemoryInMB": lambda n : setattr(self, 'minimum_memory_in_mb', n.get_int_value()),
             "minimumNumberOfProcessors": lambda n : setattr(self, 'minimum_number_of_processors', n.get_int_value()),
             "minimumSupportedWindowsRelease": lambda n : setattr(self, 'minimum_supported_windows_release', n.get_str_value()),
             "msiInformation": lambda n : setattr(self, 'msi_information', n.get_object_value(Win32LobAppMsiInformation)),
@@ -108,9 +108,9 @@ class Win32LobApp(MobileLobApp):
         writer.write_enum_value("applicableArchitectures", self.applicable_architectures)
         writer.write_str_value("installCommandLine", self.install_command_line)
         writer.write_object_value("installExperience", self.install_experience)
-        writer.write_int_value("minimumCpuSpeedInMHz", self.minimum_cpu_speed_in_m_hz)
-        writer.write_int_value("minimumFreeDiskSpaceInMB", self.minimum_free_disk_space_in_m_b)
-        writer.write_int_value("minimumMemoryInMB", self.minimum_memory_in_m_b)
+        writer.write_int_value("minimumCpuSpeedInMHz", self.minimum_cpu_speed_in_mhz)
+        writer.write_int_value("minimumFreeDiskSpaceInMB", self.minimum_free_disk_space_in_mb)
+        writer.write_int_value("minimumMemoryInMB", self.minimum_memory_in_mb)
         writer.write_int_value("minimumNumberOfProcessors", self.minimum_number_of_processors)
         writer.write_str_value("minimumSupportedWindowsRelease", self.minimum_supported_windows_release)
         writer.write_object_value("msiInformation", self.msi_information)

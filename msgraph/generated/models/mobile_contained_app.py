@@ -5,7 +5,7 @@ from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .entity import Entity
-    from .windows_universal_app_x_contained_app import WindowsUniversalAppXContainedApp
+    from .windows_universal_app_xcontained_app import WindowsUniversalAppXContainedApp
 
 from .entity import Entity
 
@@ -18,7 +18,7 @@ class MobileContainedApp(Entity):
     odata_type: Optional[str] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: Optional[ParseNode] = None) -> MobileContainedApp:
+    def create_from_discriminator_value(parse_node: ParseNode) -> MobileContainedApp:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
@@ -31,7 +31,7 @@ class MobileContainedApp(Entity):
         except AttributeError:
             mapping_value = None
         if mapping_value and mapping_value.casefold() == "#microsoft.graph.windowsUniversalAppXContainedApp".casefold():
-            from .windows_universal_app_x_contained_app import WindowsUniversalAppXContainedApp
+            from .windows_universal_app_xcontained_app import WindowsUniversalAppXContainedApp
 
             return WindowsUniversalAppXContainedApp()
         return MobileContainedApp()
@@ -42,10 +42,10 @@ class MobileContainedApp(Entity):
         Returns: Dict[str, Callable[[ParseNode], None]]
         """
         from .entity import Entity
-        from .windows_universal_app_x_contained_app import WindowsUniversalAppXContainedApp
+        from .windows_universal_app_xcontained_app import WindowsUniversalAppXContainedApp
 
         from .entity import Entity
-        from .windows_universal_app_x_contained_app import WindowsUniversalAppXContainedApp
+        from .windows_universal_app_xcontained_app import WindowsUniversalAppXContainedApp
 
         fields: Dict[str, Callable[[Any], None]] = {
         }

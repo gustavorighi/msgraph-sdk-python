@@ -2,6 +2,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from kiota_abstractions.base_request_builder import BaseRequestBuilder
 from kiota_abstractions.base_request_configuration import RequestConfiguration
+from kiota_abstractions.default_query_parameters import QueryParameters
 from kiota_abstractions.get_path_parameters import get_path_parameters
 from kiota_abstractions.method import Method
 from kiota_abstractions.request_adapter import RequestAdapter
@@ -9,13 +10,14 @@ from kiota_abstractions.request_information import RequestInformation
 from kiota_abstractions.request_option import RequestOption
 from kiota_abstractions.serialization import Parsable, ParsableFactory
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union
+from warnings import warn
 
 if TYPE_CHECKING:
-    from .......models.o_data_errors.o_data_error import ODataError
+    from .......models.odata_errors.odata_error import ODataError
     from .......models.workbook_functions import WorkbookFunctions
     from .abs.abs_request_builder import AbsRequestBuilder
     from .accr_int.accr_int_request_builder import AccrIntRequestBuilder
-    from .accr_int_m.accr_int_m_request_builder import AccrIntMRequestBuilder
+    from .accr_int_m.accr_int_mrequest_builder import AccrIntMRequestBuilder
     from .acos.acos_request_builder import AcosRequestBuilder
     from .acosh.acosh_request_builder import AcoshRequestBuilder
     from .acot.acot_request_builder import AcotRequestBuilder
@@ -32,16 +34,16 @@ if TYPE_CHECKING:
     from .atan2.atan2_request_builder import Atan2RequestBuilder
     from .atanh.atanh_request_builder import AtanhRequestBuilder
     from .average.average_request_builder import AverageRequestBuilder
-    from .average_a.average_a_request_builder import AverageARequestBuilder
+    from .average_a.average_arequest_builder import AverageARequestBuilder
     from .average_if.average_if_request_builder import AverageIfRequestBuilder
     from .average_ifs.average_ifs_request_builder import AverageIfsRequestBuilder
     from .ave_dev.ave_dev_request_builder import AveDevRequestBuilder
     from .baht_text.baht_text_request_builder import BahtTextRequestBuilder
     from .base.base_request_builder_ import BaseRequestBuilder_
-    from .bessel_i.bessel_i_request_builder import BesselIRequestBuilder
-    from .bessel_j.bessel_j_request_builder import BesselJRequestBuilder
-    from .bessel_k.bessel_k_request_builder import BesselKRequestBuilder
-    from .bessel_y.bessel_y_request_builder import BesselYRequestBuilder
+    from .bessel_i.bessel_irequest_builder import BesselIRequestBuilder
+    from .bessel_j.bessel_jrequest_builder import BesselJRequestBuilder
+    from .bessel_k.bessel_krequest_builder import BesselKRequestBuilder
+    from .bessel_y.bessel_yrequest_builder import BesselYRequestBuilder
     from .beta_dist.beta_dist_request_builder import Beta_DistRequestBuilder
     from .beta_inv.beta_inv_request_builder import Beta_InvRequestBuilder
     from .bin2_dec.bin2_dec_request_builder import Bin2DecRequestBuilder
@@ -59,9 +61,9 @@ if TYPE_CHECKING:
     from .ceiling_precise.ceiling_precise_request_builder import Ceiling_PreciseRequestBuilder
     from .char.char_request_builder import CharRequestBuilder
     from .chi_sq_dist.chi_sq_dist_request_builder import ChiSq_DistRequestBuilder
-    from .chi_sq_dist_r_t.chi_sq_dist_r_t_request_builder import ChiSq_Dist_RTRequestBuilder
+    from .chi_sq_dist_rt.chi_sq_dist_rtrequest_builder import ChiSq_Dist_RTRequestBuilder
     from .chi_sq_inv.chi_sq_inv_request_builder import ChiSq_InvRequestBuilder
-    from .chi_sq_inv_r_t.chi_sq_inv_r_t_request_builder import ChiSq_Inv_RTRequestBuilder
+    from .chi_sq_inv_rt.chi_sq_inv_rtrequest_builder import ChiSq_Inv_RTRequestBuilder
     from .choose.choose_request_builder import ChooseRequestBuilder
     from .clean.clean_request_builder import CleanRequestBuilder
     from .code.code_request_builder import CodeRequestBuilder
@@ -71,14 +73,14 @@ if TYPE_CHECKING:
     from .complex.complex_request_builder import ComplexRequestBuilder
     from .concatenate.concatenate_request_builder import ConcatenateRequestBuilder
     from .confidence_norm.confidence_norm_request_builder import Confidence_NormRequestBuilder
-    from .confidence_t.confidence_t_request_builder import Confidence_TRequestBuilder
+    from .confidence_t.confidence_trequest_builder import Confidence_TRequestBuilder
     from .convert.convert_request_builder import ConvertRequestBuilder
     from .cos.cos_request_builder import CosRequestBuilder
     from .cosh.cosh_request_builder import CoshRequestBuilder
     from .cot.cot_request_builder import CotRequestBuilder
     from .coth.coth_request_builder import CothRequestBuilder
     from .count.count_request_builder import CountRequestBuilder
-    from .count_a.count_a_request_builder import CountARequestBuilder
+    from .count_a.count_arequest_builder import CountARequestBuilder
     from .count_blank.count_blank_request_builder import CountBlankRequestBuilder
     from .count_if.count_if_request_builder import CountIfRequestBuilder
     from .count_ifs.count_ifs_request_builder import CountIfsRequestBuilder
@@ -90,7 +92,7 @@ if TYPE_CHECKING:
     from .coup_pcd.coup_pcd_request_builder import CoupPcdRequestBuilder
     from .csc.csc_request_builder import CscRequestBuilder
     from .csch.csch_request_builder import CschRequestBuilder
-    from .cum_i_pmt.cum_i_pmt_request_builder import CumIPmtRequestBuilder
+    from .cum_ipmt.cum_ipmt_request_builder import CumIPmtRequestBuilder
     from .cum_princ.cum_princ_request_builder import CumPrincRequestBuilder
     from .date.date_request_builder import DateRequestBuilder
     from .datevalue.datevalue_request_builder import DatevalueRequestBuilder
@@ -101,7 +103,7 @@ if TYPE_CHECKING:
     from .db.db_request_builder import DbRequestBuilder
     from .dbcs.dbcs_request_builder import DbcsRequestBuilder
     from .dcount.dcount_request_builder import DcountRequestBuilder
-    from .dcount_a.dcount_a_request_builder import DcountARequestBuilder
+    from .dcount_a.dcount_arequest_builder import DcountARequestBuilder
     from .ddb.ddb_request_builder import DdbRequestBuilder
     from .dec2_bin.dec2_bin_request_builder import Dec2BinRequestBuilder
     from .dec2_hex.dec2_hex_request_builder import Dec2HexRequestBuilder
@@ -119,17 +121,17 @@ if TYPE_CHECKING:
     from .dollar_fr.dollar_fr_request_builder import DollarFrRequestBuilder
     from .dproduct.dproduct_request_builder import DproductRequestBuilder
     from .dst_dev.dst_dev_request_builder import DstDevRequestBuilder
-    from .dst_dev_p.dst_dev_p_request_builder import DstDevPRequestBuilder
+    from .dst_dev_p.dst_dev_prequest_builder import DstDevPRequestBuilder
     from .dsum.dsum_request_builder import DsumRequestBuilder
     from .duration.duration_request_builder import DurationRequestBuilder
     from .dvar.dvar_request_builder import DvarRequestBuilder
-    from .dvar_p.dvar_p_request_builder import DvarPRequestBuilder
+    from .dvar_p.dvar_prequest_builder import DvarPRequestBuilder
     from .ecma_ceiling.ecma_ceiling_request_builder import Ecma_CeilingRequestBuilder
     from .edate.edate_request_builder import EdateRequestBuilder
     from .effect.effect_request_builder import EffectRequestBuilder
     from .eo_month.eo_month_request_builder import EoMonthRequestBuilder
     from .erf.erf_request_builder import ErfRequestBuilder
-    from .erf_c.erf_c_request_builder import ErfCRequestBuilder
+    from .erf_c.erf_crequest_builder import ErfCRequestBuilder
     from .erf_c_precise.erf_c_precise_request_builder import ErfC_PreciseRequestBuilder
     from .erf_precise.erf_precise_request_builder import Erf_PreciseRequestBuilder
     from .error_type.error_type_request_builder import Error_TypeRequestBuilder
@@ -141,7 +143,7 @@ if TYPE_CHECKING:
     from .fact_double.fact_double_request_builder import FactDoubleRequestBuilder
     from .false_.false_request_builder import FalseRequestBuilder
     from .find.find_request_builder import FindRequestBuilder
-    from .find_b.find_b_request_builder import FindBRequestBuilder
+    from .find_b.find_brequest_builder import FindBRequestBuilder
     from .fisher.fisher_request_builder import FisherRequestBuilder
     from .fisher_inv.fisher_inv_request_builder import FisherInvRequestBuilder
     from .fixed.fixed_request_builder import FixedRequestBuilder
@@ -150,9 +152,9 @@ if TYPE_CHECKING:
     from .fv.fv_request_builder import FvRequestBuilder
     from .fvschedule.fvschedule_request_builder import FvscheduleRequestBuilder
     from .f_dist.f_dist_request_builder import F_DistRequestBuilder
-    from .f_dist_r_t.f_dist_r_t_request_builder import F_Dist_RTRequestBuilder
+    from .f_dist_rt.f_dist_rtrequest_builder import F_Dist_RTRequestBuilder
     from .f_inv.f_inv_request_builder import F_InvRequestBuilder
-    from .f_inv_r_t.f_inv_r_t_request_builder import F_Inv_RTRequestBuilder
+    from .f_inv_rt.f_inv_rtrequest_builder import F_Inv_RTRequestBuilder
     from .gamma.gamma_request_builder import GammaRequestBuilder
     from .gamma_dist.gamma_dist_request_builder import Gamma_DistRequestBuilder
     from .gamma_inv.gamma_inv_request_builder import Gamma_InvRequestBuilder
@@ -209,9 +211,9 @@ if TYPE_CHECKING:
     from .is_even.is_even_request_builder import IsEvenRequestBuilder
     from .is_formula.is_formula_request_builder import IsFormulaRequestBuilder
     from .is_logical.is_logical_request_builder import IsLogicalRequestBuilder
+    from .is_na.is_narequest_builder import IsNARequestBuilder
     from .is_non_text.is_non_text_request_builder import IsNonTextRequestBuilder
     from .is_number.is_number_request_builder import IsNumberRequestBuilder
-    from .is_n_a.is_n_a_request_builder import IsNARequestBuilder
     from .is_odd.is_odd_request_builder import IsOddRequestBuilder
     from .is_text.is_text_request_builder import IsTextRequestBuilder
     from .kurt.kurt_request_builder import KurtRequestBuilder
@@ -230,20 +232,20 @@ if TYPE_CHECKING:
     from .lower.lower_request_builder import LowerRequestBuilder
     from .match.match_request_builder import MatchRequestBuilder
     from .max.max_request_builder import MaxRequestBuilder
-    from .max_a.max_a_request_builder import MaxARequestBuilder
+    from .max_a.max_arequest_builder import MaxARequestBuilder
     from .mduration.mduration_request_builder import MdurationRequestBuilder
     from .median.median_request_builder import MedianRequestBuilder
     from .mid.mid_request_builder import MidRequestBuilder
     from .midb.midb_request_builder import MidbRequestBuilder
     from .min.min_request_builder import MinRequestBuilder
     from .minute.minute_request_builder import MinuteRequestBuilder
-    from .min_a.min_a_request_builder import MinARequestBuilder
+    from .min_a.min_arequest_builder import MinARequestBuilder
     from .mirr.mirr_request_builder import MirrRequestBuilder
     from .mod.mod_request_builder import ModRequestBuilder
     from .month.month_request_builder import MonthRequestBuilder
     from .mround.mround_request_builder import MroundRequestBuilder
     from .multi_nomial.multi_nomial_request_builder import MultiNomialRequestBuilder
-    from .n.n_request_builder import NRequestBuilder
+    from .n.nrequest_builder import NRequestBuilder
     from .na.na_request_builder import NaRequestBuilder
     from .neg_binom_dist.neg_binom_dist_request_builder import NegBinom_DistRequestBuilder
     from .network_days.network_days_request_builder import NetworkDaysRequestBuilder
@@ -262,10 +264,10 @@ if TYPE_CHECKING:
     from .oct2_dec.oct2_dec_request_builder import Oct2DecRequestBuilder
     from .oct2_hex.oct2_hex_request_builder import Oct2HexRequestBuilder
     from .odd.odd_request_builder import OddRequestBuilder
-    from .odd_f_price.odd_f_price_request_builder import OddFPriceRequestBuilder
-    from .odd_f_yield.odd_f_yield_request_builder import OddFYieldRequestBuilder
-    from .odd_l_price.odd_l_price_request_builder import OddLPriceRequestBuilder
-    from .odd_l_yield.odd_l_yield_request_builder import OddLYieldRequestBuilder
+    from .odd_fprice.odd_fprice_request_builder import OddFPriceRequestBuilder
+    from .odd_fyield.odd_fyield_request_builder import OddFYieldRequestBuilder
+    from .odd_lprice.odd_lprice_request_builder import OddLPriceRequestBuilder
+    from .odd_lyield.odd_lyield_request_builder import OddLYieldRequestBuilder
     from .or_.or_request_builder import OrRequestBuilder
     from .pduration.pduration_request_builder import PdurationRequestBuilder
     from .percentile_exc.percentile_exc_request_builder import Percentile_ExcRequestBuilder
@@ -297,7 +299,7 @@ if TYPE_CHECKING:
     from .rate.rate_request_builder import RateRequestBuilder
     from .received.received_request_builder import ReceivedRequestBuilder
     from .replace.replace_request_builder import ReplaceRequestBuilder
-    from .replace_b.replace_b_request_builder import ReplaceBRequestBuilder
+    from .replace_b.replace_brequest_builder import ReplaceBRequestBuilder
     from .rept.rept_request_builder import ReptRequestBuilder
     from .right.right_request_builder import RightRequestBuilder
     from .rightb.rightb_request_builder import RightbRequestBuilder
@@ -323,10 +325,10 @@ if TYPE_CHECKING:
     from .sqrt.sqrt_request_builder import SqrtRequestBuilder
     from .sqrt_pi.sqrt_pi_request_builder import SqrtPiRequestBuilder
     from .standardize.standardize_request_builder import StandardizeRequestBuilder
-    from .st_dev_a.st_dev_a_request_builder import StDevARequestBuilder
-    from .st_dev_p.st_dev_p_request_builder import StDev_PRequestBuilder
-    from .st_dev_p_a.st_dev_p_a_request_builder import StDevPARequestBuilder
-    from .st_dev_s.st_dev_s_request_builder import StDev_SRequestBuilder
+    from .st_dev_a.st_dev_arequest_builder import StDevARequestBuilder
+    from .st_dev_p.st_dev_prequest_builder import StDev_PRequestBuilder
+    from .st_dev_pa.st_dev_parequest_builder import StDevPARequestBuilder
+    from .st_dev_s.st_dev_srequest_builder import StDev_SRequestBuilder
     from .substitute.substitute_request_builder import SubstituteRequestBuilder
     from .subtotal.subtotal_request_builder import SubtotalRequestBuilder
     from .sum.sum_request_builder import SumRequestBuilder
@@ -334,7 +336,7 @@ if TYPE_CHECKING:
     from .sum_ifs.sum_ifs_request_builder import SumIfsRequestBuilder
     from .sum_sq.sum_sq_request_builder import SumSqRequestBuilder
     from .syd.syd_request_builder import SydRequestBuilder
-    from .t.t_request_builder import TRequestBuilder
+    from .t.trequest_builder import TRequestBuilder
     from .tan.tan_request_builder import TanRequestBuilder
     from .tanh.tanh_request_builder import TanhRequestBuilder
     from .tbill_eq.tbill_eq_request_builder import TbillEqRequestBuilder
@@ -350,19 +352,19 @@ if TYPE_CHECKING:
     from .trunc.trunc_request_builder import TruncRequestBuilder
     from .type.type_request_builder import TypeRequestBuilder
     from .t_dist.t_dist_request_builder import T_DistRequestBuilder
-    from .t_dist_2_t.t_dist_2_t_request_builder import T_Dist_2TRequestBuilder
-    from .t_dist_r_t.t_dist_r_t_request_builder import T_Dist_RTRequestBuilder
+    from .t_dist_2_t.t_dist_2_trequest_builder import T_Dist_2TRequestBuilder
+    from .t_dist_rt.t_dist_rtrequest_builder import T_Dist_RTRequestBuilder
     from .t_inv.t_inv_request_builder import T_InvRequestBuilder
-    from .t_inv_2_t.t_inv_2_t_request_builder import T_Inv_2TRequestBuilder
+    from .t_inv_2_t.t_inv_2_trequest_builder import T_Inv_2TRequestBuilder
     from .unichar.unichar_request_builder import UnicharRequestBuilder
     from .unicode.unicode_request_builder import UnicodeRequestBuilder
     from .upper.upper_request_builder import UpperRequestBuilder
     from .usdollar.usdollar_request_builder import UsdollarRequestBuilder
     from .value.value_request_builder import ValueRequestBuilder
-    from .var_a.var_a_request_builder import VarARequestBuilder
-    from .var_p.var_p_request_builder import Var_PRequestBuilder
-    from .var_p_a.var_p_a_request_builder import VarPARequestBuilder
-    from .var_s.var_s_request_builder import Var_SRequestBuilder
+    from .var_a.var_arequest_builder import VarARequestBuilder
+    from .var_p.var_prequest_builder import Var_PRequestBuilder
+    from .var_pa.var_parequest_builder import VarPARequestBuilder
+    from .var_s.var_srequest_builder import Var_SRequestBuilder
     from .vdb.vdb_request_builder import VdbRequestBuilder
     from .vlookup.vlookup_request_builder import VlookupRequestBuilder
     from .weekday.weekday_request_builder import WeekdayRequestBuilder
@@ -393,7 +395,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         super().__init__(request_adapter, "{+baseurl}/drives/{drive%2Did}/items/{driveItem%2Did}/workbook/functions{?%24expand,%24select}", path_parameters)
     
-    async def delete(self,request_configuration: Optional[RequestConfiguration] = None) -> None:
+    async def delete(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> None:
         """
         Delete navigation property functions for drives
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
@@ -402,7 +404,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         request_info = self.to_delete_request_information(
             request_configuration
         )
-        from .......models.o_data_errors.o_data_error import ODataError
+        from .......models.odata_errors.odata_error import ODataError
 
         error_mapping: Dict[str, ParsableFactory] = {
             "XXX": ODataError,
@@ -411,7 +413,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
             raise Exception("Http core is null") 
         return await self.request_adapter.send_no_response_content_async(request_info, error_mapping)
     
-    async def get(self,request_configuration: Optional[RequestConfiguration] = None) -> Optional[WorkbookFunctions]:
+    async def get(self,request_configuration: Optional[RequestConfiguration[FunctionsRequestBuilderGetQueryParameters]] = None) -> Optional[WorkbookFunctions]:
         """
         Get functions from drives
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
@@ -420,7 +422,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         request_info = self.to_get_request_information(
             request_configuration
         )
-        from .......models.o_data_errors.o_data_error import ODataError
+        from .......models.odata_errors.odata_error import ODataError
 
         error_mapping: Dict[str, ParsableFactory] = {
             "XXX": ODataError,
@@ -431,7 +433,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
 
         return await self.request_adapter.send_async(request_info, WorkbookFunctions, error_mapping)
     
-    async def patch(self,body: Optional[WorkbookFunctions] = None, request_configuration: Optional[RequestConfiguration] = None) -> Optional[WorkbookFunctions]:
+    async def patch(self,body: WorkbookFunctions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[WorkbookFunctions]:
         """
         Update the navigation property functions in drives
         param body: The request body
@@ -443,7 +445,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         request_info = self.to_patch_request_information(
             body, request_configuration
         )
-        from .......models.o_data_errors.o_data_error import ODataError
+        from .......models.odata_errors.odata_error import ODataError
 
         error_mapping: Dict[str, ParsableFactory] = {
             "XXX": ODataError,
@@ -454,7 +456,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
 
         return await self.request_adapter.send_async(request_info, WorkbookFunctions, error_mapping)
     
-    def to_delete_request_information(self,request_configuration: Optional[RequestConfiguration] = None) -> RequestInformation:
+    def to_delete_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Delete navigation property functions for drives
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
@@ -465,7 +467,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         request_info.headers.try_add("Accept", "application/json")
         return request_info
     
-    def to_get_request_information(self,request_configuration: Optional[RequestConfiguration] = None) -> RequestInformation:
+    def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[FunctionsRequestBuilderGetQueryParameters]] = None) -> RequestInformation:
         """
         Get functions from drives
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
@@ -476,7 +478,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         request_info.headers.try_add("Accept", "application/json")
         return request_info
     
-    def to_patch_request_information(self,body: Optional[WorkbookFunctions] = None, request_configuration: Optional[RequestConfiguration] = None) -> RequestInformation:
+    def to_patch_request_information(self,body: WorkbookFunctions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Update the navigation property functions in drives
         param body: The request body
@@ -491,7 +493,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         request_info.set_content_from_parsable(self.request_adapter, "application/json", body)
         return request_info
     
-    def with_url(self,raw_url: Optional[str] = None) -> FunctionsRequestBuilder:
+    def with_url(self,raw_url: str) -> FunctionsRequestBuilder:
         """
         Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         param raw_url: The raw URL to use for the request builder.
@@ -524,7 +526,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the accrIntM method.
         """
-        from .accr_int_m.accr_int_m_request_builder import AccrIntMRequestBuilder
+        from .accr_int_m.accr_int_mrequest_builder import AccrIntMRequestBuilder
 
         return AccrIntMRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -686,7 +688,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the averageA method.
         """
-        from .average_a.average_a_request_builder import AverageARequestBuilder
+        from .average_a.average_arequest_builder import AverageARequestBuilder
 
         return AverageARequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -731,7 +733,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the besselI method.
         """
-        from .bessel_i.bessel_i_request_builder import BesselIRequestBuilder
+        from .bessel_i.bessel_irequest_builder import BesselIRequestBuilder
 
         return BesselIRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -740,7 +742,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the besselJ method.
         """
-        from .bessel_j.bessel_j_request_builder import BesselJRequestBuilder
+        from .bessel_j.bessel_jrequest_builder import BesselJRequestBuilder
 
         return BesselJRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -749,7 +751,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the besselK method.
         """
-        from .bessel_k.bessel_k_request_builder import BesselKRequestBuilder
+        from .bessel_k.bessel_krequest_builder import BesselKRequestBuilder
 
         return BesselKRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -758,7 +760,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the besselY method.
         """
-        from .bessel_y.bessel_y_request_builder import BesselYRequestBuilder
+        from .bessel_y.bessel_yrequest_builder import BesselYRequestBuilder
 
         return BesselYRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -916,11 +918,11 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         return ChiSq_DistRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
-    def chi_sq_dist_r_t(self) -> ChiSq_Dist_RTRequestBuilder:
+    def chi_sq_dist_rt(self) -> ChiSq_Dist_RTRequestBuilder:
         """
         Provides operations to call the chiSq_Dist_RT method.
         """
-        from .chi_sq_dist_r_t.chi_sq_dist_r_t_request_builder import ChiSq_Dist_RTRequestBuilder
+        from .chi_sq_dist_rt.chi_sq_dist_rtrequest_builder import ChiSq_Dist_RTRequestBuilder
 
         return ChiSq_Dist_RTRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -934,11 +936,11 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         return ChiSq_InvRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
-    def chi_sq_inv_r_t(self) -> ChiSq_Inv_RTRequestBuilder:
+    def chi_sq_inv_rt(self) -> ChiSq_Inv_RTRequestBuilder:
         """
         Provides operations to call the chiSq_Inv_RT method.
         """
-        from .chi_sq_inv_r_t.chi_sq_inv_r_t_request_builder import ChiSq_Inv_RTRequestBuilder
+        from .chi_sq_inv_rt.chi_sq_inv_rtrequest_builder import ChiSq_Inv_RTRequestBuilder
 
         return ChiSq_Inv_RTRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -1028,7 +1030,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the confidence_T method.
         """
-        from .confidence_t.confidence_t_request_builder import Confidence_TRequestBuilder
+        from .confidence_t.confidence_trequest_builder import Confidence_TRequestBuilder
 
         return Confidence_TRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -1091,7 +1093,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the countA method.
         """
-        from .count_a.count_a_request_builder import CountARequestBuilder
+        from .count_a.count_arequest_builder import CountARequestBuilder
 
         return CountARequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -1195,11 +1197,11 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         return CschRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
-    def cum_i_pmt(self) -> CumIPmtRequestBuilder:
+    def cum_ipmt(self) -> CumIPmtRequestBuilder:
         """
         Provides operations to call the cumIPmt method.
         """
-        from .cum_i_pmt.cum_i_pmt_request_builder import CumIPmtRequestBuilder
+        from .cum_ipmt.cum_ipmt_request_builder import CumIPmtRequestBuilder
 
         return CumIPmtRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -1298,7 +1300,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the dcountA method.
         """
-        from .dcount_a.dcount_a_request_builder import DcountARequestBuilder
+        from .dcount_a.dcount_arequest_builder import DcountARequestBuilder
 
         return DcountARequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -1460,7 +1462,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the dstDevP method.
         """
-        from .dst_dev_p.dst_dev_p_request_builder import DstDevPRequestBuilder
+        from .dst_dev_p.dst_dev_prequest_builder import DstDevPRequestBuilder
 
         return DstDevPRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -1496,7 +1498,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the dvarP method.
         """
-        from .dvar_p.dvar_p_request_builder import DvarPRequestBuilder
+        from .dvar_p.dvar_prequest_builder import DvarPRequestBuilder
 
         return DvarPRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -1550,7 +1552,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the erfC method.
         """
-        from .erf_c.erf_c_request_builder import ErfCRequestBuilder
+        from .erf_c.erf_crequest_builder import ErfCRequestBuilder
 
         return ErfCRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -1627,11 +1629,11 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         return F_DistRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
-    def f_dist_r_t(self) -> F_Dist_RTRequestBuilder:
+    def f_dist_rt(self) -> F_Dist_RTRequestBuilder:
         """
         Provides operations to call the f_Dist_RT method.
         """
-        from .f_dist_r_t.f_dist_r_t_request_builder import F_Dist_RTRequestBuilder
+        from .f_dist_rt.f_dist_rtrequest_builder import F_Dist_RTRequestBuilder
 
         return F_Dist_RTRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -1645,11 +1647,11 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         return F_InvRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
-    def f_inv_r_t(self) -> F_Inv_RTRequestBuilder:
+    def f_inv_rt(self) -> F_Inv_RTRequestBuilder:
         """
         Provides operations to call the f_Inv_RT method.
         """
-        from .f_inv_r_t.f_inv_r_t_request_builder import F_Inv_RTRequestBuilder
+        from .f_inv_rt.f_inv_rtrequest_builder import F_Inv_RTRequestBuilder
 
         return F_Inv_RTRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -1694,7 +1696,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the findB method.
         """
-        from .find_b.find_b_request_builder import FindBRequestBuilder
+        from .find_b.find_brequest_builder import FindBRequestBuilder
 
         return FindBRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -2230,11 +2232,11 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         return IsLogicalRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
-    def is_n_a(self) -> IsNARequestBuilder:
+    def is_na(self) -> IsNARequestBuilder:
         """
         Provides operations to call the isNA method.
         """
-        from .is_n_a.is_n_a_request_builder import IsNARequestBuilder
+        from .is_na.is_narequest_builder import IsNARequestBuilder
 
         return IsNARequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -2459,7 +2461,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the maxA method.
         """
-        from .max_a.max_a_request_builder import MaxARequestBuilder
+        from .max_a.max_arequest_builder import MaxARequestBuilder
 
         return MaxARequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -2513,7 +2515,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the minA method.
         """
-        from .min_a.min_a_request_builder import MinARequestBuilder
+        from .min_a.min_arequest_builder import MinARequestBuilder
 
         return MinARequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -2576,7 +2578,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the n method.
         """
-        from .n.n_request_builder import NRequestBuilder
+        from .n.nrequest_builder import NRequestBuilder
 
         return NRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -2743,38 +2745,38 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         return OddRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
-    def odd_f_price(self) -> OddFPriceRequestBuilder:
+    def odd_fprice(self) -> OddFPriceRequestBuilder:
         """
         Provides operations to call the oddFPrice method.
         """
-        from .odd_f_price.odd_f_price_request_builder import OddFPriceRequestBuilder
+        from .odd_fprice.odd_fprice_request_builder import OddFPriceRequestBuilder
 
         return OddFPriceRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
-    def odd_f_yield(self) -> OddFYieldRequestBuilder:
+    def odd_fyield(self) -> OddFYieldRequestBuilder:
         """
         Provides operations to call the oddFYield method.
         """
-        from .odd_f_yield.odd_f_yield_request_builder import OddFYieldRequestBuilder
+        from .odd_fyield.odd_fyield_request_builder import OddFYieldRequestBuilder
 
         return OddFYieldRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
-    def odd_l_price(self) -> OddLPriceRequestBuilder:
+    def odd_lprice(self) -> OddLPriceRequestBuilder:
         """
         Provides operations to call the oddLPrice method.
         """
-        from .odd_l_price.odd_l_price_request_builder import OddLPriceRequestBuilder
+        from .odd_lprice.odd_lprice_request_builder import OddLPriceRequestBuilder
 
         return OddLPriceRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
-    def odd_l_yield(self) -> OddLYieldRequestBuilder:
+    def odd_lyield(self) -> OddLYieldRequestBuilder:
         """
         Provides operations to call the oddLYield method.
         """
-        from .odd_l_yield.odd_l_yield_request_builder import OddLYieldRequestBuilder
+        from .odd_lyield.odd_lyield_request_builder import OddLYieldRequestBuilder
 
         return OddLYieldRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -3062,7 +3064,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the replaceB method.
         """
-        from .replace_b.replace_b_request_builder import ReplaceBRequestBuilder
+        from .replace_b.replace_brequest_builder import ReplaceBRequestBuilder
 
         return ReplaceBRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -3287,7 +3289,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the stDevA method.
         """
-        from .st_dev_a.st_dev_a_request_builder import StDevARequestBuilder
+        from .st_dev_a.st_dev_arequest_builder import StDevARequestBuilder
 
         return StDevARequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -3296,16 +3298,16 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the stDev_P method.
         """
-        from .st_dev_p.st_dev_p_request_builder import StDev_PRequestBuilder
+        from .st_dev_p.st_dev_prequest_builder import StDev_PRequestBuilder
 
         return StDev_PRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
-    def st_dev_p_a(self) -> StDevPARequestBuilder:
+    def st_dev_pa(self) -> StDevPARequestBuilder:
         """
         Provides operations to call the stDevPA method.
         """
-        from .st_dev_p_a.st_dev_p_a_request_builder import StDevPARequestBuilder
+        from .st_dev_pa.st_dev_parequest_builder import StDevPARequestBuilder
 
         return StDevPARequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -3314,7 +3316,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the stDev_S method.
         """
-        from .st_dev_s.st_dev_s_request_builder import StDev_SRequestBuilder
+        from .st_dev_s.st_dev_srequest_builder import StDev_SRequestBuilder
 
         return StDev_SRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -3395,7 +3397,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the t method.
         """
-        from .t.t_request_builder import TRequestBuilder
+        from .t.trequest_builder import TRequestBuilder
 
         return TRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -3413,16 +3415,16 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the t_Dist_2T method.
         """
-        from .t_dist_2_t.t_dist_2_t_request_builder import T_Dist_2TRequestBuilder
+        from .t_dist_2_t.t_dist_2_trequest_builder import T_Dist_2TRequestBuilder
 
         return T_Dist_2TRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
-    def t_dist_r_t(self) -> T_Dist_RTRequestBuilder:
+    def t_dist_rt(self) -> T_Dist_RTRequestBuilder:
         """
         Provides operations to call the t_Dist_RT method.
         """
-        from .t_dist_r_t.t_dist_r_t_request_builder import T_Dist_RTRequestBuilder
+        from .t_dist_rt.t_dist_rtrequest_builder import T_Dist_RTRequestBuilder
 
         return T_Dist_RTRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -3440,7 +3442,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the t_Inv_2T method.
         """
-        from .t_inv_2_t.t_inv_2_t_request_builder import T_Inv_2TRequestBuilder
+        from .t_inv_2_t.t_inv_2_trequest_builder import T_Inv_2TRequestBuilder
 
         return T_Inv_2TRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -3620,7 +3622,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the varA method.
         """
-        from .var_a.var_a_request_builder import VarARequestBuilder
+        from .var_a.var_arequest_builder import VarARequestBuilder
 
         return VarARequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -3629,16 +3631,16 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the var_P method.
         """
-        from .var_p.var_p_request_builder import Var_PRequestBuilder
+        from .var_p.var_prequest_builder import Var_PRequestBuilder
 
         return Var_PRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
-    def var_p_a(self) -> VarPARequestBuilder:
+    def var_pa(self) -> VarPARequestBuilder:
         """
         Provides operations to call the varPA method.
         """
-        from .var_p_a.var_p_a_request_builder import VarPARequestBuilder
+        from .var_pa.var_parequest_builder import VarPARequestBuilder
 
         return VarPARequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -3647,7 +3649,7 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         """
         Provides operations to call the var_S method.
         """
-        from .var_s.var_s_request_builder import Var_SRequestBuilder
+        from .var_s.var_srequest_builder import Var_SRequestBuilder
 
         return Var_SRequestBuilder(self.request_adapter, self.path_parameters)
     
@@ -3796,11 +3798,18 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         return Z_TestRequestBuilder(self.request_adapter, self.path_parameters)
     
     @dataclass
+    class FunctionsRequestBuilderDeleteRequestConfiguration(RequestConfiguration[QueryParameters]):
+        """
+        Configuration for the request such as headers, query parameters, and middleware options.
+        """
+        warn("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.", DeprecationWarning)
+    
+    @dataclass
     class FunctionsRequestBuilderGetQueryParameters():
         """
         Get functions from drives
         """
-        def get_query_parameter(self,original_name: Optional[str] = None) -> str:
+        def get_query_parameter(self,original_name: str) -> str:
             """
             Maps the query parameters names to their encoded names for the URI template parsing.
             param original_name: The original query parameter name in the class.
@@ -3820,5 +3829,19 @@ class FunctionsRequestBuilder(BaseRequestBuilder):
         # Select properties to be returned
         select: Optional[List[str]] = None
 
+    
+    @dataclass
+    class FunctionsRequestBuilderGetRequestConfiguration(RequestConfiguration[FunctionsRequestBuilderGetQueryParameters]):
+        """
+        Configuration for the request such as headers, query parameters, and middleware options.
+        """
+        warn("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.", DeprecationWarning)
+    
+    @dataclass
+    class FunctionsRequestBuilderPatchRequestConfiguration(RequestConfiguration[QueryParameters]):
+        """
+        Configuration for the request such as headers, query parameters, and middleware options.
+        """
+        warn("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.", DeprecationWarning)
     
 
